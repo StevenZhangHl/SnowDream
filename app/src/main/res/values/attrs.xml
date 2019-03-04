@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ReelView">
+        <attr name="textColor" format="color" />
+        <attr name="reelColor" format="color" />
+        <attr name="paperColor" format="color" />
+        <attr name="reelWidth" format="dimension" />
+        <attr name="text" format="string" />
+        <attr name="textSize" format="dimension" />
+        <attr name="duration" format="integer" />
+    </declare-styleable>
+    <!--画轴的高度-->
+    <attr name="paintScrollHeight" format="dimension"/>
+    <!--画轴的图片-->
+    <attr name="paintScrollSrc" format="reference"/>
+    <!--画轴文字-->
+    <attr name="paintScrollTxt" format="string"/>
+    <!--画轴文字颜色-->
+    <attr name="paintScrollTxtColor" format="color"/>
+    <!--画轴文字大小-->
+    <attr name="paintScrollTxtSize" format="dimension"/>
+    <!--滚动速度-->
+    <attr name="scrollSpeed" format="integer"/>
+    <!--分割节点-->
+    <attr name="scrollPartitionNode" format="integer"/>
+    <declare-styleable name="ScrollPaintView">
+        <attr name="paintScrollHeight"/>
+        <attr name="paintScrollSrc"/>
+        <attr name="paintScrollTxt"/>
+        <attr name="paintScrollTxtColor"/>
+        <attr name="paintScrollTxtSize"/>
+        <attr name="scrollSpeed"/>
+        <attr name="scrollPartitionNode"/>
+    </declare-styleable>
+</resources>

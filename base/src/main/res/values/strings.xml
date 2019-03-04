@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_please_check_network">Please check network</string>
+    <string name="loading">Loading</string>
+    <string name="cont_connection_server">无法连接服务器</string>
+    <string name="cont_connection_network">网络无法连接</string>
+    <string name="connection_network_error">Server error</string>
+    <string name="hint_exit">再按一次退出</string>
+</resources>

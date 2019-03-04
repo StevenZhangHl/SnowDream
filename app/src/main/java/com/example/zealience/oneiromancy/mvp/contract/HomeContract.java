@@ -1,0 +1,29 @@
+package com.example.zealience.oneiromancy.mvp.contract;
+
+import com.example.zealience.oneiromancy.entity.DreamTypeEntity;
+import com.steven.base.mvp.BaseModel;
+import com.steven.base.mvp.BasePresenter;
+import com.steven.base.mvp.BaseView;
+
+import java.util.List;
+import java.util.Map;
+
+import io.reactivex.Observable;
+/**
+ * @user steven
+ * @createDate 2019/2/20 11:15
+ * @description 自定义
+ */
+public interface HomeContract {
+    interface View extends BaseView {
+        void setDreamTypeData(List<DreamTypeEntity> dreamTypeEntityList);
+    }
+
+    interface Model extends BaseModel {
+        Observable<List<DreamTypeEntity>> getDreamType(Map<String,Object> objectMap);
+    }
+
+    abstract class Presenter extends BasePresenter<View, Model> {
+        public abstract void getHomeDreamTypeData();
+    }
+}
