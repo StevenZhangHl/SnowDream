@@ -41,6 +41,8 @@ public class UserPhotoDetailActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState) {
+        showTitle("个人信息");
+        setWhiteStatusBar(R.color.white);
         iv_paint = (ImageView) findViewById(R.id.iv_paint);
         mScrollPaintView = (ScrollPaintView) findViewById(R.id.mScrollPaintView);
         mScrollPaintView.setPaintView(iv_paint);

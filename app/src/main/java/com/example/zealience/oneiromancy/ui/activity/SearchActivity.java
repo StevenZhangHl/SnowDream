@@ -55,6 +55,7 @@ public class SearchActivity extends BaseActivity<SearchPresenter, SearchModel> i
 
     @Override
     public void initView(Bundle savedInstanceState) {
+        setWhiteStatusBar(R.color.white);
         et_search = (EditText) findViewById(R.id.et_search);
         iv_back = (ImageView) findViewById(R.id.iv_back);
         tv_search = (TextView) findViewById(R.id.tv_search);

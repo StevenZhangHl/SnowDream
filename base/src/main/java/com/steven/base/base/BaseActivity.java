@@ -14,6 +14,7 @@ import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import com.hjq.bar.ITitleBarStyle;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.jaeger.library.StatusBarUtil;
@@ -133,6 +134,10 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
      */
     protected boolean isCustomLoadingLayout() {
         return false;
+    }
+
+    public TitleBar getTitlebar() {
+        return titlebar;
     }
 
     /**

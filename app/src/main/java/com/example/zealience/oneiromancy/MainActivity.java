@@ -63,7 +63,6 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
     private TextView et_search_dream;
     private ImageView iv_vr;
     private ImageView iv_small_snow;
-    private FloatView float_view;
     private Banner bannerContainer;
     private NestedScrollView nested_scrollview;
     private int column = 4;
@@ -89,7 +88,6 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
         iv_user_head = (CircleImageView) findViewById(R.id.iv_user_head);
         iv_vr = (ImageView) findViewById(R.id.iv_vr);
         iv_small_snow = (ImageView) findViewById(R.id.iv_small_snow);
-        float_view = (FloatView) findViewById(R.id.float_view);
         bannerContainer = (Banner) findViewById(R.id.bannerContainer);
         nested_scrollview = (NestedScrollView) findViewById(R.id.nested_scrollview);
         initClick();
@@ -106,7 +104,6 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
                 .asGif()
                 .load(R.drawable.home_ali)
                 .into(iv_small_snow);
-        float_view.setmDragView(iv_small_snow);
     }
 
     private void initRecyclerView() {

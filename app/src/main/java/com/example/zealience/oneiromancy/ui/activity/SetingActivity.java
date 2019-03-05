@@ -24,5 +24,6 @@ public class SetingActivity extends BaseActivity {
     @Override
     public void initView(Bundle savedInstanceState) {
         showTitle("设置");
+        setWhiteStatusBar(R.color.white);
     }
 }
