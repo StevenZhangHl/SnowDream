@@ -8,9 +8,10 @@
     tools:context=".MainActivity">
 
     <RelativeLayout
+        android:id="@+id/rl_title"
         android:layout_width="match_parent"
-        android:background="@color/mainColor"
-        android:layout_height="wrap_content">
+        android:layout_height="60dp"
+        android:background="@color/mainColor">
 
         <ImageView
             android:id="@+id/iv_vr"
@@ -21,69 +22,68 @@
             android:scaleType="centerCrop"
             android:src="@mipmap/icon_vr" />
 
+        <TextView
+            android:id="@+id/et_search_dream"
+            style="@style/text_14_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@+id/iv_user_head"
+            android:layout_toRightOf="@+id/iv_vr"
+            android:background="@drawable/shape_radio_white_15"
+            android:hint="被人打/捡到钱"
+            android:paddingLeft="@dimen/margin_10"
+            android:paddingTop="@dimen/margin_5"
+            android:paddingBottom="@dimen/margin_5"
+            android:textColorHint="@color/white"
+            android:transitionName="search_edit" />
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_user_head"
             android:layout_width="@dimen/margin_50"
             android:layout_height="@dimen/margin_50"
-            android:layout_centerInParent="true"
-            android:layout_margin="@dimen/margin_5"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_marginRight="@dimen/margin_10"
             android:src="@mipmap/icon_user"
             app:civ_border_color="@color/DCDCDC"
             app:civ_border_width="@dimen/margin_2" />
 
-        <ImageView
-            android:id="@+id/iv_set"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:padding="@dimen/margin_10"
-            android:src="@mipmap/icon_set" />
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/et_search_dream"
-        style="@style/text_14_333333"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_10"
-        android:layout_marginTop="@dimen/margin_10"
-        android:layout_marginRight="@dimen/margin_10"
-        android:background="@drawable/shape_radio_dcdcdc_15"
-        android:hint="被人打/捡到钱"
-        android:paddingLeft="@dimen/margin_10"
-        android:paddingTop="@dimen/margin_5"
-        android:paddingBottom="@dimen/margin_5"
-        android:transitionName="search_edit" />
 
     <com.steven.base.widget.FloatView
         android:id="@+id/float_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview_dream_type"
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nested_scrollview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_5"
-            android:layout_marginTop="@dimen/margin_10"
-            android:layout_marginRight="@dimen/margin_5" />
+            android:layout_height="match_parent"
+            android:focusableInTouchMode="false">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/margin_100"
-            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:descendantFocusability="blocksDescendants"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_one"
-                style="@style/text_16_666666"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_10"
-                android:ems="1" />
-        </LinearLayout>
+                <com.youth.banner.Banner
+                    android:id="@+id/bannerContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:focusableInTouchMode="false"></com.youth.banner.Banner>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview_dream_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_5"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_marginRight="@dimen/margin_5" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
 
         <ImageView
             android:id="@+id/iv_small_snow"

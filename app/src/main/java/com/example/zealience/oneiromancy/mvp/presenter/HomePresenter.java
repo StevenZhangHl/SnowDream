@@ -1,5 +1,6 @@
 package com.example.zealience.oneiromancy.mvp.presenter;
 
+import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.api.ApiRequest;
 import com.example.zealience.oneiromancy.constant.SharePConstant;
 import com.example.zealience.oneiromancy.entity.DreamTypeEntity;
@@ -8,6 +9,7 @@ import com.steven.base.rx.BaseObserver;
 import com.steven.base.util.GsonUtil;
 import com.steven.base.util.SPUtils;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -16,6 +18,8 @@ import java.util.List;
  * @description 自定义
  */
 public class HomePresenter extends HomeContract.Presenter {
+    private Integer[] images = {R.mipmap.bg_banner_one, R.mipmap.bg_banner_two, R.mipmap.bg_banner_three};
+
     @Override
     public void getHomeDreamTypeData() {
         mRxManager.add(mModel.getDreamType(ApiRequest.getHomeDreamType()).subscribeWith(new BaseObserver<List<DreamTypeEntity>>(mContext, false) {
@@ -30,5 +34,10 @@ public class HomePresenter extends HomeContract.Presenter {
                 mView.onError(message);
             }
         }));
+    }
+
+    @Override
+    public void getHomeBannerData() {
+        mView.setBannerDdata(Arrays.asList(images));
     }
 }

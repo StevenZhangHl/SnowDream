@@ -128,4 +128,5 @@ public class FloatView extends RelativeLayout {
     public void setmDragView(View mDragView) {
         this.mDragView = mDragView;
     }
+
 }

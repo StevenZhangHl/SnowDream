@@ -1,13 +1,17 @@
 package com.example.zealience.oneiromancy;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,14 +38,20 @@ import com.jaeger.library.StatusBarUtil;
 import com.steven.base.app.GlideApp;
 import com.steven.base.base.BaseActivity;
 import com.steven.base.util.DisplayUtil;
+import com.steven.base.util.GlideImageLoader;
 import com.steven.base.util.GsonUtil;
 import com.steven.base.util.SPUtils;
 import com.steven.base.util.TiaoZiUtil;
 import com.example.zealience.oneiromancy.util.TiaoZUtil;
+import com.steven.base.util.ToastUitl;
 import com.steven.base.widget.FloatBallView;
 import com.steven.base.widget.FloatView;
+import com.youth.banner.Banner;
+import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -51,14 +61,13 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
     private RecyclerView recyclerview_dream_type;
     private CircleImageView iv_user_head;
     private TextView et_search_dream;
-    private TextView tv_one;
     private ImageView iv_vr;
-    private ImageView iv_set;
     private ImageView iv_small_snow;
     private FloatView float_view;
+    private Banner bannerContainer;
+    private NestedScrollView nested_scrollview;
     private int column = 4;
     private int girdMargin = 10;
-    private String[] args = {"红豆生南国", "春来发几枝", "愿君多采撷", "此物最相思", "玲珑骰子安红豆", "入骨相思知不知"};
     int time = 0;
     private List<DreamTypeEntity> mDreamTypeList = new ArrayList<>();
 
@@ -78,27 +87,72 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
         recyclerview_dream_type = (RecyclerView) findViewById(R.id.recyclerview_dream_type);
         et_search_dream = (TextView) findViewById(R.id.et_search_dream);
         iv_user_head = (CircleImageView) findViewById(R.id.iv_user_head);
-        tv_one = (TextView) findViewById(R.id.tv_one);
         iv_vr = (ImageView) findViewById(R.id.iv_vr);
-        iv_set = (ImageView) findViewById(R.id.iv_set);
         iv_small_snow = (ImageView) findViewById(R.id.iv_small_snow);
         float_view = (FloatView) findViewById(R.id.float_view);
-        dreamTypeAdapter = new DreamTypeAdapter(R.layout.item_dream_type, new ArrayList<>());
-        recyclerview_dream_type.setLayoutManager(new GridLayoutManager(this, column));
-        recyclerview_dream_type.addItemDecoration(new SpaceItemDecoration(DisplayUtil.dip2px(girdMargin), column));
-        recyclerview_dream_type.setAdapter(dreamTypeAdapter);
-        if (!TextUtils.isEmpty(SPUtils.getSharedStringData(this, SharePConstant.KEY_DREAM_DATA))) {
-            setDreamTypeData(GsonUtil.GsonToList(SPUtils.getSharedStringData(this, SharePConstant.KEY_DREAM_DATA), DreamTypeEntity.class));
-        } else {
-            mPresenter.getHomeDreamTypeData();
-        }
-//        new TiaoZiUtil(tv_one, "老婆我爱你", 400);
+        bannerContainer = (Banner) findViewById(R.id.bannerContainer);
+        nested_scrollview = (NestedScrollView) findViewById(R.id.nested_scrollview);
         initClick();
+        initRecyclerView();
+        initRabot();
+        mPresenter.getHomeBannerData();
+    }
+
+    /**
+     * 初始化机器人
+     */
+    private void initRabot() {
         GlideApp.with(this)
                 .asGif()
                 .load(R.drawable.home_ali)
                 .into(iv_small_snow);
         float_view.setmDragView(iv_small_snow);
+    }
+
+    private void initRecyclerView() {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, column);
+        gridLayoutManager.setSmoothScrollbarEnabled(true);
+        gridLayoutManager.setAutoMeasureEnabled(true);
+        recyclerview_dream_type.setHasFixedSize(true);
+        recyclerview_dream_type.setNestedScrollingEnabled(false);
+        recyclerview_dream_type.setLayoutManager(gridLayoutManager);
+        recyclerview_dream_type.addItemDecoration(new SpaceItemDecoration(DisplayUtil.dip2px(girdMargin), column));
+        dreamTypeAdapter = new DreamTypeAdapter(R.layout.item_dream_type, new ArrayList<>());
+        recyclerview_dream_type.setAdapter(dreamTypeAdapter);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            nested_scrollview.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                @Override
+                public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                    /**
+                     * 第一个参数NestedScrollView v:是NestedScrollView的对象
+                     * 第二个参数:scrollX是目前的（滑动后）的X轴坐标
+                     * 第三个参数:ScrollY是目前的（滑动后）的Y轴坐标
+                     * 第四个参数:oldScrollX是之前的（滑动前）的X轴坐标
+                     * 第五个参数:oldScrollY是之前的（滑动前）的Y轴坐标
+                     */
+                    if (scrollY > oldScrollY) {
+                        //向下滑动
+
+                    }
+                    if (scrollY < oldScrollY) {
+                        //向下滑动
+                    }
+                    if (DisplayUtil.px2dip(scrollY) <= 150) {
+                        int imageWidth = DisplayUtil.dip2px(50) - 2*scrollY / 15;
+                        ViewGroup.LayoutParams layoutParams = iv_user_head.getLayoutParams();
+                        layoutParams.width = imageWidth;
+                        layoutParams.height = imageWidth;
+                        iv_user_head.setLayoutParams(layoutParams);
+                    }
+                    Log.i("distance--------->", scrollY + "");
+                }
+            });
+        }
+        if (!TextUtils.isEmpty(SPUtils.getSharedStringData(this, SharePConstant.KEY_DREAM_DATA))) {
+            setDreamTypeData(GsonUtil.GsonToList(SPUtils.getSharedStringData(this, SharePConstant.KEY_DREAM_DATA), DreamTypeEntity.class));
+        } else {
+            mPresenter.getHomeDreamTypeData();
+        }
         recyclerview_dream_type.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -113,15 +167,30 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
         et_search_dream.setOnClickListener(this);
         iv_user_head.setOnClickListener(this);
         iv_vr.setOnClickListener(this);
-        iv_set.setOnClickListener(this);
         iv_small_snow.setOnClickListener(this);
     }
 
     @Override
     public void setDreamTypeData(List<DreamTypeEntity> dreamTypeEntityList) {
         dreamTypeAdapter.setNewData(dreamTypeEntityList);
+        nested_scrollview.smoothScrollTo(0, 0);
         mDreamTypeList.clear();
         mDreamTypeList.addAll(dreamTypeEntityList);
+    }
+
+    @Override
+    public void setBannerDdata(List<Integer> images) {
+        bannerContainer.setBannerAnimation(Transformer.Accordion)
+                .isAutoPlay(true)
+                .setDelayTime(3000)
+                .setImageLoader(new GlideImageLoader())
+                .setImages(images)
+                .setOnBannerListener(new OnBannerListener() {
+                    @Override
+                    public void OnBannerClick(int position) {
+                        ToastUitl.showShort(position + "");
+                    }
+                }).start();
     }
 
     @Override
@@ -137,9 +206,6 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
         if (v == iv_vr) {
             startActivity(VRActivity.class);
         }
-        if (v == iv_set) {
-            startActivity(SetingActivity.class);
-        }
         if (v == iv_small_snow) {
             startActivity(WebViewActivity.class);
         }
@@ -148,6 +214,13 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
     @Override
     protected void onPause() {
         super.onPause();
+        bannerContainer.stopAutoPlay();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        bannerContainer.startAutoPlay();
     }
 
     @Override

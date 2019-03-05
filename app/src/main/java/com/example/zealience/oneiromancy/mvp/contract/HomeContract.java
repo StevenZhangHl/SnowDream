@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
+
 /**
  * @user steven
  * @createDate 2019/2/20 11:15
@@ -17,13 +18,17 @@ import io.reactivex.Observable;
 public interface HomeContract {
     interface View extends BaseView {
         void setDreamTypeData(List<DreamTypeEntity> dreamTypeEntityList);
+
+        void setBannerDdata(List<Integer> images);
     }
 
     interface Model extends BaseModel {
-        Observable<List<DreamTypeEntity>> getDreamType(Map<String,Object> objectMap);
+        Observable<List<DreamTypeEntity>> getDreamType(Map<String, Object> objectMap);
     }
 
     abstract class Presenter extends BasePresenter<View, Model> {
         public abstract void getHomeDreamTypeData();
+
+        public abstract void getHomeBannerData();
     }
 }
