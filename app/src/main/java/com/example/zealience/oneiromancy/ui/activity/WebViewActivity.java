@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.zealience.oneiromancy.R;
+import com.steven.base.app.BaseApp;
 import com.steven.base.base.BaseActivity;
 
 public class WebViewActivity extends BaseActivity {
@@ -32,6 +33,7 @@ public class WebViewActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState) {
+        BaseApp.getInstance().addActivity(this);
         showTitle("");
         setWhiteStatusBar(R.color.white);
         webView = (WebView) findViewById(R.id.webView);

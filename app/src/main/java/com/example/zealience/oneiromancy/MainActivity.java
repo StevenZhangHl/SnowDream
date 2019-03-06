@@ -3,8 +3,6 @@ package com.example.zealience.oneiromancy;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,21 +10,22 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.zealience.oneiromancy.constant.SharePConstant;
-import com.example.zealience.oneiromancy.entity.DreamEntity;
 import com.example.zealience.oneiromancy.entity.DreamTypeEntity;
 import com.example.zealience.oneiromancy.mvp.contract.HomeContract;
 import com.example.zealience.oneiromancy.mvp.model.HomeModel;
 import com.example.zealience.oneiromancy.mvp.presenter.HomePresenter;
 import com.example.zealience.oneiromancy.ui.DreamTypeAdapter;
 import com.example.zealience.oneiromancy.ui.activity.SearchActivity;
-import com.example.zealience.oneiromancy.ui.activity.SetingActivity;
-import com.example.zealience.oneiromancy.ui.activity.UserPhotoDetailActivity;
+import com.example.zealience.oneiromancy.ui.activity.UserInfolActivity;
 import com.example.zealience.oneiromancy.ui.activity.VRActivity;
 import com.example.zealience.oneiromancy.ui.activity.WebViewActivity;
 import com.example.zealience.oneiromancy.util.SpaceItemDecoration;
@@ -34,24 +33,19 @@ import com.hw.ycshareelement.YcShareElement;
 import com.hw.ycshareelement.transition.IShareElements;
 import com.hw.ycshareelement.transition.ShareElementInfo;
 import com.hw.ycshareelement.transition.TextViewStateSaver;
-import com.jaeger.library.StatusBarUtil;
+import com.steven.base.app.BaseApp;
 import com.steven.base.app.GlideApp;
 import com.steven.base.base.BaseActivity;
 import com.steven.base.util.DisplayUtil;
 import com.steven.base.util.GlideImageLoader;
 import com.steven.base.util.GsonUtil;
 import com.steven.base.util.SPUtils;
-import com.steven.base.util.TiaoZiUtil;
-import com.example.zealience.oneiromancy.util.TiaoZUtil;
 import com.steven.base.util.ToastUitl;
-import com.steven.base.widget.FloatBallView;
-import com.steven.base.widget.FloatView;
 import com.youth.banner.Banner;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -67,7 +61,7 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
     private NestedScrollView nested_scrollview;
     private int column = 4;
     private int girdMargin = 10;
-    int time = 0;
+    private boolean isStopAnim;
     private List<DreamTypeEntity> mDreamTypeList = new ArrayList<>();
 
     @Override
@@ -82,6 +76,7 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
 
     @Override
     public void initView(Bundle savedInstanceState) {
+        BaseApp.getInstance().addActivity(this);
         YcShareElement.enableContentTransition(getApplication());
         recyclerview_dream_type = (RecyclerView) findViewById(R.id.recyclerview_dream_type);
         et_search_dream = (TextView) findViewById(R.id.et_search_dream);
@@ -94,6 +89,16 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
         initRecyclerView();
         initRabot();
         mPresenter.getHomeBannerData();
+        nested_scrollview.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if (isStopAnim) {
+                    return;
+                }
+                startAnim();
+                isStopAnim = true;
+            }
+        });
     }
 
     /**
@@ -104,6 +109,14 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
                 .asGif()
                 .load(R.drawable.home_ali)
                 .into(iv_small_snow);
+    }
+
+    private void startAnim() {
+        TranslateAnimation animation = new TranslateAnimation(0, DisplayUtil.getScreenWidth(this) - iv_small_snow.getWidth(), 0, DisplayUtil.getScreenHeight(this) - iv_small_snow.getHeight() - DisplayUtil.getStatusBarHeight(this) - DisplayUtil.dip2px(60) - iv_small_snow.getHeight());
+        animation.setInterpolator(new AccelerateDecelerateInterpolator());
+        animation.setFillAfter(true);
+        animation.setDuration(3000);
+        iv_small_snow.startAnimation(animation);
     }
 
     private void initRecyclerView() {
@@ -135,7 +148,7 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
                         //向下滑动
                     }
                     if (DisplayUtil.px2dip(scrollY) <= 150) {
-                        int imageWidth = DisplayUtil.dip2px(50) - 2*scrollY / 15;
+                        int imageWidth = DisplayUtil.dip2px(50) - 2 * scrollY / 15;
                         ViewGroup.LayoutParams layoutParams = iv_user_head.getLayoutParams();
                         layoutParams.width = imageWidth;
                         layoutParams.height = imageWidth;
@@ -198,7 +211,7 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
             startActivity(intent, optionsBundle);
         }
         if (v == iv_user_head) {
-            startActivity(UserPhotoDetailActivity.class);
+            startActivity(UserInfolActivity.class);
         }
         if (v == iv_vr) {
             startActivity(VRActivity.class);
@@ -206,6 +219,11 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
         if (v == iv_small_snow) {
             startActivity(WebViewActivity.class);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override

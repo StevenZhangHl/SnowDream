@@ -1,26 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.UserPhotoDetailActivity">
-    <!--需要显示的图-->
-    <ImageView
-        android:id="@+id/iv_paint"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="matrix"
-        android:src="@mipmap/icon_user"
-        android:visibility="gone" />
+    android:orientation="vertical"
+    tools:context=".ui.activity.UserInfolActivity">
 
-    <com.example.zealience.oneiromancy.ui.widget.ScrollPaintView
-        android:id="@+id/mScrollPaintView"
+    <Button
+        android:id="@+id/bt_login_out"
+        style="@style/text_16_white"
         android:layout_width="match_parent"
-        app:paintScrollHeight="@dimen/margin_30"
-        app:paintScrollSrc="@mipmap/bg_paint"
-        app:paintScrollTxt="向下拉看女神美照"
-        app:paintScrollTxtColor="@color/white"
-        app:paintScrollTxtSize="14sp"
-        android:layout_height="match_parent"></com.example.zealience.oneiromancy.ui.widget.ScrollPaintView>
-</RelativeLayout>
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_15"
+        android:background="@drawable/bg_radio_333_2"
+        android:text="退出登录" />
+</LinearLayout>

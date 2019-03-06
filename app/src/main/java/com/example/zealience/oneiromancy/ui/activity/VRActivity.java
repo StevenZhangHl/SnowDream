@@ -20,6 +20,7 @@ import com.example.zealience.oneiromancy.ui.VRPhotoAdapter;
 import com.google.vr.sdk.widgets.pano.VrPanoramaView;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
+import com.steven.base.app.BaseApp;
 import com.steven.base.base.BaseActivity;
 import com.steven.base.util.AssetsUtil;
 import com.steven.base.widget.FloatView;
@@ -51,6 +52,7 @@ public class VRActivity extends BaseActivity<VRPresenter, VRModel> implements VR
 
     @Override
     public void initView(Bundle savedInstanceState) {
+        BaseApp.getInstance().addActivity(this);
         vrView = (VrPanoramaView) findViewById(R.id.vr_view);
         recyclerviewVr = (RecyclerView) findViewById(R.id.recyclerview_vr);
         appbar_layout = (AppBarLayout) findViewById(R.id.appbar_layout);

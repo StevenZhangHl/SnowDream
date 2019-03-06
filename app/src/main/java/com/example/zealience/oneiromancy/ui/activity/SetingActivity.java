@@ -7,6 +7,7 @@ import com.example.zealience.oneiromancy.R;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.hjq.bar.style.TitleBarLightStyle;
+import com.steven.base.app.BaseApp;
 import com.steven.base.base.BaseActivity;
 
 public class SetingActivity extends BaseActivity {
@@ -23,6 +24,7 @@ public class SetingActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState) {
+        BaseApp.getInstance().addActivity(this);
         showTitle("设置");
         setWhiteStatusBar(R.color.white);
     }

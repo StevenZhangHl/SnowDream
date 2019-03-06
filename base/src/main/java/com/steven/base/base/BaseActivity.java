@@ -120,7 +120,6 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
 
             }
         });
-        setFitsSystemWindows();
         // 多状态管理类
         if (!isCustomLoadingLayout()) {
             mBaseLoadService = LoadSir.getDefault().register(flBaseContent, this);

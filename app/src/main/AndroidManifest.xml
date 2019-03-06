@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.zealience.oneiromancy">
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:name="com.steven.base.app.BaseApp"
         android:allowBackup="true"
@@ -25,10 +30,13 @@
             android:name=".ui.activity.DreamDetailActivity"
             android:label="@string/title_activity_dream_detail"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ui.activity.UserPhotoDetailActivity" />
+        <activity android:name=".ui.activity.UserInfolActivity" />
         <activity android:name=".ui.activity.VRActivity" />
         <activity android:name=".ui.activity.WebViewActivity" />
-        <activity android:name=".ui.activity.SetingActivity"></activity>
+        <activity android:name=".ui.activity.SetingActivity" />
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:label="@string/title_activity_login"></activity>
     </application>
 
 </manifest>

@@ -2,11 +2,13 @@ package com.steven.base.widget;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,13 +35,13 @@ public class LoadingDialog {
      * @param msg        对话框显示内容
      * @param cancelable 对话框是否可以取消
      */
-    public Dialog showDialogForLoading(Activity context, String msg, boolean cancelable) {
+    public Dialog showDialogForLoading(Context context, String msg, boolean cancelable) {
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_loading, null);
         TextView loadingText = (TextView) view.findViewById(R.id.id_tv_loading_dialog_text);
 
         iv_animation = (ImageView) view.findViewById(R.id.iv_animation);
         Animation rotate = AnimationUtils.loadAnimation(context, R.anim.rotate_anim);
-        LinearInterpolator lir = new LinearInterpolator();
+        DecelerateInterpolator lir = new DecelerateInterpolator();
         rotate.setInterpolator(lir);
         iv_animation.startAnimation(rotate);
         loadingText.setText(msg);

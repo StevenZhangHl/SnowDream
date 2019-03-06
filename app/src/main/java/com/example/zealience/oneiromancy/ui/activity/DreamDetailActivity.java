@@ -19,6 +19,7 @@ import com.example.zealience.oneiromancy.entity.DreamEntity;
 import com.example.zealience.oneiromancy.ui.DreamDetailAdapter;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
+import com.steven.base.app.BaseApp;
 
 import java.util.ArrayList;
 
@@ -33,6 +34,7 @@ public class DreamDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BaseApp.getInstance().addActivity(this);
         setContentView(R.layout.activity_dream_detail);
         DreamEntity entity = (DreamEntity) getIntent().getSerializableExtra("dreamInfo");
         appBar = (AppBarLayout) findViewById(R.id.app_bar);

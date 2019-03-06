@@ -27,6 +27,7 @@ import com.hw.ycshareelement.YcShareElement;
 import com.hw.ycshareelement.transition.IShareElements;
 import com.hw.ycshareelement.transition.ShareElementInfo;
 import com.hw.ycshareelement.transition.TextViewStateSaver;
+import com.steven.base.app.BaseApp;
 import com.steven.base.base.BaseActivity;
 import com.steven.base.util.KeyboardUtil;
 
@@ -55,6 +56,7 @@ public class SearchActivity extends BaseActivity<SearchPresenter, SearchModel> i
 
     @Override
     public void initView(Bundle savedInstanceState) {
+        BaseApp.getInstance().addActivity(this);
         setWhiteStatusBar(R.color.white);
         et_search = (EditText) findViewById(R.id.et_search);
         iv_back = (ImageView) findViewById(R.id.iv_back);
