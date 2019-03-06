@@ -1,11 +1,14 @@
 package com.example.zealience.oneiromancy.ui.activity;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnticipateOvershootInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.zealience.oneiromancy.MainActivity;
 import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.mvp.contract.LoginContract;
@@ -22,6 +27,7 @@ import com.example.zealience.oneiromancy.util.ShakeUtils;
 import com.jaeger.library.StatusBarUtil;
 import com.steven.base.app.BaseApp;
 import com.steven.base.base.BaseActivity;
+import com.steven.base.util.Typefaces;
 
 /**
  * A login screen that offers login via email/password.
@@ -34,6 +40,9 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
     private EditText et_phone;
     private EditText et_password;
     private ShakeUtils shakeUtils;
+    private LinearLayout ll_show_love;
+    private TextView tv_show_love_one;
+    private TextView tv_show_love_two;
 
     @Override
     public int getLayoutId() {
@@ -54,6 +63,9 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
         ll_content = (LinearLayout) findViewById(R.id.ll_content);
         tv_cancel = (TextView) findViewById(R.id.tv_cancel);
         bt_login = (Button) findViewById(R.id.bt_login);
+        ll_show_love = (LinearLayout) findViewById(R.id.ll_show_love);
+        tv_show_love_one = (TextView) findViewById(R.id.tv_show_love_one);
+        tv_show_love_two = (TextView) findViewById(R.id.tv_show_love_two);
         bt_login.setOnClickListener(this);
         tv_cancel.setOnClickListener(this);
         mPresenter.observerInput(et_phone, et_password);
@@ -81,6 +93,14 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
                 ll.topMargin = top;
                 ll_content.setLayoutParams(ll);
                 ll_content.clearAnimation();
+                ll_show_love.setVisibility(View.VISIBLE);
+                Typeface typeface = Typefaces.get(LoginActivity.this, "showlove.ttf");
+                tv_show_love_one.setTypeface(typeface);
+                tv_show_love_two.setTypeface(typeface);
+                YoYo.with(Techniques.FadeIn)
+                        .interpolate(new LinearInterpolator())
+                        .duration(5000)
+                        .playOn(ll_show_love);
             }
 
             @Override

@@ -73,5 +73,29 @@
             android:text="登录"
             android:textStyle="bold" />
 
+        <LinearLayout
+            android:id="@+id/ll_show_love"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_show_love_one"
+                style="@style/text_13_666666"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:layout_marginTop="@dimen/margin_15"
+                android:text="玲珑骰子安红豆" />
+
+            <TextView
+                android:id="@+id/tv_show_love_two"
+                style="@style/text_13_666666"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:text="入骨相思知不知" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
