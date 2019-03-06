@@ -89,16 +89,6 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
         initRecyclerView();
         initRabot();
         mPresenter.getHomeBannerData();
-        nested_scrollview.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                if (isStopAnim) {
-                    return;
-                }
-                startAnim();
-                isStopAnim = true;
-            }
-        });
     }
 
     /**
@@ -109,14 +99,6 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
                 .asGif()
                 .load(R.drawable.home_ali)
                 .into(iv_small_snow);
-    }
-
-    private void startAnim() {
-        TranslateAnimation animation = new TranslateAnimation(0, DisplayUtil.getScreenWidth(this) - iv_small_snow.getWidth(), 0, DisplayUtil.getScreenHeight(this) - iv_small_snow.getHeight() - DisplayUtil.getStatusBarHeight(this) - DisplayUtil.dip2px(60) - iv_small_snow.getHeight());
-        animation.setInterpolator(new AccelerateDecelerateInterpolator());
-        animation.setFillAfter(true);
-        animation.setDuration(3000);
-        iv_small_snow.startAnimation(animation);
     }
 
     private void initRecyclerView() {
