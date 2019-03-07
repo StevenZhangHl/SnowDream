@@ -24,7 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
         <activity android:name=".ui.activity.SearchActivity" />
         <activity
             android:name=".ui.activity.DreamDetailActivity"
@@ -36,7 +35,10 @@
         <activity android:name=".ui.activity.SetingActivity" />
         <activity
             android:name=".ui.activity.LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:label="@string/title_activity_main"></activity>
     </application>
 
 </manifest>

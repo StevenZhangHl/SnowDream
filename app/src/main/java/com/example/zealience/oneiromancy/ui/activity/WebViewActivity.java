@@ -1,5 +1,7 @@
 package com.example.zealience.oneiromancy.ui.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +31,13 @@ public class WebViewActivity extends BaseActivity {
     @Override
     public void initPresenter() {
 
+    }
+
+    public static void startActivity(Context context,Bundle bundle){
+        Intent intent = new Intent();
+        intent.setClass(context,WebViewActivity.class);
+        intent.putExtra("urlData",bundle);
+        context.startActivity(intent);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.zealience.oneiromancy;
+package com.example.zealience.oneiromancy.ui.fragment;
 
 import android.content.Intent;
 import android.os.Build;
@@ -10,14 +10,12 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.constant.SharePConstant;
 import com.example.zealience.oneiromancy.entity.DreamTypeEntity;
 import com.example.zealience.oneiromancy.mvp.contract.HomeContract;
@@ -35,7 +33,7 @@ import com.hw.ycshareelement.transition.ShareElementInfo;
 import com.hw.ycshareelement.transition.TextViewStateSaver;
 import com.steven.base.app.BaseApp;
 import com.steven.base.app.GlideApp;
-import com.steven.base.base.BaseActivity;
+import com.steven.base.base.BaseFragment;
 import com.steven.base.util.DisplayUtil;
 import com.steven.base.util.GlideImageLoader;
 import com.steven.base.util.GsonUtil;
@@ -50,7 +48,12 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends BaseActivity<HomePresenter, HomeModel> implements HomeContract.View, View.OnClickListener, IShareElements {
+/**
+ * @user steven
+ * @createDate 2019/3/6 18:02
+ * @description 首页
+ */
+public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> implements HomeContract.View, View.OnClickListener, IShareElements {
     private DreamTypeAdapter dreamTypeAdapter;
     private RecyclerView recyclerview_dream_type;
     private CircleImageView iv_user_head;
@@ -66,7 +69,7 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_main;
+        return R.layout.fragment_home;
     }
 
     @Override
@@ -76,15 +79,14 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        BaseApp.getInstance().addActivity(this);
-        YcShareElement.enableContentTransition(getApplication());
-        recyclerview_dream_type = (RecyclerView) findViewById(R.id.recyclerview_dream_type);
-        et_search_dream = (TextView) findViewById(R.id.et_search_dream);
-        iv_user_head = (CircleImageView) findViewById(R.id.iv_user_head);
-        iv_vr = (ImageView) findViewById(R.id.iv_vr);
-        iv_small_snow = (ImageView) findViewById(R.id.iv_small_snow);
-        bannerContainer = (Banner) findViewById(R.id.bannerContainer);
-        nested_scrollview = (NestedScrollView) findViewById(R.id.nested_scrollview);
+        YcShareElement.enableContentTransition(BaseApp.getInstance());
+        recyclerview_dream_type = (RecyclerView) rootView.findViewById(R.id.recyclerview_dream_type);
+        et_search_dream = (TextView) rootView.findViewById(R.id.et_search_dream);
+        iv_user_head = (CircleImageView) rootView.findViewById(R.id.iv_user_head);
+        iv_vr = (ImageView) rootView.findViewById(R.id.iv_vr);
+        iv_small_snow = (ImageView) rootView.findViewById(R.id.iv_small_snow);
+        bannerContainer = (Banner) rootView.findViewById(R.id.bannerContainer);
+        nested_scrollview = (NestedScrollView) rootView.findViewById(R.id.nested_scrollview);
         initClick();
         initRecyclerView();
         initRabot();
@@ -102,7 +104,7 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
     }
 
     private void initRecyclerView() {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, column);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(_mActivity, column);
         gridLayoutManager.setSmoothScrollbarEnabled(true);
         gridLayoutManager.setAutoMeasureEnabled(true);
         recyclerview_dream_type.setHasFixedSize(true);
@@ -140,8 +142,8 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
                 }
             });
         }
-        if (!TextUtils.isEmpty(SPUtils.getSharedStringData(this, SharePConstant.KEY_DREAM_DATA))) {
-            setDreamTypeData(GsonUtil.GsonToList(SPUtils.getSharedStringData(this, SharePConstant.KEY_DREAM_DATA), DreamTypeEntity.class));
+        if (!TextUtils.isEmpty(SPUtils.getSharedStringData(_mActivity, SharePConstant.KEY_DREAM_DATA))) {
+            setDreamTypeData(GsonUtil.GsonToList(SPUtils.getSharedStringData(_mActivity, SharePConstant.KEY_DREAM_DATA), DreamTypeEntity.class));
         } else {
             mPresenter.getHomeDreamTypeData();
         }
@@ -160,6 +162,29 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
         iv_user_head.setOnClickListener(this);
         iv_vr.setOnClickListener(this);
         iv_small_snow.setOnClickListener(this);
+    }
+
+    @Override
+    public void onError(String msg) {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == et_search_dream) {
+            Intent intent = new Intent(_mActivity, SearchActivity.class);
+            Bundle optionsBundle = YcShareElement.buildOptionsBundle(_mActivity, HomeFragment.this);
+            startActivity(intent, optionsBundle);
+        }
+        if (v == iv_user_head) {
+            startActivity(UserInfolActivity.class);
+        }
+        if (v == iv_vr) {
+            startActivity(VRActivity.class);
+        }
+        if (v == iv_small_snow) {
+            startActivity(WebViewActivity.class);
+        }
     }
 
     @Override
@@ -186,42 +211,16 @@ public class MainActivity extends BaseActivity<HomePresenter, HomeModel> impleme
     }
 
     @Override
-    public void onClick(View v) {
-        if (v == et_search_dream) {
-            Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-            Bundle optionsBundle = YcShareElement.buildOptionsBundle(MainActivity.this, MainActivity.this);
-            startActivity(intent, optionsBundle);
-        }
-        if (v == iv_user_head) {
-            startActivity(UserInfolActivity.class);
-        }
-        if (v == iv_vr) {
-            startActivity(VRActivity.class);
-        }
-        if (v == iv_small_snow) {
-            startActivity(WebViewActivity.class);
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        bannerContainer.stopAutoPlay();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        bannerContainer.startAutoPlay();
-    }
-
-    @Override
     public ShareElementInfo[] getShareElements() {
         return new ShareElementInfo[]{new ShareElementInfo(et_search_dream, new TextViewStateSaver())};
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if (hidden) {
+            bannerContainer.stopAutoPlay();
+        } else {
+            bannerContainer.startAutoPlay();
+        }
     }
 }

@@ -1,11 +1,8 @@
 package com.example.zealience.oneiromancy.ui.activity;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-import com.example.zealience.oneiromancy.MainActivity;
 import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.util.UserHelper;
 import com.steven.base.base.BaseActivity;

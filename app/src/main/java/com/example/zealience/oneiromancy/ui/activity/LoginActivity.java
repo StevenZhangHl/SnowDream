@@ -7,18 +7,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnticipateOvershootInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.example.zealience.oneiromancy.MainActivity;
 import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.mvp.contract.LoginContract;
 import com.example.zealience.oneiromancy.mvp.model.LoginModel;

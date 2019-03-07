@@ -17,7 +17,7 @@ public class ShakeUtils implements SensorEventListener {
     private SensorManager mSensorManager = null;
     private Vibrator vibrator;
     private OnShakeListener mOnShakeListener = null;
-    private static final int SENSOR_VALUE = 40;
+    private static final int SENSOR_VALUE = 20;
 
     public ShakeUtils(Context context) {
         mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
@@ -52,9 +52,7 @@ public class ShakeUtils implements SensorEventListener {
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        if (accuracy > SENSOR_VALUE) {
-            mOnShakeListener.onShake();
-        }
+
     }
 
     public void onResume() {
