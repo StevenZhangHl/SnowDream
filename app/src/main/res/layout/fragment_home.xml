@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/rl_title"
@@ -14,13 +13,13 @@
         android:background="@color/mainColor">
 
         <ImageView
-            android:id="@+id/iv_vr"
+            android:id="@+id/iv_sao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:padding="@dimen/margin_10"
             android:scaleType="centerCrop"
-            android:src="@mipmap/icon_vr" />
+            android:src="@mipmap/icon_sao" />
 
         <TextView
             android:id="@+id/et_search_dream"
@@ -29,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_toLeftOf="@+id/iv_user_head"
-            android:layout_toRightOf="@+id/iv_vr"
+            android:layout_toRightOf="@+id/iv_sao"
             android:background="@drawable/shape_radio_white_15"
             android:hint="被人打/捡到钱"
             android:paddingLeft="@dimen/margin_10"
@@ -85,8 +84,8 @@
         android:id="@+id/iv_small_snow"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/margin_15"
         android:scaleType="centerCrop" />
 </RelativeLayout>

@@ -1,7 +1,5 @@
 package com.steven.base.bean;
 
-import android.text.TextUtils;
-
 import java.io.Serializable;
 
 /**
@@ -39,7 +37,7 @@ public class BaseEntity<T> implements Serializable {
     }
 
     public boolean success() {
-        if ("successed".equals(reason)) {
+        if (error_code == 0) {
             return true;
         } else {
             return false;

@@ -17,7 +17,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -68,6 +68,22 @@ dependencies {
     api 'com.google.vr:sdk-panowidget:1.80.0'
     api 'com.android.support:design:28.0.0'
     api 'com.android.support:percent:28.0.0'
-    api 'com.youth.banner:banner:1.4.10'  //最新版本
+    api 'com.youth.banner:banner:1.4.10'
+    //最新版本
     api 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+    api 'com.github.hackware1993:MagicIndicator:1.5.0'
+    api 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
+    api 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1'
+    api 'com.umeng.umsdk:common:1.5.4'
+    api 'com.umeng.umsdk:utdid:1.1.5.3'
+    api files('libs/libapshare20161108.jar')
+    api files('libs/libddshare.jar')
+    api files('libs/umeng-share-alipay-6.9.4.jar')
+    api files('libs/umeng-share-core-6.9.4.jar')
+    api files('libs/umeng-share-Ding-6.9.4.jar')
+    api files('libs/umeng-share-QQ-simplify-6.9.4.jar')
+    api files('libs/umeng-share-sina-simplify-6.9.4.jar')
+    api files('libs/umeng-share-wechat-simplify-6.9.4.jar')
+    api files('libs/umeng-sharetool-6.9.4.jar')
+    api files('libs/umeng-shareboard-widget-6.9.4.jar')
 }

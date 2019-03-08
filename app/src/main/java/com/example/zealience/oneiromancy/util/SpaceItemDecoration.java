@@ -8,7 +8,7 @@ import android.view.View;
 /**
  * @user steven
  * @createDate 2019/2/21 09:35
- * @description 自定义
+ * @description 表格布局间隔工具
  */
 public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
     private int space;

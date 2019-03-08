@@ -2,6 +2,7 @@ package com.example.zealience.oneiromancy.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,12 +17,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.zealience.oneiromancy.R;
+import com.example.zealience.oneiromancy.constant.KeyConstant;
 import com.steven.base.app.BaseApp;
 import com.steven.base.base.BaseActivity;
 
 public class WebViewActivity extends BaseActivity {
     private WebView webView;
     private ProgressBar mProgressBar;
+    private String url;
+    private String currentUrl;
 
     @Override
     public int getLayoutId() {
@@ -33,10 +37,10 @@ public class WebViewActivity extends BaseActivity {
 
     }
 
-    public static void startActivity(Context context,Bundle bundle){
+    public static void startActivity(Context context, Bundle bundle) {
         Intent intent = new Intent();
-        intent.setClass(context,WebViewActivity.class);
-        intent.putExtra("urlData",bundle);
+        intent.setClass(context, WebViewActivity.class);
+        intent.putExtra(KeyConstant.URL_BUNDLE_KEY, bundle);
         context.startActivity(intent);
     }
 
@@ -85,6 +89,7 @@ public class WebViewActivity extends BaseActivity {
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                currentUrl = request.getUrl().getPath();
                 return super.shouldOverrideUrlLoading(view, request);
             }
 
@@ -103,6 +108,7 @@ public class WebViewActivity extends BaseActivity {
                 super.onPageFinished(view, url);
             }
         });
-        webView.loadUrl("https://www.zhihu.com/topic/19556496/hot");
+        url = getIntent().getBundleExtra(KeyConstant.URL_BUNDLE_KEY).getString(KeyConstant.URL_KEY);
+        webView.loadUrl(url);
     }
 }

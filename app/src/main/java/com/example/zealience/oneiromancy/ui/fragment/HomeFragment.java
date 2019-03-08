@@ -16,7 +16,9 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.zealience.oneiromancy.R;
+import com.example.zealience.oneiromancy.constant.KeyConstant;
 import com.example.zealience.oneiromancy.constant.SharePConstant;
+import com.example.zealience.oneiromancy.constant.UrlConstant;
 import com.example.zealience.oneiromancy.entity.DreamTypeEntity;
 import com.example.zealience.oneiromancy.mvp.contract.HomeContract;
 import com.example.zealience.oneiromancy.mvp.model.HomeModel;
@@ -58,7 +60,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
     private RecyclerView recyclerview_dream_type;
     private CircleImageView iv_user_head;
     private TextView et_search_dream;
-    private ImageView iv_vr;
+    private ImageView iv_sao;
     private ImageView iv_small_snow;
     private Banner bannerContainer;
     private NestedScrollView nested_scrollview;
@@ -83,7 +85,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         recyclerview_dream_type = (RecyclerView) rootView.findViewById(R.id.recyclerview_dream_type);
         et_search_dream = (TextView) rootView.findViewById(R.id.et_search_dream);
         iv_user_head = (CircleImageView) rootView.findViewById(R.id.iv_user_head);
-        iv_vr = (ImageView) rootView.findViewById(R.id.iv_vr);
+        iv_sao = (ImageView) rootView.findViewById(R.id.iv_sao);
         iv_small_snow = (ImageView) rootView.findViewById(R.id.iv_small_snow);
         bannerContainer = (Banner) rootView.findViewById(R.id.bannerContainer);
         nested_scrollview = (NestedScrollView) rootView.findViewById(R.id.nested_scrollview);
@@ -160,7 +162,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
     private void initClick() {
         et_search_dream.setOnClickListener(this);
         iv_user_head.setOnClickListener(this);
-        iv_vr.setOnClickListener(this);
+        iv_sao.setOnClickListener(this);
         iv_small_snow.setOnClickListener(this);
     }
 
@@ -179,11 +181,13 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         if (v == iv_user_head) {
             startActivity(UserInfolActivity.class);
         }
-        if (v == iv_vr) {
-            startActivity(VRActivity.class);
+        if (v == iv_sao) {
+            ToastUitl.showShort("功能待开发");
         }
         if (v == iv_small_snow) {
-            startActivity(WebViewActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString(KeyConstant.URL_KEY, UrlConstant.URL_ZHIHU);
+            WebViewActivity.startActivity(_mActivity, bundle);
         }
     }
 

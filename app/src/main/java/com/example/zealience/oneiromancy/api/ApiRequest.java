@@ -34,18 +34,58 @@ public class ApiRequest {
 
     /**
      * 解梦查询
+     *
      * @param content
      * @param dreamType
      * @return
      */
-    public static Map<String, Object> searchDreamData(String content,int dreamType) {
+    public static Map<String, Object> searchDreamData(String content, int dreamType) {
         Map<String, Object> map = new HashMap<>();
         map.put("key", "3fc44d0a8ea0c260e39d72ce4783dd42");
         map.put("q", content);
-        if (dreamType!=-1) {
+        if (dreamType != -1) {
             map.put("cid", dreamType);
         }
         map.put("full", 1);
+        return map;
+    }
+
+    /**
+     * 根据类型获取新闻列表
+     *
+     * @param type
+     * @return
+     */
+    public static Map<String, Object> getNewsList(String type) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("key", "da1f5d71e56b5e338f7e7d198c80b2cf");
+        map.put("type", type);
+        return map;
+    }
+
+    /**
+     * 根据日期获取历史上的今天
+     *
+     * @param date
+     * @return
+     */
+    public static Map<String, Object> getHistoryListBydate(String date) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("key", "020e9154a16c582e675b3ac67000a8b5");
+        map.put("date", date);
+        return map;
+    }
+
+    /**
+     * 根据id获取历史上的今天详情
+     *
+     * @param e_id
+     * @return
+     */
+    public static Map<String, Object> getHistoryListById(String e_id) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("key", "020e9154a16c582e675b3ac67000a8b5");
+        map.put("e_id", e_id);
         return map;
     }
 }
