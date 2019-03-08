@@ -17,7 +17,7 @@ import io.reactivex.functions.Consumer;
 
 public class WelcomeActivity extends BaseActivity {
     private ImageView iv_splash;
-    private int[] images = {R.mipmap.lanucher_one, R.mipmap.lanucher_two};
+    private int[] images = {R.mipmap.lanucher_three};
     private RxManager rxManager;
 
     @Override
