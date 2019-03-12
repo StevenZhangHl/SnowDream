@@ -20,16 +20,27 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_me_head"
                 android:layout_width="65dp"
+                android:transitionName="userInfoImageHead"
                 android:layout_height="65dp"
                 android:layout_centerInParent="true"
                 android:src="@mipmap/icon_user"
                 app:civ_border_color="@color/DCDCDC"
                 app:civ_border_width="2dp" />
         </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-        </RelativeLayout>
+        <com.steven.base.widget.CustomLayoutGroup
+            android:id="@+id/customLayout_signIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.steven.base.widget.CustomLayoutGroup>
+
+        <com.steven.base.widget.CustomLayoutGroup
+            android:id="@+id/customLayout_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.steven.base.widget.CustomLayoutGroup>
+
+        <com.steven.base.widget.CustomLayoutGroup
+            android:id="@+id/customLayout_collection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.steven.base.widget.CustomLayoutGroup>
     </LinearLayout>
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>

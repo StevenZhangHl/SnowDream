@@ -283,13 +283,30 @@ public class AnimationUtils {
      * @param view     view
      * @param duration 时间
      */
-    public static void scaleBigView(View view, int duration) {
-        ObjectAnimator animatorX = ObjectAnimator.ofFloat(view, "scaleX", 0f, 1f);
-        ObjectAnimator animatorY = ObjectAnimator.ofFloat(view, "scaleY", 1f, 1f);
+    public static void scaleBigView(View view, int duration, Animator.AnimatorListener listener) {
+        ObjectAnimator animatorX = ObjectAnimator.ofFloat(view, "scaleX", 1f, 1.5f);
+        ObjectAnimator animatorY = ObjectAnimator.ofFloat(view, "scaleY", 1f, 1.5f);
         AnimatorSet set = new AnimatorSet();
         set.play(animatorX).with(animatorY);
         set.setDuration(duration);
-        set.setInterpolator(new AnticipateOvershootInterpolator());
+        set.addListener(listener);
+        set.setInterpolator(new LinearInterpolator());
+        set.start();
+    }
+
+    /**
+     * 放大View
+     *
+     * @param view     view
+     * @param duration 时间
+     */
+    public static void scaleBigView(View view, int duration) {
+        ObjectAnimator animatorX = ObjectAnimator.ofFloat(view, "scaleX", 1f, 1.5f);
+        ObjectAnimator animatorY = ObjectAnimator.ofFloat(view, "scaleY", 1f, 1.5f);
+        AnimatorSet set = new AnimatorSet();
+        set.play(animatorX).with(animatorY);
+        set.setDuration(duration);
+        set.setInterpolator(new LinearInterpolator());
         set.start();
     }
 
@@ -299,13 +316,29 @@ public class AnimationUtils {
      * @param view     view
      * @param duration 时间
      */
-    public static void scaleSmallView(View view, int duration) {
-        ObjectAnimator animatorX = ObjectAnimator.ofFloat(view, "scaleX", 1f, 0f);
-        ObjectAnimator animatorY = ObjectAnimator.ofFloat(view, "scaleY", 1f, 1f);
+    public static void scaleSmallView(View view, int duration, Animator.AnimatorListener listener) {
+        ObjectAnimator animatorX = ObjectAnimator.ofFloat(view, "scaleX", 1.5f, 1f);
+        ObjectAnimator animatorY = ObjectAnimator.ofFloat(view, "scaleY", 1.5f, 1f);
         AnimatorSet set = new AnimatorSet();
         set.play(animatorX).with(animatorY);
         set.setDuration(duration);
-        set.setInterpolator(new AnticipateOvershootInterpolator());
+        set.addListener(listener);
+        set.setInterpolator(new LinearInterpolator());
+        set.start();
+    }
+    /**
+     * 缩小View
+     *
+     * @param view     view
+     * @param duration 时间
+     */
+    public static void scaleSmallView(View view, int duration) {
+        ObjectAnimator animatorX = ObjectAnimator.ofFloat(view, "scaleX", 1.5f, 1f);
+        ObjectAnimator animatorY = ObjectAnimator.ofFloat(view, "scaleY", 1.5f, 1f);
+        AnimatorSet set = new AnimatorSet();
+        set.play(animatorX).with(animatorY);
+        set.setDuration(duration);
+        set.setInterpolator(new LinearInterpolator());
         set.start();
     }
 

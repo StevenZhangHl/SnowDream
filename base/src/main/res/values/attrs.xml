@@ -7,7 +7,7 @@
     <declare-styleable name="CustomLayoutGroup">
         <attr name="left_title"></attr>
         <attr name="left_drawable"></attr>
-        <attr name="right_left"></attr>
+        <attr name="right_title"></attr>
         <attr name="right_drawable"></attr>
     </declare-styleable>
 </resources>

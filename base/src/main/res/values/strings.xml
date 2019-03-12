@@ -6,4 +6,9 @@
     <string name="cont_connection_network">网络无法连接</string>
     <string name="connection_network_error">Server error</string>
     <string name="hint_exit">再按一次退出</string>
+    <!--<string name="error_over_count">最多只能选择 %1$d 个图片</string>-->
+    <plurals name="error_over_count">
+        <item quantity="one">最多只能选择 %1$d 个图片</item>
+        <item quantity="many">最多只能选择 %1$d 个图片</item>
+    </plurals>
 </resources>
