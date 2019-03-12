@@ -22,6 +22,7 @@ import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.jaeger.library.StatusBarUtil;
 import com.steven.base.app.BaseApp;
+import com.steven.base.base.AppManager;
 
 import java.util.ArrayList;
 
@@ -72,7 +73,7 @@ public class MainActivity extends SupportActivity implements View.OnClickListene
         StatusBarUtil.setColor(this, ContextCompat.getColor(this, R.color.mainColor), 0);
         setContentView(R.layout.activity_main);
         initView();
-        BaseApp.getInstance().addActivity(this);
+        AppManager.getAppManager().addActivity(this);
         if (savedInstanceState == null) {
             homeFragment = new HomeFragment();
             newsFragment = NewsFragment.getInstance("资讯");

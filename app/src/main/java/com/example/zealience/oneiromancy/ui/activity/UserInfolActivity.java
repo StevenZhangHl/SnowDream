@@ -14,6 +14,7 @@ import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.ui.widget.ScrollPaintView;
 import com.example.zealience.oneiromancy.util.UserHelper;
 import com.steven.base.app.BaseApp;
+import com.steven.base.base.AppManager;
 import com.steven.base.base.BaseActivity;
 
 public class UserInfolActivity extends BaseActivity implements View.OnClickListener {
@@ -44,7 +45,7 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        BaseApp.getInstance().addActivity(this);
+        AppManager.getAppManager().addActivity(this);
         showTitle("个人信息");
         setWhiteStatusBar(R.color.white);
         bt_login_out = (Button) findViewById(R.id.bt_login_out);
@@ -54,7 +55,7 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         UserHelper.clearUseInfo(this);
-        BaseApp.getInstance().finishAllActivity();
+        AppManager.getAppManager().finishAllActivity();
         startActivity(LoginActivity.class);
     }
 }

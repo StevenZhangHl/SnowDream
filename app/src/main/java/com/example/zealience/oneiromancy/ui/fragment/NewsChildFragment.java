@@ -89,7 +89,7 @@ public class NewsChildFragment extends SupportFragment implements NewsContract.V
         recyclerviewNewsList.setAdapter(newsListAdapter);
         refreshNews.setOnRefreshListener(this);
         refreshNews.setRefreshHeader(new MaterialHeader(_mActivity));
-        refreshNews.autoRefresh(300);
+        refreshNews.autoRefresh();
         recyclerviewNewsList.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {

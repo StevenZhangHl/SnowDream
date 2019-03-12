@@ -1,8 +1,10 @@
 package com.example.zealience.oneiromancy.ui.fragment;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 
 import com.example.zealience.oneiromancy.R;
+import com.jaeger.library.StatusBarUtil;
 import com.scwang.smartrefresh.header.BezierCircleHeader;
 import com.scwang.smartrefresh.header.DeliveryHeader;
 import com.scwang.smartrefresh.header.PhoenixHeader;
@@ -52,5 +54,10 @@ public class MeFragment extends BaseFragment {
     @Override
     public void onError(String msg) {
 
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
     }
 }

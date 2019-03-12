@@ -5,6 +5,7 @@ import android.widget.ImageView;
 
 import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.util.UserHelper;
+import com.steven.base.base.AppManager;
 import com.steven.base.base.BaseActivity;
 import com.steven.base.rx.RxHelper;
 import com.steven.base.rx.RxManager;
@@ -32,11 +33,12 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState) {
+        AppManager.getAppManager().addActivity(this);
         iv_splash = (ImageView) findViewById(R.id.iv_splash);
         final int indenx = (int) (Math.random() * images.length);
         iv_splash.setImageResource(images[indenx]);
         rxManager = new RxManager();
-        rxManager.add(Observable.timer(1, TimeUnit.SECONDS)
+        rxManager.add(Observable.timer(2, TimeUnit.SECONDS)
                 .compose(RxHelper.<Long>applySchedulers())
                 .subscribe(new Consumer<Long>() {
                     @Override

@@ -22,6 +22,7 @@ import com.example.zealience.oneiromancy.entity.HistoryEntity;
 import com.example.zealience.oneiromancy.ui.HistoryDetailPhotoAdapter;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
+import com.steven.base.base.AppManager;
 import com.steven.base.base.BaseActivity;
 import com.steven.base.rx.BaseObserver;
 import com.steven.base.rx.RxHelper;
@@ -58,6 +59,7 @@ public class HistoryDetailActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState) {
+        AppManager.getAppManager().addActivity(this);
         mToolbar = (TitleBar) findViewById(R.id.toolbar);
         mToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         mAppBar = (AppBarLayout) findViewById(R.id.app_bar);

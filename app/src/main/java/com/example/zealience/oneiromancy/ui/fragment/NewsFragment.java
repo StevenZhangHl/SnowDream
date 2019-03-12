@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
@@ -13,6 +14,7 @@ import com.example.zealience.oneiromancy.mvp.contract.NewsContract;
 import com.example.zealience.oneiromancy.mvp.model.NewsModel;
 import com.example.zealience.oneiromancy.mvp.presenter.NewsPresenter;
 import com.example.zealience.oneiromancy.ui.FragmentListAdapter;
+import com.jaeger.library.StatusBarUtil;
 import com.steven.base.base.BaseFragment;
 import com.steven.base.util.DisplayUtil;
 
@@ -116,4 +118,8 @@ public class NewsFragment extends BaseFragment {
 
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+    }
 }

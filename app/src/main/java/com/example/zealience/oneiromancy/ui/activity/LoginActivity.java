@@ -23,6 +23,7 @@ import com.example.zealience.oneiromancy.mvp.presenter.LoginPresenter;
 import com.example.zealience.oneiromancy.util.ShakeUtils;
 import com.jaeger.library.StatusBarUtil;
 import com.steven.base.app.BaseApp;
+import com.steven.base.base.AppManager;
 import com.steven.base.base.BaseActivity;
 import com.steven.base.util.Typefaces;
 
@@ -53,7 +54,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        BaseApp.getInstance().addActivity(this);
+        AppManager.getAppManager().addActivity(this);
         StatusBarUtil.setTranslucentForImageView(this, 100, null);
         et_phone = (EditText) findViewById(R.id.et_phone);
         et_password = (EditText) findViewById(R.id.et_password);

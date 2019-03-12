@@ -2,6 +2,7 @@ package com.example.zealience.oneiromancy.ui.fragment;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TimeUtils;
@@ -21,6 +22,7 @@ import com.example.zealience.oneiromancy.ui.HistoryListAdapter;
 import com.example.zealience.oneiromancy.ui.activity.HistoryDetailActivity;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
+import com.jaeger.library.StatusBarUtil;
 import com.steven.base.base.BaseFragment;
 import com.steven.base.util.DateTimeHelper;
 import com.steven.base.util.ToastUitl;
@@ -122,5 +124,10 @@ public class HistoryTodayFragment extends BaseFragment<HistoryPresenter, History
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         mPresenter.getHistoryBydate(month + 1 + "/" + dayOfMonth);
         historyToolbar.setRightTitle(month + 1 + "/" + dayOfMonth);
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
     }
 }

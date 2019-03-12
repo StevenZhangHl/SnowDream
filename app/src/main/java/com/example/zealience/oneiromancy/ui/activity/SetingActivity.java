@@ -8,6 +8,7 @@ import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.hjq.bar.style.TitleBarLightStyle;
 import com.steven.base.app.BaseApp;
+import com.steven.base.base.AppManager;
 import com.steven.base.base.BaseActivity;
 
 public class SetingActivity extends BaseActivity {
@@ -24,7 +25,7 @@ public class SetingActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        BaseApp.getInstance().addActivity(this);
+        AppManager.getAppManager().addActivity(this);
         showTitle("设置");
         setWhiteStatusBar(R.color.white);
     }
