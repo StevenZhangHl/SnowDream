@@ -11,6 +11,7 @@ import com.example.zealience.oneiromancy.entity.EventEntity;
 import com.example.zealience.oneiromancy.ui.activity.MyAddressActivity;
 import com.example.zealience.oneiromancy.ui.activity.SearchActivity;
 import com.example.zealience.oneiromancy.ui.activity.ShowAmapActivity;
+import com.example.zealience.oneiromancy.ui.activity.SignInActivity;
 import com.example.zealience.oneiromancy.ui.activity.UserInfolActivity;
 import com.example.zealience.oneiromancy.util.UserHelper;
 import com.hw.ycshareelement.YcShareElement;
@@ -79,6 +80,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
         customLayout_collection.setTv_left("收藏");
         customLayoutSignIn.setTv_left("签到");
         customLayoutAddress.setTv_left("地址");
+        customLayout_collection.hidenLine();
         customLayout_collection.setLeftDrawable(R.mipmap.icon_collection);
         customLayoutSignIn.setLeftDrawable(R.mipmap.icon_sign_in);
         customLayoutAddress.setLeftDrawable(R.mipmap.icon_address);
@@ -117,7 +119,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
             startActivity(MyAddressActivity.class);
         }
         if (v == customLayoutSignIn) {
-
+            startActivity(SignInActivity.class);
         }
     }
 

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_F7F7F7"
+    android:orientation="vertical"
+    tools:context=".ui.activity.SignInActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp">
+
+        <com.steven.base.widget.ArcImageView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/bg_sign_in"
+            app:arcHeight="@dimen/margin_50" />
+
+        <TextView
+            android:id="@+id/tv_jifen"
+            style="@style/text_16_333333"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:drawableTop="@mipmap/icon_jifen"
+            android:gravity="center"
+            android:text="0" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_10"
+        android:background="@color/white"
+        app:cardCornerRadius="@dimen/margin_5"
+        app:contentPadding="@dimen/margin_5">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="签到记录" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_sign_note"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_150"
+                android:layout_marginTop="@dimen/margin_10"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

@@ -63,7 +63,8 @@
             android:label="@string/title_activity_history_detail"
             android:theme="@style/AppTheme" />
         <activity android:name=".ui.activity.ShowAmapActivity" />
-        <activity android:name=".ui.activity.MyAddressActivity"></activity>
+        <activity android:name=".ui.activity.MyAddressActivity" />
+        <activity android:name=".ui.activity.SignInActivity"></activity>
     </application>
 
 </manifest>

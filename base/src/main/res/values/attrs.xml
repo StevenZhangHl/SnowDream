@@ -10,4 +10,14 @@
         <attr name="right_title"></attr>
         <attr name="right_drawable"></attr>
     </declare-styleable>
+    <attr name="arcHeight" format="dimension"/>
+
+    <declare-styleable name="ArcView">
+        <attr name="arcHeight"/>
+        <attr name="bgColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="ArcImageView">
+        <attr name="arcHeight"/>
+    </declare-styleable>
 </resources>

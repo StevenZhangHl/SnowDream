@@ -26,6 +26,7 @@ public class CustomLayoutGroup extends RelativeLayout {
     private int rightDrawable;
     private String leftTitle;
     private String rightTitle;
+    private View view_line;
 
     public CustomLayoutGroup(Context context) {
         super(context);
@@ -48,6 +49,7 @@ public class CustomLayoutGroup extends RelativeLayout {
         tv_left = (TextView) view.findViewById(R.id.tv_left_title);
         tv_right = (TextView) view.findViewById(R.id.tv_right_title);
         iv_right = (ImageView) view.findViewById(R.id.iv_right);
+        view_line = (View) view.findViewById(R.id.view_line);
         tv_left.setCompoundDrawablePadding(DisplayUtil.dip2px(10));
         addView(view);
     }
@@ -101,5 +103,12 @@ public class CustomLayoutGroup extends RelativeLayout {
 
     public Drawable getDrawable(int drawalbeResource) {
         return getResources().getDrawable(drawalbeResource);
+    }
+
+    /**
+     * 隐藏底部分界线
+     */
+    public void hidenLine() {
+        view_line.setVisibility(GONE);
     }
 }
