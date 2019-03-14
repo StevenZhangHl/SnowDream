@@ -10,8 +10,17 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BODY_SENSORS" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!--允许程序访问WiFi网络信息-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--允许程序读写手机状态和身份-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.SENSOR_INFO" />
     <uses-permission android:name="android.permission.SENSOR_ENABLE" />
+    <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <application>
         <!--新浪-->
@@ -65,6 +74,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/publish_path" />
         </provider>
+        <meta-data android:name="com.amap.api.v2.apikey" android:value="b5b50e13c603826d2e4e4f22dd67927c">
+        </meta-data>
     </application>
 
 </manifest>

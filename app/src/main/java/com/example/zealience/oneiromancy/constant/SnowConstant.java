@@ -10,4 +10,8 @@ public class SnowConstant {
      * Provider路径
      */
     public static final String FILE_PROVIDER = "com.steven.snow.fileprovider";
+    /**
+     * 头像修改成功
+     */
+    public static final String EVENT_UPDATE_USER_HEAD = "event_update_user_head";
 }

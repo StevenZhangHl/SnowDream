@@ -22,6 +22,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.constant.SnowConstant;
+import com.example.zealience.oneiromancy.entity.EventEntity;
+import com.example.zealience.oneiromancy.entity.UserInfo;
 import com.example.zealience.oneiromancy.util.BlurTransformation;
 import com.example.zealience.oneiromancy.util.UserHelper;
 import com.hjq.bar.OnTitleBarListener;
@@ -35,6 +37,8 @@ import com.yanzhenjie.permission.AndPermission;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.internal.entity.CaptureStrategy;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -98,6 +102,10 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
         mBtLoginOut.setOnClickListener(this);
         mIvUserInfoHead.setOnClickListener(this);
         bt_login_out.setOnClickListener(this);
+        GlideApp.with(this)
+                .load(UserHelper.getUserInfo(this).getHeadImageUrl())
+                .placeholder(R.mipmap.icon_user)
+                .into(mIvUserInfoHead);
         GlideApp.with(this)
                 .load(R.mipmap.bg_user_wall)
                 .apply(RequestOptions.bitmapTransform(new BlurTransformation(this, 12)))
@@ -188,6 +196,10 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
                 GlideApp.with(UserInfolActivity.this)
                         .load(selectPath)
                         .into(mIvUserInfoHead);
+                UserInfo userInfo = UserHelper.getUserInfo(UserInfolActivity.this);
+                userInfo.setHeadImageUrl(selectPath);
+                UserHelper.saveUserInfo(UserInfolActivity.this,userInfo);
+                EventBus.getDefault().post(new EventEntity(SnowConstant.EVENT_UPDATE_USER_HEAD));
                 Log.i("Matisse", "mSelected: " + selectPath);
             }
         }

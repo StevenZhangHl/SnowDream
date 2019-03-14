@@ -19,8 +19,10 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.constant.KeyConstant;
 import com.example.zealience.oneiromancy.constant.SharePConstant;
+import com.example.zealience.oneiromancy.constant.SnowConstant;
 import com.example.zealience.oneiromancy.constant.UrlConstant;
 import com.example.zealience.oneiromancy.entity.DreamTypeEntity;
+import com.example.zealience.oneiromancy.entity.EventEntity;
 import com.example.zealience.oneiromancy.mvp.contract.HomeContract;
 import com.example.zealience.oneiromancy.mvp.model.HomeModel;
 import com.example.zealience.oneiromancy.mvp.presenter.HomePresenter;
@@ -30,6 +32,7 @@ import com.example.zealience.oneiromancy.ui.activity.UserInfolActivity;
 import com.example.zealience.oneiromancy.ui.activity.VRActivity;
 import com.example.zealience.oneiromancy.ui.activity.WebViewActivity;
 import com.example.zealience.oneiromancy.util.SpaceItemDecoration;
+import com.example.zealience.oneiromancy.util.UserHelper;
 import com.hw.ycshareelement.YcShareElement;
 import com.hw.ycshareelement.transition.IShareElements;
 import com.hw.ycshareelement.transition.ShareElementInfo;
@@ -46,6 +49,10 @@ import com.steven.base.util.ToastUitl;
 import com.youth.banner.Banner;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,10 +98,15 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         iv_small_snow = (ImageView) rootView.findViewById(R.id.iv_small_snow);
         bannerContainer = (Banner) rootView.findViewById(R.id.bannerContainer);
         nested_scrollview = (NestedScrollView) rootView.findViewById(R.id.nested_scrollview);
+        GlideApp.with(_mActivity)
+                .load(UserHelper.getUserInfo(_mActivity).getHeadImageUrl())
+                .placeholder(R.mipmap.icon_user)
+                .into(iv_user_head);
         initClick();
         initRecyclerView();
         initRabot();
         mPresenter.getHomeBannerData();
+        EventBus.getDefault().register(this);
     }
 
     /**
@@ -217,6 +229,12 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
     public ShareElementInfo[] getShareElements() {
         return new ShareElementInfo[]{new ShareElementInfo(et_search_dream, new TextViewStateSaver())};
     }
@@ -227,6 +245,15 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
             bannerContainer.stopAutoPlay();
         } else {
             bannerContainer.startAutoPlay();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onReceiveEvent(EventEntity event) {
+        if (SnowConstant.EVENT_UPDATE_USER_HEAD.equals(event.getEvent())) {
+            GlideApp.with(_mActivity)
+                    .load(UserHelper.getUserInfo(_mActivity).getHeadImageUrl())
+                    .into(iv_user_head);
         }
     }
 }

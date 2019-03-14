@@ -1,7 +1,5 @@
 package com.example.zealience.oneiromancy.mvp.presenter;
 
-import android.content.Context;
-import android.hardware.SensorManager;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;

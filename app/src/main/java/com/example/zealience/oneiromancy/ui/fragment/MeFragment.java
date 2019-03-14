@@ -6,8 +6,13 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import com.example.zealience.oneiromancy.R;
+import com.example.zealience.oneiromancy.constant.SnowConstant;
+import com.example.zealience.oneiromancy.entity.EventEntity;
+import com.example.zealience.oneiromancy.ui.activity.MyAddressActivity;
 import com.example.zealience.oneiromancy.ui.activity.SearchActivity;
+import com.example.zealience.oneiromancy.ui.activity.ShowAmapActivity;
 import com.example.zealience.oneiromancy.ui.activity.UserInfolActivity;
+import com.example.zealience.oneiromancy.util.UserHelper;
 import com.hw.ycshareelement.YcShareElement;
 import com.hw.ycshareelement.transition.IShareElements;
 import com.hw.ycshareelement.transition.ShareElementInfo;
@@ -21,9 +26,14 @@ import com.scwang.smartrefresh.header.TaurusHeader;
 import com.scwang.smartrefresh.header.WaterDropHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
+import com.steven.base.app.GlideApp;
 import com.steven.base.base.BaseFragment;
 import com.steven.base.util.ToastUitl;
 import com.steven.base.widget.CustomLayoutGroup;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -72,10 +82,15 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
         customLayout_collection.setLeftDrawable(R.mipmap.icon_collection);
         customLayoutSignIn.setLeftDrawable(R.mipmap.icon_sign_in);
         customLayoutAddress.setLeftDrawable(R.mipmap.icon_address);
+        GlideApp.with(_mActivity)
+                .load(UserHelper.getUserInfo(_mActivity).getHeadImageUrl())
+                .placeholder(R.mipmap.icon_user)
+                .into(ivMeHead);
         customLayout_collection.setOnClickListener(this);
         customLayoutAddress.setOnClickListener(this);
         customLayoutSignIn.setOnClickListener(this);
         ivMeHead.setOnClickListener(this);
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -99,7 +114,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
             ToastUitl.showShort("收藏");
         }
         if (v == customLayoutAddress) {
-
+            startActivity(MyAddressActivity.class);
         }
         if (v == customLayoutSignIn) {
 
@@ -107,7 +122,22 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
     public ShareElementInfo[] getShareElements() {
         return new ShareElementInfo[]{new ShareElementInfo(ivMeHead, new TextViewStateSaver())};
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onReceiveEvent(EventEntity event) {
+        if (SnowConstant.EVENT_UPDATE_USER_HEAD.equals(event.getEvent())) {
+            GlideApp.with(_mActivity)
+                    .load(UserHelper.getUserInfo(_mActivity).getHeadImageUrl())
+                    .into(ivMeHead);
+        }
     }
 }

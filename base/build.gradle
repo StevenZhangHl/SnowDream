@@ -71,7 +71,7 @@ dependencies {
     api 'com.android.support:percent:28.0.0'
     api 'com.youth.banner:banner:1.4.10'
     // event bus
-    api 'org.simple:androideventbus:1.0.5.1'
+    api 'org.greenrobot:eventbus:3.0.0'
     //最新版本
     api 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     api 'com.github.hackware1993:MagicIndicator:1.5.0'
@@ -81,6 +81,12 @@ dependencies {
     api('com.zhihu.android:matisse:0.5.1-beta1') {
         exclude group: "com.android.support"
     }
+    //3D地图so及jar
+    api 'com.amap.api:3dmap:latest.integration'
+    //定位功能
+    api 'com.amap.api:location:latest.integration'
+    //搜索功能
+    api 'com.amap.api:search:latest.integration'
     api 'com.umeng.umsdk:common:1.5.4'
     api 'com.umeng.umsdk:utdid:1.1.5.3'
     api files('libs/libapshare20161108.jar')

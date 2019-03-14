@@ -11,4 +11,8 @@
         <item quantity="one">最多只能选择 %1$d 个图片</item>
         <item quantity="many">最多只能选择 %1$d 个图片</item>
     </plurals>
+    <string name="loading_footer">正在加载</string>
+    <string name="refresh_footer">正在刷新...</string>
+    <string name="loading_fail">加载失败</string>
+    <string name="loading_finish_footer">到底了</string>
 </resources>

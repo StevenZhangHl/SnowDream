@@ -1,5 +1,7 @@
 package com.steven.base.util;
 
+import android.text.TextUtils;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -53,7 +55,9 @@ public class GsonUtil {
     public static <T> T GsonToBean(String gsonString, Class<T> cls) {
         T t = null;
         gson = new Gson();
-        t = gson.fromJson(gsonString, cls);
+        if (!TextUtils.isEmpty(gsonString)) {
+            t = gson.fromJson(gsonString, cls);
+        }
         return t;
     }
 

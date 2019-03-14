@@ -87,6 +87,12 @@ public class CustomLayoutGroup extends RelativeLayout {
         invalidate();
     }
 
+    public void isShowRightDrawable(boolean isShowRightDrawable) {
+        if (!isShowRightDrawable) {
+            iv_right.setVisibility(GONE);
+        }
+    }
+
     public void setRightDrawable(int rightDrawable) {
         this.rightDrawable = rightDrawable;
         iv_right.setImageResource(rightDrawable);

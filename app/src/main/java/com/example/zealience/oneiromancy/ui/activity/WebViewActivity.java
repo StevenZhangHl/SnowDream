@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.webkit.ConsoleMessage;
@@ -18,11 +19,14 @@ import android.widget.TextView;
 
 import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.constant.KeyConstant;
+import com.hjq.bar.OnTitleBarListener;
 import com.steven.base.app.BaseApp;
 import com.steven.base.base.AppManager;
 import com.steven.base.base.BaseActivity;
+import com.steven.base.util.ProviderUtil;
+import com.steven.base.util.ToastUitl;
 
-public class WebViewActivity extends BaseActivity {
+public class WebViewActivity extends BaseActivity implements OnTitleBarListener {
     private WebView webView;
     private ProgressBar mProgressBar;
     private String url;
@@ -49,6 +53,7 @@ public class WebViewActivity extends BaseActivity {
     public void initView(Bundle savedInstanceState) {
         AppManager.getAppManager().addActivity(this);
         showTitle("");
+        getTitlebar().setOnTitleBarListener(this);
         setWhiteStatusBar(R.color.white);
         webView = (WebView) findViewById(R.id.webView);
         mProgressBar = (ProgressBar) findViewById(R.id.mProgressBar);
@@ -90,7 +95,6 @@ public class WebViewActivity extends BaseActivity {
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                currentUrl = request.getUrl().getPath();
                 return super.shouldOverrideUrlLoading(view, request);
             }
 
@@ -106,10 +110,34 @@ public class WebViewActivity extends BaseActivity {
 
             @Override
             public void onPageFinished(WebView view, String url) {
+                currentUrl = url;
                 super.onPageFinished(view, url);
             }
         });
         url = getIntent().getBundleExtra(KeyConstant.URL_BUNDLE_KEY).getString(KeyConstant.URL_KEY);
+        boolean isShowShare = getIntent().getBundleExtra(KeyConstant.URL_BUNDLE_KEY).getBoolean(KeyConstant.ISSHOW_SHARE_KEY);
+        if (isShowShare) {
+            getTitlebar().setRightIcon(R.mipmap.icon_share);
+        }
         webView.loadUrl(url);
+    }
+
+    @Override
+    public void onLeftClick(View v) {
+        finish();
+    }
+
+    @Override
+    public void onTitleClick(View v) {
+
+    }
+
+    @Override
+    public void onRightClick(View v) {
+        if (TextUtils.isEmpty(currentUrl)) {
+            ToastUitl.showShort("客官别急，页面还没加载完成呢");
+            return;
+        }
+        ProviderUtil.startLocalShareText(this, currentUrl);
     }
 }

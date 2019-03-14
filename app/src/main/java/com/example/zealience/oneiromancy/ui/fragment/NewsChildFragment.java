@@ -95,6 +95,7 @@ public class NewsChildFragment extends SupportFragment implements NewsContract.V
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle = new Bundle();
                 bundle.putString(KeyConstant.URL_KEY, mNewsList.get(position).getUrl());
+                bundle.putBoolean(KeyConstant.ISSHOW_SHARE_KEY, true);
                 WebViewActivity.startActivity(_mActivity, bundle);
             }
         });

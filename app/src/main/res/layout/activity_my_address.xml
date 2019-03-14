@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.MyAddressActivity">
+
+    <LinearLayout
+        android:id="@+id/ll_address_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <com.steven.base.widget.CustomLayoutGroup
+            android:id="@+id/view_province"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.steven.base.widget.CustomLayoutGroup>
+
+        <com.steven.base.widget.CustomLayoutGroup
+            android:id="@+id/view_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.steven.base.widget.CustomLayoutGroup>
+
+        <com.steven.base.widget.CustomLayoutGroup
+            android:id="@+id/view_district"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.steven.base.widget.CustomLayoutGroup>
+
+        <com.steven.base.widget.CustomLayoutGroup
+            android:id="@+id/view_street"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.steven.base.widget.CustomLayoutGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="您还未设置地址" />
+
+        <ImageView
+            android:id="@+id/iv_add_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/margin_10"
+            android:src="@mipmap/icon_add_address" />
+    </LinearLayout>
+</RelativeLayout>

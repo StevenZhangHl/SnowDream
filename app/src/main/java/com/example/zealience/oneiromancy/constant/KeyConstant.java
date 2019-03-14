@@ -8,6 +8,7 @@ package com.example.zealience.oneiromancy.constant;
 public class KeyConstant {
     public static final String URL_KEY = "web_url";
     public static final String URL_BUNDLE_KEY = "url_bundle";
-    public static final String HISITORY_BUNDLE_KEY = "url_bundle";
-    public static final String HISITORY_ENTITY_KEY = "url_bundle";
+    public static final String HISITORY_BUNDLE_KEY = "history_bundle";
+    public static final String HISITORY_ENTITY_KEY = "history_entity_bundle";
+    public static final String ISSHOW_SHARE_KEY = "is_show_share_bundle";
 }

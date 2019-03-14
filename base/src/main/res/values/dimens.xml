@@ -12,6 +12,7 @@
     <dimen name="textSize_26">26sp</dimen>
     <dimen name="textSize_20">20sp</dimen>
     <dimen name="textSize_50">50sp</dimen>
+    <dimen name="line_height">0.5dp</dimen>
     <dimen name="margin_5">5dp</dimen>
     <dimen name="margin_4">4dp</dimen>
     <dimen name="margin_3">3dp</dimen>

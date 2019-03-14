@@ -4,7 +4,7 @@
     android:shape="rectangle"
     tools:ignore="ResourceName">
     <solid android:color="@color/DCDCDC"></solid>
-    <size android:height="@dimen/margin_1"></size>
+    <size android:height="@dimen/line_height"></size>
     <padding
         android:left="@dimen/margin_10"
         android:right="@dimen/margin_10"></padding>
