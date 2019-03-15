@@ -59,7 +59,7 @@ public class DateTimeHelper {
      */
     public static String getCurrentSystemTime() {
         Date curDate = new Date(System.currentTimeMillis());// 获取当前时间
-        return updateDateFormat(sdfCommonNoSecond.format(curDate));
+        return sdfCommonNoSecond.format(curDate);
     }
 
     /**
@@ -82,7 +82,7 @@ public class DateTimeHelper {
      */
     public static String getTimeFromLong(long l) {
         Date curDate = new Date(l);// 获取当前时间
-        return updateDateFormat(sdfCommonNoTime.format(curDate));
+        return sdfCommonNoTime.format(curDate);
     }
 
     public static String getTimeStr(long time) {

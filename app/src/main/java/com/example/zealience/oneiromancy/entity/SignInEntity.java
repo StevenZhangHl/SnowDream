@@ -24,4 +24,9 @@ public class SignInEntity {
     public void setPoints(int points) {
         this.points = points;
     }
+
+    public SignInEntity(String createTime, int points) {
+        this.createTime = createTime;
+        this.points = points;
+    }
 }

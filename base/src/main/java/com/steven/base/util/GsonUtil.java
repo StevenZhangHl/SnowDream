@@ -71,9 +71,11 @@ public class GsonUtil {
     public static <T> List<T> GsonToList(String gsonString, Class<T> cls) {
         List<T> list = new ArrayList<>();
         gson = new Gson();
-        JsonArray jsonArray = new JsonParser().parse(gsonString).getAsJsonArray();
-        for (JsonElement element : jsonArray) {
-            list.add(gson.fromJson(element, cls));
+        if (!TextUtils.isEmpty(gsonString)) {
+            JsonArray jsonArray = new JsonParser().parse(gsonString).getAsJsonArray();
+            for (JsonElement element : jsonArray) {
+                list.add(gson.fromJson(element, cls));
+            }
         }
         return list;
     }

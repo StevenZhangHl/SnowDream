@@ -13,6 +13,7 @@ import com.example.zealience.oneiromancy.ui.activity.SearchActivity;
 import com.example.zealience.oneiromancy.ui.activity.ShowAmapActivity;
 import com.example.zealience.oneiromancy.ui.activity.SignInActivity;
 import com.example.zealience.oneiromancy.ui.activity.UserInfolActivity;
+import com.example.zealience.oneiromancy.ui.widget.SnowRefershHeader;
 import com.example.zealience.oneiromancy.util.UserHelper;
 import com.hw.ycshareelement.YcShareElement;
 import com.hw.ycshareelement.transition.IShareElements;
@@ -22,6 +23,7 @@ import com.hw.ycshareelement.transition.ViewStateSaver;
 import com.jaeger.library.StatusBarUtil;
 import com.scwang.smartrefresh.header.BezierCircleHeader;
 import com.scwang.smartrefresh.header.DeliveryHeader;
+import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.header.PhoenixHeader;
 import com.scwang.smartrefresh.header.TaurusHeader;
 import com.scwang.smartrefresh.header.WaterDropHeader;
@@ -70,13 +72,13 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        refreshMe = (SmartRefreshLayout) rootView.findViewById(R.id.refresh__me);
+        refreshMe = (SmartRefreshLayout) rootView.findViewById(R.id.refresh_me);
         ivMeHead = (CircleImageView) rootView.findViewById(R.id.iv_me_head);
         customLayout_collection = (CustomLayoutGroup) rootView.findViewById(R.id.customLayout_collection);
         customLayoutSignIn = (CustomLayoutGroup) rootView.findViewById(R.id.customLayout_signIn);
         customLayoutAddress = (CustomLayoutGroup) rootView.findViewById(R.id.customLayout_address);
         refreshMe.setPrimaryColors(_mActivity.getResources().getColor(R.color.mainColor));
-        refreshMe.setRefreshHeader(new BezierRadarHeader(_mActivity));
+        refreshMe.setRefreshHeader(new MaterialHeader(_mActivity));
         customLayout_collection.setTv_left("收藏");
         customLayoutSignIn.setTv_left("签到");
         customLayoutAddress.setTv_left("地址");
