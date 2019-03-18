@@ -70,6 +70,7 @@ public class HistoryTodayFragment extends BaseFragment<HistoryPresenter, History
         historyToolbar.setRightIcon(R.mipmap.icon_calander);
         String currentDay = mPresenter.getCurrentDay();
         historyToolbar.setRightTitle(currentDay);
+        historyToolbar.setTitle("历史上的今天");
         historyToolbar.setRightColor(_mActivity.getResources().getColor(R.color.mainColor));
         mPresenter.getHistoryBydate(currentDay);
         historyToolbar.setOnTitleBarListener(new OnTitleBarListener() {

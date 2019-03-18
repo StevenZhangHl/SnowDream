@@ -21,10 +21,11 @@ import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.steven.base.app.BaseApp;
 import com.steven.base.base.AppManager;
+import com.steven.base.base.BaseActivity;
 
 import java.util.ArrayList;
 
-public class DreamDetailActivity extends AppCompatActivity {
+public class DreamDetailActivity extends BaseActivity {
     private AppBarLayout appBar;
     private CollapsingToolbarLayout toolbarLayout;
     private FloatingActionButton fab;
@@ -33,8 +34,17 @@ public class DreamDetailActivity extends AppCompatActivity {
     private TitleBar dream_detail_titlebar;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public int getLayoutId() {
+        return R.layout.activity_dream_detail;
+    }
+
+    @Override
+    public void initPresenter() {
+
+    }
+
+    @Override
+    public void initView(Bundle savedInstanceState) {
         AppManager.getAppManager().addActivity(this);
         setContentView(R.layout.activity_dream_detail);
         DreamEntity entity = (DreamEntity) getIntent().getSerializableExtra("dreamInfo");

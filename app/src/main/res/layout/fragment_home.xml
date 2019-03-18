@@ -77,6 +77,28 @@
                 android:layout_marginLeft="@dimen/margin_5"
                 android:layout_marginTop="@dimen/margin_10"
                 android:layout_marginRight="@dimen/margin_5" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="——————————热点——————————"
+                android:layout_margin="@dimen/margin_5"
+                android:layout_gravity="center_horizontal" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_dream_hot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_marginLeft="@dimen/margin_5"
+                android:layout_marginRight="@dimen/margin_5" />
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_10"
+                android:layout_gravity="center_horizontal"
+                android:text="——————我是有底线的——————" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

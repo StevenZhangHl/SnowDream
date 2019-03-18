@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.TextView;
 
 import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.entity.NewsEntity;
@@ -16,14 +19,18 @@ import com.example.zealience.oneiromancy.mvp.presenter.NewsPresenter;
 import com.example.zealience.oneiromancy.ui.FragmentListAdapter;
 import com.jaeger.library.StatusBarUtil;
 import com.steven.base.base.BaseFragment;
+import com.steven.base.util.AssetsUtil;
 import com.steven.base.util.DisplayUtil;
+import com.steven.base.util.Typefaces;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
+import net.lucode.hackware.magicindicator.buildins.UIUtil;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.WrapPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ClipPagerTitleView;
 
@@ -41,6 +48,7 @@ public class NewsFragment extends BaseFragment {
     private List<String> mDataList = Arrays.asList(CHANNELS);
     private MagicIndicator magicIndicator;
     private ViewPager viewPager;
+    private TextView tv_news_title;
     private FragmentListAdapter fragmentListAdapter;
     private List<Fragment> fragments = new ArrayList<>();
 
@@ -64,6 +72,7 @@ public class NewsFragment extends BaseFragment {
     @Override
     public void initView(Bundle savedInstanceState) {
         magicIndicator = (MagicIndicator) rootView.findViewById(R.id.magic_indicator);
+        tv_news_title = (TextView) rootView.findViewById(R.id.tv_news_title);
         viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
         for (int i = 0; i < mDataList.size(); i++) {
             NewsChildFragment childFragment = NewsChildFragment.getInstance(mDataList.get(i));
@@ -73,10 +82,11 @@ public class NewsFragment extends BaseFragment {
         viewPager.setAdapter(fragmentListAdapter);
         viewPager.setOffscreenPageLimit(fragments.size());
         initMagicIndicator();
+        tv_news_title.setTypeface(Typefaces.get(_mActivity, "showlove.ttf"));
     }
 
     private void initMagicIndicator() {
-        magicIndicator.setBackgroundColor(Color.WHITE);
+        magicIndicator.setBackgroundColor(_mActivity.getResources().getColor(R.color.mainColor));
         CommonNavigator commonNavigator = new CommonNavigator(_mActivity);
         commonNavigator.setScrollPivotX(0.35f);
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
@@ -89,8 +99,8 @@ public class NewsFragment extends BaseFragment {
             public IPagerTitleView getTitleView(Context context, int index) {
                 ClipPagerTitleView clipPagerTitleView = new ClipPagerTitleView(context);
                 clipPagerTitleView.setText(mDataList.get(index));
-                clipPagerTitleView.setTextColor(_mActivity.getResources().getColor(R.color.color_707070));
-                clipPagerTitleView.setClipColor(_mActivity.getResources().getColor(R.color.mainColor));
+                clipPagerTitleView.setTextColor(_mActivity.getResources().getColor(R.color.color_f5));
+                clipPagerTitleView.setClipColor(_mActivity.getResources().getColor(R.color.white));
                 clipPagerTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -102,10 +112,9 @@ public class NewsFragment extends BaseFragment {
 
             @Override
             public IPagerIndicator getIndicator(Context context) {
-                WrapPagerIndicator indicator = new WrapPagerIndicator(context);
-                indicator.setVerticalPadding(DisplayUtil.dip2px(3));
-                indicator.setHorizontalPadding(DisplayUtil.dip2px(8));
-                indicator.setFillColor(Color.parseColor("#ebe4e3"));
+                LinePagerIndicator indicator = new LinePagerIndicator(context);
+                indicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
+                indicator.setColors(Color.WHITE);
                 return indicator;
             }
         });

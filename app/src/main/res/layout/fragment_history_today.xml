@@ -9,7 +9,6 @@
         android:id="@+id/history_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="历史上的今天"
         app:backButton="false"></com.hjq.bar.TitleBar>
 
     <android.support.v7.widget.RecyclerView

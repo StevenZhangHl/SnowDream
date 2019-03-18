@@ -17,8 +17,6 @@ import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 
 public class WelcomeActivity extends BaseActivity {
-    private ImageView iv_splash;
-    private int[] images = {R.mipmap.lanucher_one};
     private RxManager rxManager;
 
     @Override
@@ -34,11 +32,8 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     public void initView(Bundle savedInstanceState) {
         AppManager.getAppManager().addActivity(this);
-        iv_splash = (ImageView) findViewById(R.id.iv_splash);
-        final int indenx = (int) (Math.random() * images.length);
-        iv_splash.setImageResource(images[indenx]);
         rxManager = new RxManager();
-        rxManager.add(Observable.timer(2, TimeUnit.SECONDS)
+        rxManager.add(Observable.timer(1, TimeUnit.SECONDS)
                 .compose(RxHelper.<Long>applySchedulers())
                 .subscribe(new Consumer<Long>() {
                     @Override

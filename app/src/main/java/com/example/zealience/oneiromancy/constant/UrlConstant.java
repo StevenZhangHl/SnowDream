@@ -6,5 +6,5 @@ package com.example.zealience.oneiromancy.constant;
  * @description 存放网页链接
  */
 public class UrlConstant {
-    public static final String URL_ZHIHU = "https://www.zhihu.com/explore";
+    public static final String URL_MYGITHUB_HOME = "https://github.com/steven945";
 }

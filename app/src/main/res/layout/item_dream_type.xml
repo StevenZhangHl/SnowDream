@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_dream_type_ic"
+        android:layout_width="wrap_content"
+        android:scaleType="centerCrop"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" />
+
     <TextView
         android:id="@+id/tv_dream_type"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
+        style="@style/text_13_666666"
         android:gravity="center"
-        android:background="@drawable/shape_radio_dcdcdc_15"
-        android:padding="@dimen/margin_4"
-        android:layout_height="wrap_content" />
+        android:padding="@dimen/margin_5" />
 </LinearLayout>

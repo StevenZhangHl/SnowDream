@@ -2,11 +2,13 @@ package com.example.zealience.oneiromancy.ui.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -76,26 +78,33 @@ public class ShowAmapActivity extends BaseActivity implements AmapLocationChange
         iv_location_marker = (ImageView) findViewById(R.id.iv_location_marker);
         refresh_address = (SmartRefreshLayout) findViewById(R.id.refresh_address);
         initRecyclerView();
-        amapHelper = new AmapHelper(this, amapView);
-        amapHelper.setLocationChangeListener(this);
-        amapHelper.setOnCameraChangeListener(this);
-        amapHelper.setPoiSearchListener(this);
-        amapView.onCreate(savedInstanceState);
-        AndPermission.with(this)
-                .runtime()
-                .permission(new String[]{Manifest.permission.ACCESS_FINE_LOCATION})
-                .onDenied(new Action<List<String>>() {
-                    @Override
-                    public void onAction(List<String> data) {
-                        finish();
-                    }
-                }).onGranted(new Action<List<String>>() {
-            @Override
-            public void onAction(List<String> data) {
-                amapHelper.startLocation();
-            }
-        }).start();
+        if (Build.VERSION.SDK_INT >= 23) {
+            AndPermission.with(this)
+                    .runtime()
+                    .permission(new String[]{Manifest.permission.ACCESS_FINE_LOCATION})
+                    .onDenied(new Action<List<String>>() {
+                        @Override
+                        public void onAction(List<String> data) {
+                            finish();
+                        }
+                    }).onGranted(new Action<List<String>>() {
+                @Override
+                public void onAction(List<String> data) {
+                    initAMap(savedInstanceState);
+                }
+            }).start();
+        } else {
+            initAMap(savedInstanceState);
+        }
 
+    }
+
+    private void initAMap(Bundle savedInstanceState) {
+        amapHelper = new AmapHelper(ShowAmapActivity.this, amapView);
+        amapHelper.setLocationChangeListener(ShowAmapActivity.this);
+        amapHelper.setPoiSearchListener(ShowAmapActivity.this);
+        amapView.onCreate(savedInstanceState);
+        amapHelper.startLocation();
     }
 
     private void initRecyclerView() {
@@ -155,6 +164,7 @@ public class ShowAmapActivity extends BaseActivity implements AmapLocationChange
     @Override
     public void onLocationChanged(AMapLocation location) {
         iv_location_marker.setVisibility(View.VISIBLE);
+        amapHelper.setOnCameraChangeListener(ShowAmapActivity.this);
     }
 
     @Override

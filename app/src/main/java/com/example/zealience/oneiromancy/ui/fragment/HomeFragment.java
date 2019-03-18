@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,7 +27,9 @@ import com.example.zealience.oneiromancy.entity.EventEntity;
 import com.example.zealience.oneiromancy.mvp.contract.HomeContract;
 import com.example.zealience.oneiromancy.mvp.model.HomeModel;
 import com.example.zealience.oneiromancy.mvp.presenter.HomePresenter;
+import com.example.zealience.oneiromancy.ui.DreamHotAdapter;
 import com.example.zealience.oneiromancy.ui.DreamTypeAdapter;
+import com.example.zealience.oneiromancy.ui.activity.ChannelManagerActivity;
 import com.example.zealience.oneiromancy.ui.activity.SearchActivity;
 import com.example.zealience.oneiromancy.ui.activity.UserInfolActivity;
 import com.example.zealience.oneiromancy.ui.activity.VRActivity;
@@ -73,7 +76,9 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
     private ImageView iv_small_snow;
     private Banner bannerContainer;
     private NestedScrollView nested_scrollview;
-    private int column = 4;
+    private RecyclerView recyclerview_dream_hot;
+    private DreamHotAdapter dreamHotAdapter;
+    private int column = 5;
     private int girdMargin = 10;
     private boolean isStopAnim;
     private List<DreamTypeEntity> mDreamTypeList = new ArrayList<>();
@@ -98,6 +103,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         iv_small_snow = (ImageView) rootView.findViewById(R.id.iv_small_snow);
         bannerContainer = (Banner) rootView.findViewById(R.id.bannerContainer);
         nested_scrollview = (NestedScrollView) rootView.findViewById(R.id.nested_scrollview);
+        recyclerview_dream_hot = (RecyclerView)rootView.findViewById(R.id.recyclerview_dream_hot);
         GlideApp.with(_mActivity)
                 .load(UserHelper.getUserInfo(_mActivity).getHeadImageUrl())
                 .placeholder(R.mipmap.icon_user)
@@ -166,11 +172,22 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         recyclerview_dream_type.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("dreamType", mDreamTypeList.get(position));
-                startActivity(SearchActivity.class, bundle);
+                if (position == 9) {
+                    startActivity(ChannelManagerActivity.class);
+                } else {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("dreamType", mDreamTypeList.get(position));
+                    startActivity(SearchActivity.class, bundle);
+                }
             }
         });
+        List<String>strings = new ArrayList<>();
+        for (int i = 0;i<10;i++){
+            strings.add(i+"我");
+        }
+        dreamHotAdapter = new DreamHotAdapter(R.layout.item_dream_hot,strings);
+        recyclerview_dream_hot.setLayoutManager(new LinearLayoutManager(_mActivity));
+        recyclerview_dream_hot.setAdapter(dreamHotAdapter);
     }
 
     private void initClick() {
@@ -200,13 +217,18 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         }
         if (v == iv_small_snow) {
             Bundle bundle = new Bundle();
-            bundle.putString(KeyConstant.URL_KEY, UrlConstant.URL_ZHIHU);
+            bundle.putString(KeyConstant.URL_KEY, UrlConstant.URL_MYGITHUB_HOME);
             WebViewActivity.startActivity(_mActivity, bundle);
         }
     }
 
     @Override
     public void setDreamTypeData(List<DreamTypeEntity> dreamTypeEntityList) {
+        for (int i = 0; i < dreamTypeEntityList.size(); i++) {
+            if (dreamTypeEntityList.get(i).getName().equals("其他类")) {
+                dreamTypeEntityList.remove(i);
+            }
+        }
         dreamTypeAdapter.setNewData(dreamTypeEntityList);
         nested_scrollview.smoothScrollTo(0, 0);
         mDreamTypeList.clear();

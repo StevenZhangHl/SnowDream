@@ -1,5 +1,6 @@
 package com.example.zealience.oneiromancy.ui.activity;
 
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import com.amap.api.services.core.PoiItem;
 import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.constant.SharePConstant;
 import com.hjq.bar.OnTitleBarListener;
+import com.steven.base.base.AppManager;
 import com.steven.base.base.BaseActivity;
 import com.steven.base.util.GsonUtil;
 import com.steven.base.util.SPUtils;
@@ -39,6 +41,7 @@ public class MyAddressActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void initView(Bundle savedInstanceState) {
+        AppManager.getAppManager().addActivity(this);
         showTitle("我的地址");
         mViewProvince = (CustomLayoutGroup) findViewById(R.id.view_province);
         mViewCity = (CustomLayoutGroup) findViewById(R.id.view_city);

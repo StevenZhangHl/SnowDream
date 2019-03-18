@@ -40,7 +40,6 @@ public class NewsChildFragment extends SupportFragment implements NewsContract.V
 
     private NewsPresenter mPresenter;
     private NewsModel mModel;
-    private RxManager mRxManager;
     private RecyclerView recyclerviewNewsList;
     private SmartRefreshLayout refreshNews;
     private NewsListAdapter newsListAdapter;
@@ -61,7 +60,6 @@ public class NewsChildFragment extends SupportFragment implements NewsContract.V
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_news_child, null);
         refreshNews = (SmartRefreshLayout) view.findViewById(R.id.refresh__news);
         recyclerviewNewsList = (RecyclerView) view.findViewById(R.id.recyclerview_news_list);
-        mRxManager = new RxManager();
         mPresenter = new NewsPresenter();
         mModel = new NewsModel();
         if (mPresenter != null) {
