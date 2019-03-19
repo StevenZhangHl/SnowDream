@@ -21,21 +21,27 @@
             android:scaleType="centerCrop"
             android:src="@mipmap/icon_sao" />
 
-        <TextView
-            android:id="@+id/et_search_dream"
-            style="@style/text_14_white"
+        <LinearLayout
+            android:id="@+id/ll_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:transitionName="search_edit"
             android:layout_toLeftOf="@+id/iv_user_head"
             android:layout_toRightOf="@+id/iv_sao"
             android:background="@drawable/shape_radio_white_15"
-            android:hint="被人打/捡到钱"
             android:paddingLeft="@dimen/margin_10"
             android:paddingTop="@dimen/margin_5"
-            android:paddingBottom="@dimen/margin_5"
-            android:textColorHint="@color/white"
-            android:transitionName="search_edit" />
+            android:paddingBottom="@dimen/margin_5">
+
+            <TextView
+                android:id="@+id/et_search_dream"
+                style="@style/text_14_white"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+        </LinearLayout>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_user_head"
@@ -81,23 +87,24 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="——————————热点——————————"
+                android:layout_gravity="center_horizontal"
                 android:layout_margin="@dimen/margin_5"
-                android:layout_gravity="center_horizontal" />
+                android:text="——————————热点——————————" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerview_dream_hot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_10"
                 android:layout_marginLeft="@dimen/margin_5"
+                android:layout_marginTop="@dimen/margin_10"
                 android:layout_marginRight="@dimen/margin_5" />
+
             <TextView
                 android:id="@+id/tv_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/margin_10"
                 android:layout_gravity="center_horizontal"
+                android:padding="@dimen/margin_10"
                 android:text="——————我是有底线的——————" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

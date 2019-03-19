@@ -9,6 +9,7 @@ import com.steven.base.rx.BaseObserver;
 import com.steven.base.util.GsonUtil;
 import com.steven.base.util.SPUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,5 +40,11 @@ public class HomePresenter extends HomeContract.Presenter {
     @Override
     public void getHomeBannerData() {
         mView.setBannerDdata(Arrays.asList(images));
+    }
+
+    @Override
+    public void getHotSearchData() {
+        String[] hots = {"被人打", "捡到钱", "梦见回到小学", "梦到吃好吃的", "被人追杀"};
+        mView.setHotSearchData(hots);
     }
 }

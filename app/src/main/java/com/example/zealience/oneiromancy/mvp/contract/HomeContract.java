@@ -20,6 +20,8 @@ public interface HomeContract {
         void setDreamTypeData(List<DreamTypeEntity> dreamTypeEntityList);
 
         void setBannerDdata(List<Integer> images);
+
+        void setHotSearchData(String[] hotSearchData);
     }
 
     interface Model extends BaseModel {
@@ -30,5 +32,7 @@ public interface HomeContract {
         public abstract void getHomeDreamTypeData();
 
         public abstract void getHomeBannerData();
+
+        public abstract void getHotSearchData();
     }
 }

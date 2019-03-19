@@ -311,6 +311,22 @@ public class AnimationUtils {
     }
 
     /**
+     * 放大View
+     *
+     * @param view     view
+     * @param duration 时间
+     */
+    public static void scaleView(View view, int duration, float x, float y) {
+        ObjectAnimator animatorX = ObjectAnimator.ofFloat(view, "scaleX", x, y);
+        ObjectAnimator animatorY = ObjectAnimator.ofFloat(view, "scaleY", x, y);
+        AnimatorSet set = new AnimatorSet();
+        set.play(animatorX).with(animatorY);
+        set.setDuration(duration);
+        set.setInterpolator(new LinearInterpolator());
+        set.start();
+    }
+
+    /**
      * 缩小View
      *
      * @param view     view
@@ -326,6 +342,7 @@ public class AnimationUtils {
         set.setInterpolator(new LinearInterpolator());
         set.start();
     }
+
     /**
      * 缩小View
      *

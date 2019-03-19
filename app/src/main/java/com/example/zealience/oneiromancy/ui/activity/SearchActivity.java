@@ -12,11 +12,13 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.zealience.oneiromancy.R;
+import com.example.zealience.oneiromancy.constant.KeyConstant;
 import com.example.zealience.oneiromancy.entity.DreamEntity;
 import com.example.zealience.oneiromancy.entity.DreamTypeEntity;
 import com.example.zealience.oneiromancy.mvp.contract.SearchContract;
@@ -85,6 +87,7 @@ public class SearchActivity extends BaseActivity<SearchPresenter, SearchModel> i
         if (getIntent() != null && getIntent().getExtras() != null) {
             dreamTypeEntity = (DreamTypeEntity) getIntent().getExtras().getSerializable("dreamType");
         }
+        et_search.setText(getIntent().getStringExtra(KeyConstant.HOME_HOT_SEARCH_KEY));
         if (dreamTypeEntity != null) {
             et_search.setHint(dreamTypeEntity.getName() + "相关");
         }
@@ -92,7 +95,7 @@ public class SearchActivity extends BaseActivity<SearchPresenter, SearchModel> i
 
     @Override
     public ShareElementInfo[] getShareElements() {
-        return new ShareElementInfo[]{new ShareElementInfo(et_search, new TextViewStateSaver())};
+        return new ShareElementInfo[]{new ShareElementInfo(tv_search, new TextViewStateSaver())};
     }
 
     @Override

@@ -1,8 +1,10 @@
 package com.example.zealience.oneiromancy.ui.fragment;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -44,6 +47,7 @@ import com.jaeger.library.StatusBarUtil;
 import com.steven.base.app.BaseApp;
 import com.steven.base.app.GlideApp;
 import com.steven.base.base.BaseFragment;
+import com.steven.base.util.AnimationUtils;
 import com.steven.base.util.DisplayUtil;
 import com.steven.base.util.GlideImageLoader;
 import com.steven.base.util.GsonUtil;
@@ -72,6 +76,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
     private RecyclerView recyclerview_dream_type;
     private CircleImageView iv_user_head;
     private TextView et_search_dream;
+    private LinearLayout ll_search;
     private ImageView iv_sao;
     private ImageView iv_small_snow;
     private Banner bannerContainer;
@@ -99,11 +104,12 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         recyclerview_dream_type = (RecyclerView) rootView.findViewById(R.id.recyclerview_dream_type);
         et_search_dream = (TextView) rootView.findViewById(R.id.et_search_dream);
         iv_user_head = (CircleImageView) rootView.findViewById(R.id.iv_user_head);
+        ll_search = (LinearLayout)rootView. findViewById(R.id.ll_search);
         iv_sao = (ImageView) rootView.findViewById(R.id.iv_sao);
         iv_small_snow = (ImageView) rootView.findViewById(R.id.iv_small_snow);
         bannerContainer = (Banner) rootView.findViewById(R.id.bannerContainer);
         nested_scrollview = (NestedScrollView) rootView.findViewById(R.id.nested_scrollview);
-        recyclerview_dream_hot = (RecyclerView)rootView.findViewById(R.id.recyclerview_dream_hot);
+        recyclerview_dream_hot = (RecyclerView) rootView.findViewById(R.id.recyclerview_dream_hot);
         GlideApp.with(_mActivity)
                 .load(UserHelper.getUserInfo(_mActivity).getHeadImageUrl())
                 .placeholder(R.mipmap.icon_user)
@@ -112,6 +118,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         initRecyclerView();
         initRabot();
         mPresenter.getHomeBannerData();
+        mPresenter.getHotSearchData();
         EventBus.getDefault().register(this);
     }
 
@@ -181,11 +188,11 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
                 }
             }
         });
-        List<String>strings = new ArrayList<>();
-        for (int i = 0;i<10;i++){
-            strings.add(i+"我");
+        List<String> strings = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            strings.add(i + "我");
         }
-        dreamHotAdapter = new DreamHotAdapter(R.layout.item_dream_hot,strings);
+        dreamHotAdapter = new DreamHotAdapter(R.layout.item_dream_hot, strings);
         recyclerview_dream_hot.setLayoutManager(new LinearLayoutManager(_mActivity));
         recyclerview_dream_hot.setAdapter(dreamHotAdapter);
     }
@@ -207,6 +214,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         if (v == et_search_dream) {
             Intent intent = new Intent(_mActivity, SearchActivity.class);
             Bundle optionsBundle = YcShareElement.buildOptionsBundle(_mActivity, HomeFragment.this);
+            intent.putExtra(KeyConstant.HOME_HOT_SEARCH_KEY,et_search_dream.getText().toString());
             startActivity(intent, optionsBundle);
         }
         if (v == iv_user_head) {
@@ -250,6 +258,28 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
                 }).start();
     }
 
+    private String[] mHotSearchData;
+    private Handler handlerSearch = new Handler();
+    private int count = 0;
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            et_search_dream.setText(mHotSearchData[count]);
+            AnimationUtils.scaleView(et_search_dream, 1000,0,1);
+            count++;
+            if (count == mHotSearchData.length) {
+                count = 0;
+            }
+            handlerSearch.postDelayed(this, 5000);
+        }
+    };
+
+    @Override
+    public void setHotSearchData(String[] hotSearchData) {
+        mHotSearchData = hotSearchData;
+        handlerSearch.post(runnable);
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -258,7 +288,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
 
     @Override
     public ShareElementInfo[] getShareElements() {
-        return new ShareElementInfo[]{new ShareElementInfo(et_search_dream, new TextViewStateSaver())};
+        return new ShareElementInfo[]{new ShareElementInfo(ll_search, new TextViewStateSaver())};
     }
 
     @Override
