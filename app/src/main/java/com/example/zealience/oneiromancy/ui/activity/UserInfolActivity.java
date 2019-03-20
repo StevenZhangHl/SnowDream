@@ -32,6 +32,7 @@ import com.steven.base.base.AppManager;
 import com.steven.base.base.BaseActivity;
 import com.steven.base.util.AnimationUtils;
 import com.steven.base.util.Glide4Engine;
+import com.steven.base.widget.CustomDialog;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.zhihu.matisse.Matisse;
@@ -57,6 +58,8 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
      * 选择图片的路径
      */
     private String selectPath;
+
+    private CustomDialog customDialog;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent();
@@ -113,6 +116,28 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
         startAnim();
     }
 
+    private void showDailog() {
+        customDialog = new CustomDialog(this);
+        customDialog.showTitle("退出提示")
+                .setButtonTexts("取消", "确定")
+                .showContent("确定退出吗？")
+                .setOnClickListene(new CustomDialog.OnClickListener() {
+                    @Override
+                    public void onLeftClick() {
+                        customDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onRightClick() {
+                        customDialog.dismiss();
+                        UserHelper.clearUseInfo(UserInfolActivity.this);
+                        AppManager.getAppManager().finishAllActivity();
+                        startActivity(LoginActivity.class);
+                    }
+                })
+                .show();
+    }
+
     private int delayTime = 10000;
     private int count = 0;
     private Handler mHandlerAnim = new Handler();
@@ -136,9 +161,7 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v == bt_login_out) {
-            UserHelper.clearUseInfo(this);
-            AppManager.getAppManager().finishAllActivity();
-            startActivity(LoginActivity.class);
+            showDailog();
         }
         if (v == mIvUserInfoHead) {
             if (Build.VERSION.SDK_INT >= 23) {
@@ -153,7 +176,7 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
     private void postPermission() {
         AndPermission.with(UserInfolActivity.this)
                 .runtime()
-                .permission(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE})
+                .permission(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA})
                 .onGranted(new Action<List<String>>() {
                     @Override
                     public void onAction(List<String> data) {
@@ -169,7 +192,6 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
                 }
             }
         }).start();
-
     }
 
     private void openCameraAndAlbum() {
@@ -198,7 +220,7 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
                         .into(mIvUserInfoHead);
                 UserInfo userInfo = UserHelper.getUserInfo(UserInfolActivity.this);
                 userInfo.setHeadImageUrl(selectPath);
-                UserHelper.saveUserInfo(UserInfolActivity.this,userInfo);
+                UserHelper.saveUserInfo(UserInfolActivity.this, userInfo);
                 EventBus.getDefault().post(new EventEntity(SnowConstant.EVENT_UPDATE_USER_HEAD));
                 Log.i("Matisse", "mSelected: " + selectPath);
             }

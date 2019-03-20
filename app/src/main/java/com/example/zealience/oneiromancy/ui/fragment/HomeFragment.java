@@ -34,6 +34,7 @@ import com.example.zealience.oneiromancy.ui.DreamHotAdapter;
 import com.example.zealience.oneiromancy.ui.DreamTypeAdapter;
 import com.example.zealience.oneiromancy.ui.activity.ChannelManagerActivity;
 import com.example.zealience.oneiromancy.ui.activity.SearchActivity;
+import com.example.zealience.oneiromancy.ui.activity.ShowScanResultActivity;
 import com.example.zealience.oneiromancy.ui.activity.UserInfolActivity;
 import com.example.zealience.oneiromancy.ui.activity.VRActivity;
 import com.example.zealience.oneiromancy.ui.activity.WebViewActivity;
@@ -53,6 +54,8 @@ import com.steven.base.util.GlideImageLoader;
 import com.steven.base.util.GsonUtil;
 import com.steven.base.util.SPUtils;
 import com.steven.base.util.ToastUitl;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
@@ -72,6 +75,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @description 首页
  */
 public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> implements HomeContract.View, View.OnClickListener, IShareElements {
+    private static final int REQUEST_CODE = 1;
     private DreamTypeAdapter dreamTypeAdapter;
     private RecyclerView recyclerview_dream_type;
     private CircleImageView iv_user_head;
@@ -104,7 +108,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         recyclerview_dream_type = (RecyclerView) rootView.findViewById(R.id.recyclerview_dream_type);
         et_search_dream = (TextView) rootView.findViewById(R.id.et_search_dream);
         iv_user_head = (CircleImageView) rootView.findViewById(R.id.iv_user_head);
-        ll_search = (LinearLayout)rootView. findViewById(R.id.ll_search);
+        ll_search = (LinearLayout) rootView.findViewById(R.id.ll_search);
         iv_sao = (ImageView) rootView.findViewById(R.id.iv_sao);
         iv_small_snow = (ImageView) rootView.findViewById(R.id.iv_small_snow);
         bannerContainer = (Banner) rootView.findViewById(R.id.bannerContainer);
@@ -214,14 +218,14 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         if (v == et_search_dream) {
             Intent intent = new Intent(_mActivity, SearchActivity.class);
             Bundle optionsBundle = YcShareElement.buildOptionsBundle(_mActivity, HomeFragment.this);
-            intent.putExtra(KeyConstant.HOME_HOT_SEARCH_KEY,et_search_dream.getText().toString());
+            intent.putExtra(KeyConstant.HOME_HOT_SEARCH_KEY, et_search_dream.getText().toString());
             startActivity(intent, optionsBundle);
         }
         if (v == iv_user_head) {
             startActivity(UserInfolActivity.class);
         }
         if (v == iv_sao) {
-            ToastUitl.showShort("功能待开发");
+            startActivityForResult(CaptureActivity.class, REQUEST_CODE);
         }
         if (v == iv_small_snow) {
             Bundle bundle = new Bundle();
@@ -265,7 +269,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         @Override
         public void run() {
             et_search_dream.setText(mHotSearchData[count]);
-            AnimationUtils.scaleView(et_search_dream, 1000,0,1);
+            AnimationUtils.scaleView(et_search_dream, 1000, 0, 1);
             count++;
             if (count == mHotSearchData.length) {
                 count = 0;
@@ -306,6 +310,30 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
             GlideApp.with(_mActivity)
                     .load(UserHelper.getUserInfo(_mActivity).getHeadImageUrl())
                     .into(iv_user_head);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            if (data != null) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    if (!TextUtils.isEmpty(result)) {
+                        if (result.startsWith("http://") || result.startsWith("https")) {
+                            bundle.putString(KeyConstant.URL_KEY, result);
+                            WebViewActivity.startActivity(_mActivity, bundle);
+                        } else {
+                            startActivity(ShowScanResultActivity.class, bundle);
+                        }
+                    }
+                }
+            }
         }
     }
 }

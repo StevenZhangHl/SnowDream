@@ -72,7 +72,8 @@
         <activity
             android:name=".ui.activity.SignInActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".ui.activity.ChannelManagerActivity"></activity>
+        <activity android:name=".ui.activity.ChannelManagerActivity" />
+        <activity android:name=".ui.activity.ShowScanResultActivity"></activity>
     </application>
 
 </manifest>

@@ -22,6 +22,7 @@ import com.umeng.commonsdk.UMConfigure;
 import com.umeng.commonsdk.debug.UMLogCommon;
 import com.umeng.commonsdk.debug.UMLogUtils;
 import com.umeng.socialize.PlatformConfig;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -40,6 +41,7 @@ public class BaseApp extends MultiDexApplication {
         ARouter.openDebug();
         ARouter.openLog();
         ARouter.init(this);
+        ZXingLibrary.initDisplayOpinion(this);
         instance = this;
         initLoadingLayout();
         initRefreshLayout();

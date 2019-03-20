@@ -178,4 +178,11 @@
         <item name="android:textColor">@color/color_FF3B30</item>
         <item name="android:textSize">@dimen/textSize_16</item>
     </style>
+    <!--底部线-->
+    <style name="divider">
+        <item name="android:background">@color/divider_color</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
 </resources>

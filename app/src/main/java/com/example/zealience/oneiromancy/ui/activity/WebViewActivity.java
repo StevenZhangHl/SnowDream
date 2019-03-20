@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
@@ -14,23 +15,28 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.constant.KeyConstant;
+import com.flyco.dialog.listener.OnOperItemClickL;
 import com.hjq.bar.OnTitleBarListener;
 import com.steven.base.app.BaseApp;
 import com.steven.base.base.AppManager;
 import com.steven.base.base.BaseActivity;
 import com.steven.base.util.ProviderUtil;
 import com.steven.base.util.ToastUitl;
+import com.steven.base.widget.SheetDialog;
 
 public class WebViewActivity extends BaseActivity implements OnTitleBarListener {
     private WebView webView;
     private ProgressBar mProgressBar;
     private String url;
     private String currentUrl;
+    private int webType = 0;
+    private SheetDialog sheetDialog;
 
     @Override
     public int getLayoutId() {
@@ -46,7 +52,7 @@ public class WebViewActivity extends BaseActivity implements OnTitleBarListener 
         Intent intent = new Intent();
         intent.setClass(context, WebViewActivity.class);
         intent.putExtra(KeyConstant.URL_BUNDLE_KEY, bundle);
-        context.startActivity(intent);
+        context.startActivity(intent, bundle);
     }
 
     @Override
@@ -118,8 +124,38 @@ public class WebViewActivity extends BaseActivity implements OnTitleBarListener 
         boolean isShowShare = getIntent().getBundleExtra(KeyConstant.URL_BUNDLE_KEY).getBoolean(KeyConstant.ISSHOW_SHARE_KEY);
         if (isShowShare) {
             getTitlebar().setRightIcon(R.mipmap.icon_share);
+            webType = 0;
+        } else {
+            getTitlebar().setRightIcon(R.mipmap.icon_web_more);
+            getTitlebar().setLeftIcon(R.mipmap.icon_close);
+            webType = 1;
         }
         webView.loadUrl(url);
+        initDialog();
+    }
+
+    private void initDialog() {
+        sheetDialog = new SheetDialog(this, new String[]{"在浏览器中打开", "复制链接", "收藏"}, null);
+        sheetDialog.isTitleShow(false);
+        sheetDialog.setOnOperItemClickL(new OnOperItemClickL() {
+            @Override
+            public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        if (TextUtils.isEmpty(currentUrl)) {
+                            ToastUitl.showShort("客官别急，页面还没加载完成呢");
+                            return;
+                        }
+                        ProviderUtil.startChromeByUrl(WebViewActivity.this, currentUrl);
+                        break;
+                    case 1:
+                        ProviderUtil.copyManager(WebViewActivity.this, currentUrl);
+                        ToastUitl.showShort("已复制");
+                        break;
+                }
+                sheetDialog.dismiss();
+            }
+        });
     }
 
     @Override
@@ -134,10 +170,27 @@ public class WebViewActivity extends BaseActivity implements OnTitleBarListener 
 
     @Override
     public void onRightClick(View v) {
-        if (TextUtils.isEmpty(currentUrl)) {
-            ToastUitl.showShort("客官别急，页面还没加载完成呢");
-            return;
+        if (webType == 0) {
+            if (TextUtils.isEmpty(currentUrl)) {
+                ToastUitl.showShort("客官别急，页面还没加载完成呢");
+                return;
+            }
+            ProviderUtil.startLocalShareText(this, currentUrl);
+        } else {
+            sheetDialog.show();
         }
-        ProviderUtil.startLocalShareText(this, currentUrl);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (webView.canGoBack()) {
+                webView.goBack();//返回上一页面
+                webView.goForward();
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+
     }
 }

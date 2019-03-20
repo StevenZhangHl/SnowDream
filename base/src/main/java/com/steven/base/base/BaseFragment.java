@@ -114,4 +114,24 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
         }
         startActivity(intent);
     }
+
+    /**
+     * 通过Class跳转界面
+     **/
+    public void startActivityForResult(Class<?> cls, int requestCode) {
+        startActivityForResult(cls, null, requestCode);
+    }
+
+    /**
+     * 含有Bundle通过Class跳转界面
+     **/
+    public void startActivityForResult(Class<?> cls, Bundle bundle,
+                                       int requestCode) {
+        Intent intent = new Intent();
+        intent.setClass(_mActivity, cls);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        startActivityForResult(intent, requestCode);
+    }
 }
