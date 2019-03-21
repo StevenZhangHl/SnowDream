@@ -4,8 +4,17 @@ import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.api.ApiRequest;
 import com.example.zealience.oneiromancy.constant.SharePConstant;
 import com.example.zealience.oneiromancy.entity.DreamTypeEntity;
+import com.example.zealience.oneiromancy.entity.HomeNormalEntity;
+import com.example.zealience.oneiromancy.entity.HomeRecommendEntity;
 import com.example.zealience.oneiromancy.mvp.contract.HomeContract;
+import com.example.zealience.oneiromancy.util.ParseJsonUtil;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import com.steven.base.rx.BaseObserver;
+import com.steven.base.util.AssetsUtil;
 import com.steven.base.util.GsonUtil;
 import com.steven.base.util.SPUtils;
 
@@ -46,5 +55,18 @@ public class HomePresenter extends HomeContract.Presenter {
     public void getHotSearchData() {
         String[] hots = {"被人打", "捡到钱", "梦见回到小学", "梦到吃好吃的", "被人追杀"};
         mView.setHotSearchData(hots);
+    }
+
+    @Override
+    public void getHomeRecommendData() {
+        List<HomeRecommendEntity> recommendEntities = new ArrayList<>();
+        String jsonResult = AssetsUtil.getStrFromAssets("homeData", mContext);
+        JsonArray jsonElements = new JsonParser().parse(jsonResult).getAsJsonArray();
+//        recommendEntities = GsonUtil.jsonArrayToList(jsonElements,HomeRecommendEntity.class);
+        for (int i = 0; i < jsonElements.size(); i++) {
+            HomeRecommendEntity entity = ParseJsonUtil.parseRecomendEntity(jsonElements.get(i).getAsJsonObject());
+            recommendEntities.add(entity);
+        }
+        mView.setRecommendData(recommendEntities);
     }
 }

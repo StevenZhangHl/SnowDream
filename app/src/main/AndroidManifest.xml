@@ -39,7 +39,10 @@
             android:name=".ui.activity.SetingActivity"
             android:launchMode="singleTask" />
         <activity android:name=".ui.activity.LoginActivity" />
-        <activity android:name=".ui.activity.MainActivity" />
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
         <!-- 微信分享 -->
         <activity
             android:name=".wxapi.WXEntryActivity"

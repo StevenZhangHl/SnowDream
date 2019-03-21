@@ -1,6 +1,7 @@
 package com.example.zealience.oneiromancy.mvp.contract;
 
 import com.example.zealience.oneiromancy.entity.DreamTypeEntity;
+import com.example.zealience.oneiromancy.entity.HomeRecommendEntity;
 import com.steven.base.mvp.BaseModel;
 import com.steven.base.mvp.BasePresenter;
 import com.steven.base.mvp.BaseView;
@@ -22,6 +23,8 @@ public interface HomeContract {
         void setBannerDdata(List<Integer> images);
 
         void setHotSearchData(String[] hotSearchData);
+
+        void setRecommendData(List<HomeRecommendEntity> homeRecommendEntities);
     }
 
     interface Model extends BaseModel {
@@ -34,5 +37,7 @@ public interface HomeContract {
         public abstract void getHomeBannerData();
 
         public abstract void getHotSearchData();
+
+        public abstract void getHomeRecommendData();
     }
 }

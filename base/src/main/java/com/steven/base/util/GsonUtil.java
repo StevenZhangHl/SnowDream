@@ -81,6 +81,23 @@ public class GsonUtil {
     }
 
     /**
+     * 转成list
+     *
+     * @param cls
+     * @return
+     */
+    public static <T> List<T> jsonArrayToList(JsonArray jsonArray, Class<T> cls) {
+        List<T> list = new ArrayList<>();
+        gson = new Gson();
+        if (jsonArray != null) {
+            for (JsonElement element : jsonArray) {
+                list.add(gson.fromJson(element, cls));
+            }
+        }
+        return list;
+    }
+
+    /**
      * 转成list中有map的
      *
      * @param gsonString

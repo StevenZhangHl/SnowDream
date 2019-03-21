@@ -1,11 +1,10 @@
 package com.example.zealience.oneiromancy.ui.fragment;
 
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,6 +26,7 @@ import com.example.zealience.oneiromancy.constant.SnowConstant;
 import com.example.zealience.oneiromancy.constant.UrlConstant;
 import com.example.zealience.oneiromancy.entity.DreamTypeEntity;
 import com.example.zealience.oneiromancy.entity.EventEntity;
+import com.example.zealience.oneiromancy.entity.HomeRecommendEntity;
 import com.example.zealience.oneiromancy.mvp.contract.HomeContract;
 import com.example.zealience.oneiromancy.mvp.model.HomeModel;
 import com.example.zealience.oneiromancy.mvp.presenter.HomePresenter;
@@ -67,6 +67,9 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.jzvd.JZMediaManager;
+import cn.jzvd.Jzvd;
+import cn.jzvd.JzvdMgr;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -91,6 +94,9 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
     private int girdMargin = 10;
     private boolean isStopAnim;
     private List<DreamTypeEntity> mDreamTypeList = new ArrayList<>();
+    private String[] mHotSearchData;
+    private Handler handlerSearch = new Handler();
+    private int count = 0;
 
     @Override
     public int getLayoutId() {
@@ -123,6 +129,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         initRabot();
         mPresenter.getHomeBannerData();
         mPresenter.getHotSearchData();
+        mPresenter.getHomeRecommendData();
         EventBus.getDefault().register(this);
     }
 
@@ -196,9 +203,31 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         for (int i = 0; i < 10; i++) {
             strings.add(i + "我");
         }
-        dreamHotAdapter = new DreamHotAdapter(R.layout.item_dream_hot, strings);
-        recyclerview_dream_hot.setLayoutManager(new LinearLayoutManager(_mActivity));
+        dreamHotAdapter = new DreamHotAdapter(new ArrayList<>());
+        dreamHotAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(_mActivity);
+        linearLayoutManager.setSmoothScrollbarEnabled(true);
+        linearLayoutManager.setAutoMeasureEnabled(true);
+        recyclerview_dream_hot.setHasFixedSize(true);
+        recyclerview_dream_hot.setNestedScrollingEnabled(false);
+        recyclerview_dream_hot.setLayoutManager(linearLayoutManager);
         recyclerview_dream_hot.setAdapter(dreamHotAdapter);
+        recyclerview_dream_hot.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
+            @Override
+            public void onChildViewAttachedToWindow(@NonNull View view) {
+            }
+
+            @Override
+            public void onChildViewDetachedFromWindow(@NonNull View view) {
+                Jzvd jzvd = view.findViewById(R.id.jz_video);
+                if (jzvd != null && jzvd.jzDataSource.containsTheUrl(JZMediaManager.getCurrentUrl())) {
+                    Jzvd currentJzvd = JzvdMgr.getCurrentJzvd();
+                    if (currentJzvd != null && currentJzvd.currentScreen != Jzvd.SCREEN_WINDOW_FULLSCREEN) {
+                        Jzvd.releaseAllVideos();
+                    }
+                }
+            }
+        });
     }
 
     private void initClick() {
@@ -262,9 +291,6 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
                 }).start();
     }
 
-    private String[] mHotSearchData;
-    private Handler handlerSearch = new Handler();
-    private int count = 0;
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -282,6 +308,11 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
     public void setHotSearchData(String[] hotSearchData) {
         mHotSearchData = hotSearchData;
         handlerSearch.post(runnable);
+    }
+
+    @Override
+    public void setRecommendData(List<HomeRecommendEntity> homeRecommendEntities) {
+        dreamHotAdapter.setNewData(homeRecommendEntities);
     }
 
     @Override

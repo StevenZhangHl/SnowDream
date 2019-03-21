@@ -26,6 +26,7 @@ import com.steven.base.base.AppManager;
 
 import java.util.ArrayList;
 
+import cn.jzvd.JzvdStd;
 import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.SupportFragment;
 
@@ -147,5 +148,11 @@ public class MainActivity extends SupportActivity implements View.OnClickListene
             Intent intent = new Intent(MainActivity.this, VRActivity.class);
             startActivity(intent);
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JzvdStd.releaseAllVideos();
     }
 }
