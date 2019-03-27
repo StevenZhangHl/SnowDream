@@ -33,6 +33,7 @@ import com.steven.base.base.BaseActivity;
 import com.steven.base.util.AnimationUtils;
 import com.steven.base.util.Glide4Engine;
 import com.steven.base.widget.CustomDialog;
+import com.steven.base.widget.CustomLayoutGroup;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.zhihu.matisse.Matisse;
@@ -60,6 +61,7 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
     private String selectPath;
 
     private CustomDialog customDialog;
+    private CustomLayoutGroup customLayout_user_name;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent();
@@ -102,6 +104,7 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
         mIvUserInfoHead = (CircleImageView) findViewById(R.id.iv_user_info_head);
         mIvBackgroundWall = (ImageView) findViewById(R.id.iv_background_wall);
         mBtLoginOut = (Button) findViewById(R.id.bt_login_out);
+        customLayout_user_name = (CustomLayoutGroup)findViewById(R.id.customLayout_user_name);
         mBtLoginOut.setOnClickListener(this);
         mIvUserInfoHead.setOnClickListener(this);
         bt_login_out.setOnClickListener(this);

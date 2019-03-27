@@ -27,6 +27,8 @@ public class CustomLayoutGroup extends RelativeLayout {
     private String leftTitle;
     private String rightTitle;
     private View view_line;
+    private boolean isHidenLine;
+    private boolean isHidenRightDrawable;
 
     public CustomLayoutGroup(Context context) {
         super(context);
@@ -36,12 +38,13 @@ public class CustomLayoutGroup extends RelativeLayout {
     public CustomLayoutGroup(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
+        initStyle(attrs, 0);
     }
 
     public CustomLayoutGroup(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
-        initStyle(attrs);
+        initStyle(attrs, defStyleAttr);
     }
 
     private void init(Context context) {
@@ -54,20 +57,32 @@ public class CustomLayoutGroup extends RelativeLayout {
         addView(view);
     }
 
-    private void initStyle(AttributeSet attrs) {
-        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.CustomLayoutGroup);
+    private void initStyle(AttributeSet attrs, int defStyleAttr) {
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.CustomLayoutGroup, defStyleAttr, 0);
         if (typedArray.hasValue(R.styleable.CustomLayoutGroup_left_title)) {
             leftTitle = typedArray.getString(R.styleable.CustomLayoutGroup_left_title);
         }
         if (typedArray.hasValue(R.styleable.CustomLayoutGroup_left_drawable)) {
-            leftDrawable = typedArray.getInt(R.styleable.CustomLayoutGroup_left_drawable, -1);
+            leftDrawable = typedArray.getResourceId(R.styleable.CustomLayoutGroup_left_drawable, -1);
         }
         if (typedArray.hasValue(R.styleable.CustomLayoutGroup_right_drawable)) {
-            rightDrawable = typedArray.getInt(R.styleable.CustomLayoutGroup_right_drawable, -1);
+            rightDrawable = typedArray.getResourceId(R.styleable.CustomLayoutGroup_right_drawable, -1);
         }
         if (typedArray.hasValue(R.styleable.CustomLayoutGroup_right_title)) {
             rightTitle = typedArray.getString(R.styleable.CustomLayoutGroup_right_title);
         }
+        if (typedArray.hasValue(R.styleable.CustomLayoutGroup_hide_line)) {
+            isHidenLine = typedArray.getBoolean(R.styleable.CustomLayoutGroup_hide_line, false);
+        }
+        if (typedArray.hasValue(R.styleable.CustomLayoutGroup_hide_right_drawable)) {
+            isHidenRightDrawable = typedArray.getBoolean(R.styleable.CustomLayoutGroup_hide_right_drawable, false);
+        }
+        setTv_left(leftTitle);
+        setTv_right(rightTitle);
+        setLeftDrawable(leftDrawable);
+        setRightDrawable(rightDrawable);
+        hidenLine(isHidenLine);
+        hideRightDrawable(isHidenRightDrawable);
         typedArray.recycle();
     }
 
@@ -85,20 +100,22 @@ public class CustomLayoutGroup extends RelativeLayout {
 
     public void setLeftDrawable(int leftDrawable) {
         this.leftDrawable = leftDrawable;
-        tv_left.setCompoundDrawablesWithIntrinsicBounds(getDrawable(leftDrawable), null, null, null);
-        invalidate();
+        if (leftDrawable != 0) {
+            tv_left.setCompoundDrawablesWithIntrinsicBounds(getDrawable(leftDrawable), null, null, null);
+            invalidate();
+        }
     }
 
-    public void isShowRightDrawable(boolean isShowRightDrawable) {
-        if (!isShowRightDrawable) {
-            iv_right.setVisibility(GONE);
-        }
+    public void hideRightDrawable(boolean isHidenRightDrawable) {
+        iv_right.setVisibility(isHidenRightDrawable ? GONE : VISIBLE);
     }
 
     public void setRightDrawable(int rightDrawable) {
         this.rightDrawable = rightDrawable;
-        iv_right.setImageResource(rightDrawable);
-        invalidate();
+        if (rightDrawable != 0) {
+            iv_right.setImageResource(rightDrawable);
+            invalidate();
+        }
     }
 
     public Drawable getDrawable(int drawalbeResource) {
@@ -108,7 +125,7 @@ public class CustomLayoutGroup extends RelativeLayout {
     /**
      * 隐藏底部分界线
      */
-    public void hidenLine() {
-        view_line.setVisibility(GONE);
+    public void hidenLine(boolean isHidenLine) {
+        view_line.setVisibility(isHidenLine ? GONE : VISIBLE);
     }
 }

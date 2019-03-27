@@ -11,28 +11,36 @@
         android:id="@+id/ll_address_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <com.steven.base.widget.CustomLayoutGroup
             android:id="@+id/view_province"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></com.steven.base.widget.CustomLayoutGroup>
+            android:layout_height="wrap_content"
+            app:hide_right_drawable="true"
+            app:left_title="省"></com.steven.base.widget.CustomLayoutGroup>
 
         <com.steven.base.widget.CustomLayoutGroup
             android:id="@+id/view_city"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></com.steven.base.widget.CustomLayoutGroup>
+            android:layout_height="wrap_content"
+            app:hide_right_drawable="true"
+            app:left_title="市"></com.steven.base.widget.CustomLayoutGroup>
 
         <com.steven.base.widget.CustomLayoutGroup
             android:id="@+id/view_district"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></com.steven.base.widget.CustomLayoutGroup>
+            android:layout_height="wrap_content"
+            app:hide_right_drawable="true"
+            app:left_title="区"></com.steven.base.widget.CustomLayoutGroup>
 
         <com.steven.base.widget.CustomLayoutGroup
             android:id="@+id/view_street"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></com.steven.base.widget.CustomLayoutGroup>
+            android:layout_height="wrap_content"
+            app:hide_right_drawable="true"
+            app:left_title="街道"></com.steven.base.widget.CustomLayoutGroup>
     </LinearLayout>
 
     <LinearLayout

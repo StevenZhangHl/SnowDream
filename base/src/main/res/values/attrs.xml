@@ -5,19 +5,21 @@
         <attr name="HollowTextView_corner_radius" />
     </declare-styleable>
     <declare-styleable name="CustomLayoutGroup">
-        <attr name="left_title"></attr>
+        <attr name="left_title" format="string"></attr>
         <attr name="left_drawable"></attr>
-        <attr name="right_title"></attr>
+        <attr name="right_title" format="string"></attr>
         <attr name="right_drawable"></attr>
+        <attr name="hide_line" format="boolean" />
+        <attr name="hide_right_drawable" format="boolean"/>
     </declare-styleable>
-    <attr name="arcHeight" format="dimension"/>
+    <attr name="arcHeight" format="dimension" />
 
     <declare-styleable name="ArcView">
-        <attr name="arcHeight"/>
-        <attr name="bgColor" format="color"/>
+        <attr name="arcHeight" />
+        <attr name="bgColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="ArcImageView">
-        <attr name="arcHeight"/>
+        <attr name="arcHeight" />
     </declare-styleable>
 </resources>

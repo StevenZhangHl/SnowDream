@@ -1,6 +1,5 @@
 package com.example.zealience.oneiromancy.ui.activity;
 
-import android.app.ActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -51,14 +50,6 @@ public class MyAddressActivity extends BaseActivity implements View.OnClickListe
         ll_address_container = (LinearLayout) findViewById(R.id.ll_address_container);
         ll_empty_view = (LinearLayout) findViewById(R.id.ll_empty_view);
         iv_add_address.setOnClickListener(this);
-        mViewProvince.setTv_left("省");
-        mViewCity.setTv_left("市");
-        mViewDistrict.setTv_left("区");
-        mViewStreet.setTv_left("街道");
-        mViewProvince.isShowRightDrawable(false);
-        mViewCity.isShowRightDrawable(false);
-        mViewDistrict.isShowRightDrawable(false);
-        mViewStreet.isShowRightDrawable(false);
         getTitlebar().setOnTitleBarListener(this);
         fillData();
     }

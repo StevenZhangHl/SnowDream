@@ -185,4 +185,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
     </style>
+    <style name="anim_view">
+        <item name='@android:windowEnterAnimation'>@anim/anim_in</item>
+        <item name='@android:windowExitAnimation'>@anim/anim_out</item>
+    </style>
 </resources>

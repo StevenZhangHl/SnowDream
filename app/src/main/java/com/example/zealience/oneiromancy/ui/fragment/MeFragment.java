@@ -1,9 +1,14 @@
 package com.example.zealience.oneiromancy.ui.fragment;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.constant.SnowConstant;
@@ -15,6 +20,7 @@ import com.example.zealience.oneiromancy.ui.activity.SignInActivity;
 import com.example.zealience.oneiromancy.ui.activity.UserInfolActivity;
 import com.example.zealience.oneiromancy.ui.widget.SnowRefershHeader;
 import com.example.zealience.oneiromancy.util.UserHelper;
+import com.hjq.bar.TitleBar;
 import com.hw.ycshareelement.YcShareElement;
 import com.hw.ycshareelement.transition.IShareElements;
 import com.hw.ycshareelement.transition.ShareElementInfo;
@@ -31,6 +37,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
 import com.steven.base.app.GlideApp;
 import com.steven.base.base.BaseFragment;
+import com.steven.base.util.DisplayUtil;
 import com.steven.base.util.ToastUitl;
 import com.steven.base.widget.CustomLayoutGroup;
 
@@ -45,12 +52,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @createDate 2019/3/6 18:02
  * @description 我的页面
  */
-public class MeFragment extends BaseFragment implements View.OnClickListener, IShareElements {
-    private SmartRefreshLayout refreshMe;
+@TargetApi(Build.VERSION_CODES.M)
+public class MeFragment extends BaseFragment implements View.OnClickListener, IShareElements,View.OnScrollChangeListener {
+    private NestedScrollView me_scroll_view;
     private CircleImageView ivMeHead;
     private CustomLayoutGroup customLayout_collection;
     private CustomLayoutGroup customLayoutSignIn;
     private CustomLayoutGroup customLayoutAddress;
+    private TitleBar me_title_bar;
 
     public static MeFragment newInstance(String title) {
         Bundle bundle = new Bundle();
@@ -72,20 +81,13 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        refreshMe = (SmartRefreshLayout) rootView.findViewById(R.id.refresh_me);
+        me_title_bar = (TitleBar) rootView.findViewById(R.id.me_title_bar);
+        me_scroll_view = (NestedScrollView) rootView.findViewById(R.id.me_scroll_view);
         ivMeHead = (CircleImageView) rootView.findViewById(R.id.iv_me_head);
         customLayout_collection = (CustomLayoutGroup) rootView.findViewById(R.id.customLayout_collection);
         customLayoutSignIn = (CustomLayoutGroup) rootView.findViewById(R.id.customLayout_signIn);
         customLayoutAddress = (CustomLayoutGroup) rootView.findViewById(R.id.customLayout_address);
-        refreshMe.setPrimaryColors(_mActivity.getResources().getColor(R.color.mainColor));
-        refreshMe.setRefreshHeader(new MaterialHeader(_mActivity));
-        customLayout_collection.setTv_left("收藏");
-        customLayoutSignIn.setTv_left("签到");
-        customLayoutAddress.setTv_left("地址");
-        customLayout_collection.hidenLine();
-        customLayout_collection.setLeftDrawable(R.mipmap.icon_collection);
-        customLayoutSignIn.setLeftDrawable(R.mipmap.icon_sign_in);
-        customLayoutAddress.setLeftDrawable(R.mipmap.icon_address);
+        me_title_bar.setRightIcon(R.mipmap.icon_set);
         GlideApp.with(_mActivity)
                 .load(UserHelper.getUserInfo(_mActivity).getHeadImageUrl())
                 .placeholder(R.mipmap.icon_user)
@@ -94,6 +96,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
         customLayoutAddress.setOnClickListener(this);
         customLayoutSignIn.setOnClickListener(this);
         ivMeHead.setOnClickListener(this);
+        me_scroll_view.setOnScrollChangeListener(this);
         EventBus.getDefault().register(this);
     }
 
@@ -142,6 +145,24 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
             GlideApp.with(_mActivity)
                     .load(UserHelper.getUserInfo(_mActivity).getHeadImageUrl())
                     .into(ivMeHead);
+        }
+    }
+
+    @Override
+    public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+        int height = DisplayUtil.dip2px(170);
+        if (scrollY <= 0) {
+            me_title_bar.setTitle("");
+            me_title_bar.setBackgroundColor(Color.argb((int) 0, 44, 44, 44));//AGB由相关工具获得，或者美工提供
+        } else if (scrollY > 0 && scrollY <= height) {
+            float scale = (float) scrollY / height;
+            float alpha = (255 * scale);
+            me_title_bar.setBackgroundColor(Color.argb((int) alpha, 44, 44, 44));
+            me_title_bar.setTitleColor(Color.argb((int) alpha, 255, 255, 255));
+            me_title_bar.setTitle("小可爱");
+        } else {
+            me_title_bar.setTitle("小可爱");
+            me_title_bar.setBackgroundColor(Color.argb((int) 255, 44, 44, 44));
         }
     }
 }

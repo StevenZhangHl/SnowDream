@@ -1,6 +1,5 @@
 package com.example.zealience.oneiromancy.ui;
 
-import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +10,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.chad.library.adapter.base.animation.BaseAnimation;
 import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.entity.HomeRecommendEntity;
 import com.example.zealience.oneiromancy.util.BlurTransformation;

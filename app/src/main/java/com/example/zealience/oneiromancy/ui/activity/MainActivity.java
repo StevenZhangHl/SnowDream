@@ -23,6 +23,7 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.jaeger.library.StatusBarUtil;
 import com.steven.base.app.BaseApp;
 import com.steven.base.base.AppManager;
+import com.steven.base.util.ToastUitl;
 
 import java.util.ArrayList;
 
@@ -154,5 +155,18 @@ public class MainActivity extends SupportActivity implements View.OnClickListene
     protected void onPause() {
         super.onPause();
         JzvdStd.releaseAllVideos();
+    }
+
+    private long time;
+    private int delayTime = 2000;
+
+    @Override
+    public void onBackPressedSupport() {
+        if (System.currentTimeMillis() - time > delayTime) {
+            ToastUitl.showTopToast(this, "再按一次退出");
+            time = System.currentTimeMillis();
+        } else {
+            AppManager.getAppManager().finishAllActivity();
+        }
     }
 }
