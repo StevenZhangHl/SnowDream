@@ -29,6 +29,7 @@ import com.steven.base.mvp.BaseView;
 import com.steven.base.rx.RxManager;
 import com.steven.base.util.NetWorkUtils;
 import com.steven.base.util.TUtil;
+import com.umeng.message.PushAgent;
 
 public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel> extends AppCompatActivity implements BaseView, Callback.OnReloadListener {
     public T mPresenter;
@@ -43,6 +44,7 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        PushAgent.getInstance(this).onAppStart();
         mRxManager = new RxManager();
         doBeforeSetContentView();
         getDelegate().setContentView(R.layout.activity_base);

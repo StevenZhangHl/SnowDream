@@ -93,16 +93,10 @@ dependencies {
     api 'com.amap.api:location:latest.integration'
     //搜索功能
     api 'com.amap.api:search:latest.integration'
-    api 'com.umeng.umsdk:common:1.5.4'
-    api 'com.umeng.umsdk:utdid:1.1.5.3'
-    api files('libs/libapshare20161108.jar')
-    api files('libs/libddshare.jar')
-    api files('libs/umeng-share-alipay-6.9.4.jar')
-    api files('libs/umeng-share-core-6.9.4.jar')
-    api files('libs/umeng-share-Ding-6.9.4.jar')
-    api files('libs/umeng-share-QQ-simplify-6.9.4.jar')
-    api files('libs/umeng-share-sina-simplify-6.9.4.jar')
-    api files('libs/umeng-share-wechat-simplify-6.9.4.jar')
-    api files('libs/umeng-sharetool-6.9.4.jar')
-    api files('libs/umeng-shareboard-widget-6.9.4.jar')
+    //PushSDK必须依赖基础组件库，所以需要加入对应依赖
+    api 'com.umeng.sdk:common:1.5.3'
+    //PushSDK必须依赖utdid库，所以需要加入对应依赖
+    api 'com.umeng.sdk:utdid:1.1.5.3'
+    //PushSDK
+    api 'com.umeng.sdk:push:4.2.0'
 }

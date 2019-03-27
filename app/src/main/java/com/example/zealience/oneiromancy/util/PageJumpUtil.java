@@ -8,7 +8,7 @@ import com.example.zealience.oneiromancy.ui.activity.WebViewActivity;
 /**
  * @user steven
  * @createDate 2019/3/6 18:06
- * @description 页面调整配置文件
+ * @description 页面跳转配置文件
  */
 public class PageJumpUtil {
     public static void jumpPage(Context context, String fuctionUrl, Bundle bundle) {

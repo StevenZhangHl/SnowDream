@@ -1,1 +1,1 @@
-include ':app', ':base', ':amapmap'
+include ':app', ':base', ':amapmap', ':pay'
