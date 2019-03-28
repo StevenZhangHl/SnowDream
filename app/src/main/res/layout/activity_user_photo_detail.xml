@@ -4,76 +4,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:orientation="vertical"
     tools:context=".ui.activity.UserInfolActivity">
 
-    <LinearLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bt_login_out"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="230dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/margin_200">
-
-                <ImageView
-                    android:id="@+id/iv_background_wall"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
-
-            </RelativeLayout>
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/iv_user_info_head"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginRight="@dimen/margin_15"
-                android:src="@mipmap/icon_user"
-                android:transitionName="userInfoImageHead"
-                app:civ_border_color="@color/DCDCDC"
-                app:civ_border_width="@dimen/margin_2" />
-        </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_above="@+id/bt_login_out"
             android:orientation="vertical">
 
-            <com.steven.base.widget.CustomLayoutGroup
-                android:id="@+id/customLayout_user_name"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:left_title="昵称"></com.steven.base.widget.CustomLayoutGroup>
+                android:layout_height="230dp">
 
-            <com.steven.base.widget.CustomLayoutGroup
-                android:id="@+id/customLayout_user_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:left_title="手机号"></com.steven.base.widget.CustomLayoutGroup>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_200">
 
-            <com.steven.base.widget.CustomLayoutGroup
-                android:id="@+id/customLayout_gender"
+                    <ImageView
+                        android:id="@+id/iv_background_wall"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
+
+                </RelativeLayout>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_user_info_head"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:src="@mipmap/icon_user"
+                    android:transitionName="userInfoImageHead"
+                    app:civ_border_color="@color/DCDCDC"
+                    app:civ_border_width="@dimen/margin_2" />
+            </RelativeLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:left_title="性别"></com.steven.base.widget.CustomLayoutGroup>
+                android:orientation="vertical">
+
+                <com.steven.base.widget.CustomLayoutGroup
+                    android:id="@+id/customLayout_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:left_title="昵称"></com.steven.base.widget.CustomLayoutGroup>
+
+                <com.steven.base.widget.CustomLayoutGroup
+                    android:id="@+id/customLayout_user_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:left_title="手机号"></com.steven.base.widget.CustomLayoutGroup>
+
+                <com.steven.base.widget.CustomLayoutGroup
+                    android:id="@+id/customLayout_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:left_title="性别"></com.steven.base.widget.CustomLayoutGroup>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/margin_10"
+                android:text="---我的动态---" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_user_dynamic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
         </LinearLayout>
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/bt_login_out"
-        style="@style/text_16_white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/margin_15"
-        android:background="@drawable/bg_radio_333_2"
-        android:text="退出登录" />
+    </android.support.v4.widget.NestedScrollView>
 </RelativeLayout>

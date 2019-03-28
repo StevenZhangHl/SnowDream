@@ -149,6 +149,7 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
     public void showTitle(String title) {
         titlebar.setVisibility(View.VISIBLE);
         titlebar.setTitle(title);
+        titlebar.getRightView().setTextColor(ContextCompat.getColor(mContext,R.color.color_999999));
     }
     /**
      * 白色标题栏

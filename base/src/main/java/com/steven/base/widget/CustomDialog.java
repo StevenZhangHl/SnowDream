@@ -3,6 +3,7 @@ package com.steven.base.widget;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,11 +28,16 @@ public class CustomDialog extends BaseDialog<CustomDialog> {
     private SuperButton sbLeft;
     private SuperButton sbRight;
     /**
+     * 输入框
+     */
+    private EditText et_input_content;
+    /**
      * 标题内容显示
      */
     boolean isShowTitle = true;
     boolean isShowContent = true;
     boolean isSingleButton = false;
+    private boolean isShowEditText = false;
 
     boolean isCancle = true;
     /**
@@ -94,6 +100,7 @@ public class CustomDialog extends BaseDialog<CustomDialog> {
         sbRight = (SuperButton) inflate.findViewById(R.id.stb_right);
         tvException = (TextView) inflate.findViewById(R.id.tv_exception);
         llException = (LinearLayout) inflate.findViewById(R.id.ll_exception);
+        et_input_content = (EditText) inflate.findViewById(R.id.et_input_content);
         return inflate;
     }
 
@@ -104,6 +111,7 @@ public class CustomDialog extends BaseDialog<CustomDialog> {
         mTitle.setVisibility(isShowTitle ? View.VISIBLE : View.GONE);
         mContent.setVisibility(isShowContent ? View.VISIBLE : View.GONE);
         sbLeft.setVisibility(isSingleButton ? View.GONE : View.VISIBLE);
+        et_input_content.setVisibility(isShowEditText ? View.VISIBLE : View.GONE);
         mTitle.setText(title);
         if (isException) {
             sbLeft.setVisibility(View.GONE);
@@ -233,6 +241,11 @@ public class CustomDialog extends BaseDialog<CustomDialog> {
     public CustomDialog showExceptionTitle(String title) {
         this.title = title;
         this.isException = true;
+        return this;
+    }
+
+    public CustomDialog isShowEditText(boolean isShowEditText) {
+        this.isShowEditText = isShowEditText;
         return this;
     }
 

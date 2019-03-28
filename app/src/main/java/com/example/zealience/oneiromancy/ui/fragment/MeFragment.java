@@ -15,11 +15,13 @@ import com.example.zealience.oneiromancy.constant.SnowConstant;
 import com.example.zealience.oneiromancy.entity.EventEntity;
 import com.example.zealience.oneiromancy.ui.activity.MyAddressActivity;
 import com.example.zealience.oneiromancy.ui.activity.SearchActivity;
+import com.example.zealience.oneiromancy.ui.activity.SetingActivity;
 import com.example.zealience.oneiromancy.ui.activity.ShowAmapActivity;
 import com.example.zealience.oneiromancy.ui.activity.SignInActivity;
 import com.example.zealience.oneiromancy.ui.activity.UserInfolActivity;
 import com.example.zealience.oneiromancy.ui.widget.SnowRefershHeader;
 import com.example.zealience.oneiromancy.util.UserHelper;
+import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.hw.ycshareelement.YcShareElement;
 import com.hw.ycshareelement.transition.IShareElements;
@@ -53,7 +55,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @description 我的页面
  */
 @TargetApi(Build.VERSION_CODES.M)
-public class MeFragment extends BaseFragment implements View.OnClickListener, IShareElements,View.OnScrollChangeListener {
+public class MeFragment extends BaseFragment implements View.OnClickListener, IShareElements, View.OnScrollChangeListener {
     private NestedScrollView me_scroll_view;
     private CircleImageView ivMeHead;
     private CustomLayoutGroup customLayout_collection;
@@ -97,6 +99,22 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
         customLayoutSignIn.setOnClickListener(this);
         ivMeHead.setOnClickListener(this);
         me_scroll_view.setOnScrollChangeListener(this);
+        me_title_bar.setOnTitleBarListener(new OnTitleBarListener() {
+            @Override
+            public void onLeftClick(View v) {
+
+            }
+
+            @Override
+            public void onTitleClick(View v) {
+
+            }
+
+            @Override
+            public void onRightClick(View v) {
+                startActivity(SetingActivity.class);
+            }
+        });
         EventBus.getDefault().register(this);
     }
 

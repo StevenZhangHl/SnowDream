@@ -1,9 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.activity.SetingActivity">
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_45">
+
+            <TextView
+                style="@style/text_14_333333"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_5"
+                android:padding="@dimen/margin_5"
+                android:text="系统通知" />
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/switch_notification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin_10"
+                android:padding="@dimen/margin_5"
+                android:thumb="@drawable/switch_custom_thumb_selector"
+                app:track="@drawable/switch_custom_track_selector" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_marginRight="@dimen/margin_10"
+            android:background="@color/DCDCDC"></View>
+
+        <com.steven.base.widget.CustomLayoutGroup
+            android:id="@+id/rl_set_sound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:left_title="通知声音设置"
+            app:right_title="去设置"></com.steven.base.widget.CustomLayoutGroup>
+
+        <com.steven.base.widget.CustomLayoutGroup
+            android:id="@+id/rl_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:left_title="意见反馈">
+
+        </com.steven.base.widget.CustomLayoutGroup>
+
+        <com.steven.base.widget.CustomLayoutGroup
+            android:id="@+id/rl_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:left_title="关于"></com.steven.base.widget.CustomLayoutGroup>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_login_out"
+        style="@style/text_16_white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/margin_15"
+        android:background="@drawable/bg_radio_333_2"
+        android:text="退出登录" />
+</RelativeLayout>

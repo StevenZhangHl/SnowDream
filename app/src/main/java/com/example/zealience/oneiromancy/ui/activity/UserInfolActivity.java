@@ -5,11 +5,15 @@ import android.animation.Animator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,18 +24,28 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.zealience.oneiromancy.R;
+import com.example.zealience.oneiromancy.constant.SharePConstant;
 import com.example.zealience.oneiromancy.constant.SnowConstant;
 import com.example.zealience.oneiromancy.entity.EventEntity;
+import com.example.zealience.oneiromancy.entity.UserDynamicEntity;
 import com.example.zealience.oneiromancy.entity.UserInfo;
+import com.example.zealience.oneiromancy.ui.UserDynamicAdapter;
 import com.example.zealience.oneiromancy.util.BlurTransformation;
 import com.example.zealience.oneiromancy.util.UserHelper;
 import com.hjq.bar.OnTitleBarListener;
 import com.steven.base.app.GlideApp;
 import com.steven.base.base.AppManager;
 import com.steven.base.base.BaseActivity;
+import com.steven.base.impl.SpanIndexListener;
+import com.steven.base.util.AddRecyclerEmptyView;
 import com.steven.base.util.AnimationUtils;
+import com.steven.base.util.DateTimeHelper;
+import com.steven.base.util.DotItemDecoration;
 import com.steven.base.util.Glide4Engine;
+import com.steven.base.util.GsonUtil;
+import com.steven.base.util.SPUtils;
 import com.steven.base.widget.CustomDialog;
 import com.steven.base.widget.CustomLayoutGroup;
 import com.yanzhenjie.permission.Action;
@@ -42,26 +56,25 @@ import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserInfolActivity extends BaseActivity implements View.OnClickListener {
     private final int REQUEST_CODE_CHOOSE = 1;
-    private Button bt_login_out;
+    private final int REQUEST_CODE_ADD_DYNAMIC = 2;
     private ImageView mIvBackgroundWall;
-    /**
-     * 退出登录
-     */
-    private Button mBtLoginOut;
     private CircleImageView mIvUserInfoHead;
     /**
      * 选择图片的路径
      */
     private String selectPath;
-
-    private CustomDialog customDialog;
     private CustomLayoutGroup customLayout_user_name;
+    private RecyclerView recyclerview_user_dynamic;
+    private UserDynamicAdapter dynamicAdapter;
+    private List<UserDynamicEntity> userDynamicEntityList = new ArrayList<>();
+    private DotItemDecoration mItemDecoration;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent();
@@ -83,10 +96,18 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
     public void initView(Bundle savedInstanceState) {
         AppManager.getAppManager().addActivity(this);
         showTitle("个人信息");
+        setWhiteStatusBar(R.color.white);
+        mIvUserInfoHead = (CircleImageView) findViewById(R.id.iv_user_info_head);
+        mIvBackgroundWall = (ImageView) findViewById(R.id.iv_background_wall);
+        recyclerview_user_dynamic = (RecyclerView) findViewById(R.id.recyclerview_user_dynamic);
+        customLayout_user_name = (CustomLayoutGroup) findViewById(R.id.customLayout_user_name);
+        customLayout_user_name.setOnClickListener(this);
+        mIvUserInfoHead.setOnClickListener(this);
+        getTitlebar().setRightIcon(R.mipmap.icon_pulibsh_dynamic);
         getTitlebar().setOnTitleBarListener(new OnTitleBarListener() {
             @Override
             public void onLeftClick(View v) {
-                onBackPressed();
+                finish();
             }
 
             @Override
@@ -96,18 +117,9 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
 
             @Override
             public void onRightClick(View v) {
-
+                startActivityForResult(PublishDynamicActivity.class, REQUEST_CODE_ADD_DYNAMIC);
             }
         });
-        setWhiteStatusBar(R.color.white);
-        bt_login_out = (Button) findViewById(R.id.bt_login_out);
-        mIvUserInfoHead = (CircleImageView) findViewById(R.id.iv_user_info_head);
-        mIvBackgroundWall = (ImageView) findViewById(R.id.iv_background_wall);
-        mBtLoginOut = (Button) findViewById(R.id.bt_login_out);
-        customLayout_user_name = (CustomLayoutGroup)findViewById(R.id.customLayout_user_name);
-        mBtLoginOut.setOnClickListener(this);
-        mIvUserInfoHead.setOnClickListener(this);
-        bt_login_out.setOnClickListener(this);
         GlideApp.with(this)
                 .load(UserHelper.getUserInfo(this).getHeadImageUrl())
                 .placeholder(R.mipmap.icon_user)
@@ -116,29 +128,57 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
                 .load(R.mipmap.bg_user_wall)
                 .apply(RequestOptions.bitmapTransform(new BlurTransformation(this, 12)))
                 .into(mIvBackgroundWall);
+        initRecyclerView();
         startAnim();
     }
 
-    private void showDailog() {
-        customDialog = new CustomDialog(this);
-        customDialog.showTitle("退出提示")
-                .setButtonTexts("取消", "确定")
-                .showContent("确定退出吗？")
-                .setOnClickListene(new CustomDialog.OnClickListener() {
-                    @Override
-                    public void onLeftClick() {
-                        customDialog.dismiss();
-                    }
+    private void initRecyclerView() {
+        mItemDecoration = new DotItemDecoration
+                .Builder(this)
+                .setOrientation(DotItemDecoration.VERTICAL)//if you want a horizontal item decoration,remember to set horizontal orientation to your LayoutManager
+                .setItemStyle(DotItemDecoration.STYLE_DRAW)//choose to draw or use resource
+                .setTopDistance(20)//dp
+                .setItemInterVal(10)//dp
+                .setItemPaddingLeft(10)//default value equals to item interval value
+                .setItemPaddingRight(10)//default value equals to item interval value
+                .setDotColor(ContextCompat.getColor(this, R.color.color_666))
+                .setDotRadius(2)//dp
+                .setDotPaddingTop(0)
+                .setDotInItemOrientationCenter(false)//set true if you want the dot align center
+                .setLineColor(ContextCompat.getColor(this, R.color.color_999))//the color of vertical line
+                .setLineWidth(1)//dp
+                .setEndText("")//set end text
+                .setTextColor(ContextCompat.getColor(this, R.color.color_666))
+                .setTextSize(10)//sp
+                .setDotPaddingText(2)//dp.The distance between the last dot and the end text
+                .setBottomDistance(0)//you can add a distance to make bottom line longer
+                .create();
+        mItemDecoration.setSpanIndexListener(new SpanIndexListener() {
+            @Override
+            public void onSpanIndexChange(View view, int spanIndex) {
+                view.setBackgroundResource(spanIndex == 0 ? R.drawable.pop_left : R.drawable.pop_right);
+            }
+        });
+        recyclerview_user_dynamic.setNestedScrollingEnabled(false);
+        recyclerview_user_dynamic.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        dynamicAdapter = new UserDynamicAdapter(R.layout.item_user_dynamic, new ArrayList<>());
+        dynamicAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM);
+        recyclerview_user_dynamic.setAdapter(dynamicAdapter);
+        getUserDynamiData();
+    }
 
-                    @Override
-                    public void onRightClick() {
-                        customDialog.dismiss();
-                        UserHelper.clearUseInfo(UserInfolActivity.this);
-                        AppManager.getAppManager().finishAllActivity();
-                        startActivity(LoginActivity.class);
-                    }
-                })
-                .show();
+    /**
+     * 获取用户动态数据
+     */
+    private void getUserDynamiData() {
+        userDynamicEntityList = GsonUtil.GsonToList(SPUtils.getSharedStringData(this, SharePConstant.KEY_USER_DYNAMIC_LIST), UserDynamicEntity.class);
+        if (userDynamicEntityList.size() == 0) {
+            AddRecyclerEmptyView.setEmptyView(dynamicAdapter, recyclerview_user_dynamic);
+        } else {
+            recyclerview_user_dynamic.addItemDecoration(mItemDecoration);
+            dynamicAdapter.setNewData(userDynamicEntityList);
+        }
+
     }
 
     private int delayTime = 10000;
@@ -163,13 +203,17 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if (v == bt_login_out) {
-            showDailog();
-        }
         if (v == mIvUserInfoHead) {
             if (Build.VERSION.SDK_INT >= 23) {
                 postPermission();
             }
+        }
+        if (v == customLayout_user_name) {
+            CustomDialog customDialog = new CustomDialog(this);
+            customDialog.showTitle("修改昵称")
+                    .isShowEditText(true)
+                    .isShowContent(false)
+                    .show();
         }
     }
 
@@ -226,6 +270,12 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
                 UserHelper.saveUserInfo(UserInfolActivity.this, userInfo);
                 EventBus.getDefault().post(new EventEntity(SnowConstant.EVENT_UPDATE_USER_HEAD));
                 Log.i("Matisse", "mSelected: " + selectPath);
+            }
+            if (requestCode == REQUEST_CODE_ADD_DYNAMIC) {
+                UserDynamicEntity dynamicEntity = (UserDynamicEntity) data.getSerializableExtra("dynamicEntity");
+                userDynamicEntityList.add(0, dynamicEntity);
+                SPUtils.setSharedStringData(UserInfolActivity.this, SharePConstant.KEY_USER_DYNAMIC_LIST, GsonUtil.GsonString(userDynamicEntityList));
+                getUserDynamiData();
             }
         }
     }

@@ -73,7 +73,10 @@
         <item name="android:textSize">@dimen/textSize_13</item>
         <item name="android:textColor">@color/color_666666</item>
     </style>
-
+    <style name="text_14_666666">
+        <item name="android:textSize">@dimen/textSize_14</item>
+        <item name="android:textColor">@color/color_666666</item>
+    </style>
     <style name="text_15_666666">
         <item name="android:textSize">@dimen/textSize_15</item>
         <item name="android:textColor">@color/color_666666</item>

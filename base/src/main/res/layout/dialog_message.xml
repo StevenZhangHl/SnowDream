@@ -29,6 +29,13 @@
             android:textSize="18sp"
             tools:text="夜以继日的认证中" />
 
+        <EditText
+            android:id="@+id/et_input_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_10"
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
@@ -66,6 +73,7 @@
                 android:layout_weight="1"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textSize_14"
+                android:text="取消"
                 android:visibility="gone"
                 stv:sSelectorNormalColor="@color/white"
                 stv:sSelectorPressedColor="@color/white"
@@ -83,6 +91,7 @@
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/stb_left"
                 android:layout_weight="1"
+                android:text="确定"
                 stv:sSelectorNormalColor="@color/white"
                 stv:sSelectorPressedColor="@color/white"
                 stv:sUseSelector="true" />
