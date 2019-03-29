@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.constant.SnowConstant;
@@ -62,6 +63,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
     private CustomLayoutGroup customLayoutSignIn;
     private CustomLayoutGroup customLayoutAddress;
     private TitleBar me_title_bar;
+    private TextView tv_user_nick;
 
     public static MeFragment newInstance(String title) {
         Bundle bundle = new Bundle();
@@ -85,6 +87,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
     public void initView(Bundle savedInstanceState) {
         me_title_bar = (TitleBar) rootView.findViewById(R.id.me_title_bar);
         me_scroll_view = (NestedScrollView) rootView.findViewById(R.id.me_scroll_view);
+        tv_user_nick = (TextView)rootView.findViewById(R.id.tv_user_nick);
         ivMeHead = (CircleImageView) rootView.findViewById(R.id.iv_me_head);
         customLayout_collection = (CustomLayoutGroup) rootView.findViewById(R.id.customLayout_collection);
         customLayoutSignIn = (CustomLayoutGroup) rootView.findViewById(R.id.customLayout_signIn);
@@ -94,6 +97,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
                 .load(UserHelper.getUserInfo(_mActivity).getHeadImageUrl())
                 .placeholder(R.mipmap.icon_user)
                 .into(ivMeHead);
+        tv_user_nick.setText(UserHelper.getUserInfo(_mActivity).getNick());
         customLayout_collection.setOnClickListener(this);
         customLayoutAddress.setOnClickListener(this);
         customLayoutSignIn.setOnClickListener(this);
@@ -163,6 +167,9 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
             GlideApp.with(_mActivity)
                     .load(UserHelper.getUserInfo(_mActivity).getHeadImageUrl())
                     .into(ivMeHead);
+        }
+        if (SnowConstant.APLIPAY_APP_ID.equals(event.getEvent())){
+            tv_user_nick.setText(UserHelper.getUserInfo(_mActivity).getNick());
         }
     }
 

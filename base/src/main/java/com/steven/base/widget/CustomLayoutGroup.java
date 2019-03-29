@@ -98,6 +98,30 @@ public class CustomLayoutGroup extends RelativeLayout {
         invalidate();
     }
 
+    public TextView getTv_left() {
+        return tv_left;
+    }
+
+    public void setTv_left(TextView tv_left) {
+        this.tv_left = tv_left;
+    }
+
+    public ImageView getIv_right() {
+        return iv_right;
+    }
+
+    public void setIv_right(ImageView iv_right) {
+        this.iv_right = iv_right;
+    }
+
+    public TextView getTv_right() {
+        return tv_right;
+    }
+
+    public void setTv_right(TextView tv_right) {
+        this.tv_right = tv_right;
+    }
+
     public void setLeftDrawable(int leftDrawable) {
         this.leftDrawable = leftDrawable;
         if (leftDrawable != 0) {

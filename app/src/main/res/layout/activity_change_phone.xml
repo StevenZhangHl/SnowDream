@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.ChangePhoneActivity">
+
+    <com.steven.base.widget.ClearEditText
+        android:id="@+id/et_phone"
+        style="@style/text_13_666666"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_10"
+        android:background="@drawable/bg_dcdcdc_radio_2"
+        android:hint="请输入新手机号"
+        android:inputType="phone"
+        android:maxLength="11"
+        android:padding="@dimen/margin_10" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.steven.base.widget.ClearEditText
+            android:id="@+id/et_code"
+            style="@style/text_13_666666"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10"
+            android:inputType="number"
+            android:layout_toLeftOf="@+id/tv_get_code"
+            android:background="@drawable/bg_dcdcdc_radio_2"
+            android:hint="请输入验证码"
+            android:maxLength="6"
+            android:padding="@dimen/margin_10" />
+
+        <TextView
+            android:id="@+id/tv_get_code"
+            style="@style/text_13_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_radio_666_2"
+            android:padding="@dimen/margin_5"
+            android:text="获取验证码" />
+    </RelativeLayout>
+
+    <com.steven.base.widget.RippleButton
+        android:id="@+id/bt_next"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_45"
+        android:layout_margin="@dimen/margin_20"
+        android:gravity="center"
+        app:gray_text="下一步"
+        app:green_text="下一步"
+        app:loading_text="验证中..."></com.steven.base.widget.RippleButton>
+</LinearLayout>

@@ -9,6 +9,7 @@ public class UserInfo {
     private String token;
     private String phone;
     private String headImageUrl;
+    private String nick;
     private int age;
     private int gender;
 
@@ -18,6 +19,15 @@ public class UserInfo {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+
+    public String getNick() {
+        return nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
     }
 
     public String getPhone() {

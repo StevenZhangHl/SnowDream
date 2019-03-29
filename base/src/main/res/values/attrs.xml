@@ -22,4 +22,12 @@
     <declare-styleable name="ArcImageView">
         <attr name="arcHeight" />
     </declare-styleable>
+    <!--多种颜色变换按钮-->
+    <declare-styleable name="RippleButton">
+        <attr name="gray_text" format="string" />
+        <attr name="red_text" format="string" />
+        <attr name="green_text" format="string" />
+        <attr name="rbt_radius" format="dimension" />
+        <attr name="loading_text" format="string" />
+    </declare-styleable>
 </resources>

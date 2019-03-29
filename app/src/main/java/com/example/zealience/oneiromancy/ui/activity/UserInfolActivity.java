@@ -1,12 +1,9 @@
 package com.example.zealience.oneiromancy.ui.activity;
 
 import android.Manifest;
-import android.animation.Animator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,14 +13,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.constant.SharePConstant;
@@ -39,15 +31,15 @@ import com.steven.base.app.GlideApp;
 import com.steven.base.base.AppManager;
 import com.steven.base.base.BaseActivity;
 import com.steven.base.impl.SpanIndexListener;
-import com.steven.base.util.AddRecyclerEmptyView;
 import com.steven.base.util.AnimationUtils;
-import com.steven.base.util.DateTimeHelper;
 import com.steven.base.util.DotItemDecoration;
 import com.steven.base.util.Glide4Engine;
 import com.steven.base.util.GsonUtil;
 import com.steven.base.util.SPUtils;
+import com.steven.base.util.ToastUitl;
 import com.steven.base.widget.CustomDialog;
 import com.steven.base.widget.CustomLayoutGroup;
+import com.steven.base.widget.RecyclerEmptyView;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.zhihu.matisse.Matisse;
@@ -64,6 +56,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UserInfolActivity extends BaseActivity implements View.OnClickListener {
     private final int REQUEST_CODE_CHOOSE = 1;
     private final int REQUEST_CODE_ADD_DYNAMIC = 2;
+    private final int REQUEST_CODE_EDIT_PHONE = 3;
     private ImageView mIvBackgroundWall;
     private CircleImageView mIvUserInfoHead;
     /**
@@ -71,6 +64,8 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
      */
     private String selectPath;
     private CustomLayoutGroup customLayout_user_name;
+    private CustomLayoutGroup customLayout_user_phone;
+    private CustomLayoutGroup customLayout_gender;
     private RecyclerView recyclerview_user_dynamic;
     private UserDynamicAdapter dynamicAdapter;
     private List<UserDynamicEntity> userDynamicEntityList = new ArrayList<>();
@@ -101,7 +96,11 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
         mIvBackgroundWall = (ImageView) findViewById(R.id.iv_background_wall);
         recyclerview_user_dynamic = (RecyclerView) findViewById(R.id.recyclerview_user_dynamic);
         customLayout_user_name = (CustomLayoutGroup) findViewById(R.id.customLayout_user_name);
+        customLayout_user_phone = (CustomLayoutGroup) findViewById(R.id.customLayout_user_phone);
+        customLayout_gender = (CustomLayoutGroup) findViewById(R.id.customLayout_gender);
         customLayout_user_name.setOnClickListener(this);
+        customLayout_user_phone.setOnClickListener(this);
+        customLayout_gender.setOnClickListener(this);
         mIvUserInfoHead.setOnClickListener(this);
         getTitlebar().setRightIcon(R.mipmap.icon_pulibsh_dynamic);
         getTitlebar().setOnTitleBarListener(new OnTitleBarListener() {
@@ -128,8 +127,26 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
                 .load(R.mipmap.bg_user_wall)
                 .apply(RequestOptions.bitmapTransform(new BlurTransformation(this, 12)))
                 .into(mIvBackgroundWall);
+        setUserPhone();
+        setUserNick();
         initRecyclerView();
         startAnim();
+    }
+
+    /**
+     * 填充手机号
+     */
+    private void setUserPhone(){
+        UserInfo userInfo = UserHelper.getUserInfo(UserInfolActivity.this);
+        customLayout_user_phone.setTv_right(userInfo.getPhone());
+    }
+
+    /**
+     * 填充昵称
+     */
+    private void setUserNick() {
+        UserInfo userInfo = UserHelper.getUserInfo(UserInfolActivity.this);
+        customLayout_user_name.setTv_right(userInfo.getNick());
     }
 
     private void initRecyclerView() {
@@ -173,7 +190,17 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
     private void getUserDynamiData() {
         userDynamicEntityList = GsonUtil.GsonToList(SPUtils.getSharedStringData(this, SharePConstant.KEY_USER_DYNAMIC_LIST), UserDynamicEntity.class);
         if (userDynamicEntityList.size() == 0) {
-            AddRecyclerEmptyView.setEmptyView(dynamicAdapter, recyclerview_user_dynamic);
+            new RecyclerEmptyView.Builder()
+                    .with(this)
+                    .adapter(dynamicAdapter)
+                    .setTitle("暂无动态")
+                    .setListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            ToastUitl.showTopToast(UserInfolActivity.this, "弟弟的");
+                        }
+                    })
+                    .create();
         } else {
             recyclerview_user_dynamic.addItemDecoration(mItemDecoration);
             dynamicAdapter.setNewData(userDynamicEntityList);
@@ -213,7 +240,29 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
             customDialog.showTitle("修改昵称")
                     .isShowEditText(true)
                     .isShowContent(false)
+                    .setOnClickListene(new CustomDialog.OnClickListener() {
+                        @Override
+                        public void onLeftClick() {
+                            customDialog.dismiss();
+                        }
+
+                        @Override
+                        public void onRightClick() {
+                            UserInfo userInfo = UserHelper.getUserInfo(UserInfolActivity.this);
+                            userInfo.setNick(customDialog.getEt_input_content());
+                            UserHelper.saveUserInfo(UserInfolActivity.this, userInfo);
+                            setUserNick();
+                            EventBus.getDefault().post(new EventEntity(SnowConstant.EVENT_UPDATE_USER_SNAK));
+                        }
+                    })
                     .show();
+            customDialog.fillEditViewContent(customLayout_user_name.getTv_right().getText().toString());
+        }
+        if (v == customLayout_user_phone) {
+            startActivityForResult(ChangePhoneActivity.class,REQUEST_CODE_EDIT_PHONE);
+        }
+        if (v == customLayout_gender) {
+
         }
     }
 
@@ -275,7 +324,10 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
                 UserDynamicEntity dynamicEntity = (UserDynamicEntity) data.getSerializableExtra("dynamicEntity");
                 userDynamicEntityList.add(0, dynamicEntity);
                 SPUtils.setSharedStringData(UserInfolActivity.this, SharePConstant.KEY_USER_DYNAMIC_LIST, GsonUtil.GsonString(userDynamicEntityList));
-                getUserDynamiData();
+                dynamicAdapter.setNewData(userDynamicEntityList);
+            }
+            if (requestCode==REQUEST_CODE_EDIT_PHONE){
+               setUserPhone();
             }
         }
     }

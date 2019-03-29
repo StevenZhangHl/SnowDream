@@ -2,6 +2,7 @@ package com.steven.base.widget;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -204,6 +205,17 @@ public class CustomDialog extends BaseDialog<CustomDialog> {
     }
 
     /**
+     * 填充输入框的默认内容，
+     *
+     * @param content
+     * @return
+     */
+    public void fillEditViewContent(String content) {
+        et_input_content.setText(content);
+        et_input_content.setFilters(new InputFilter[content.length()]);
+    }
+
+    /**
      * 内容文字
      *
      * @param content
@@ -323,6 +335,10 @@ public class CustomDialog extends BaseDialog<CustomDialog> {
 
     public void setLeftDismiss(boolean leftDismiss) {
         isLeftDismiss = leftDismiss;
+    }
+
+    public String getEt_input_content() {
+        return et_input_content.getText().toString();
     }
 
     public void setRightDismiss(boolean rightDismiss) {
