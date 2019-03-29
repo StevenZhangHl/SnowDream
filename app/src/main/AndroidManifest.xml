@@ -74,7 +74,10 @@
         <service android:name=".umeng.MyNotificationService" />
 
         <activity android:name=".ui.activity.PublishDynamicActivity" />
-        <activity android:name=".ui.activity.ChangePhoneActivity"></activity>
+        <activity android:name=".ui.activity.ChangePhoneActivity" />
+        <activity
+            android:name=".ui.activity.CaptureActivity"
+            android:theme="@style/ThemeTraslate"></activity>
     </application>
 
 </manifest>
