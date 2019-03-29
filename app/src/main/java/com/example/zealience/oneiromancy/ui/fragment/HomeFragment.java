@@ -38,6 +38,7 @@ import com.example.zealience.oneiromancy.ui.activity.SearchActivity;
 import com.example.zealience.oneiromancy.ui.activity.ShowScanResultActivity;
 import com.example.zealience.oneiromancy.ui.activity.UserInfolActivity;
 import com.example.zealience.oneiromancy.ui.activity.WebViewActivity;
+import com.example.zealience.oneiromancy.ui.widget.AdDialog;
 import com.example.zealience.oneiromancy.util.SpaceItemDecoration;
 import com.example.zealience.oneiromancy.util.UserHelper;
 import com.hw.ycshareelement.YcShareElement;
@@ -56,6 +57,7 @@ import com.steven.base.util.ToastUitl;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.Transformer;
+import com.youth.banner.WeakHandler;
 import com.youth.banner.listener.OnBannerListener;
 
 import org.greenrobot.eventbus.EventBus;
@@ -128,6 +130,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         mPresenter.getHomeBannerData();
         mPresenter.getHotSearchData();
         mPresenter.getHomeRecommendData();
+        mPresenter.getAppActivityData();
         EventBus.getDefault().register(this);
     }
 
@@ -313,6 +316,21 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         dreamHotAdapter.setNewData(homeRecommendEntities);
     }
 
+    private WeakHandler mHandler = new WeakHandler();
+    private Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            adDialog.show();
+        }
+    };
+    private AdDialog adDialog;
+
+    @Override
+    public void showAppAdv(String url, String functionUrl) {
+        adDialog = new AdDialog(_mActivity, url, functionUrl);
+        mHandler.postDelayed(mRunnable, 1500);
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -354,7 +372,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
                 if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                     String result = bundle.getString(CodeUtils.RESULT_STRING);
                     if (!TextUtils.isEmpty(result)) {
-                        if (result.startsWith("http://") || result.startsWith("https")) {
+                        if (result.startsWith("http://") || result.startsWith("https://")) {
                             bundle.putString(KeyConstant.URL_KEY, result);
                             WebViewActivity.startActivity(_mActivity, bundle);
                         } else {

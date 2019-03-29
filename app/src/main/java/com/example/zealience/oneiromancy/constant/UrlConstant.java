@@ -7,4 +7,6 @@ package com.example.zealience.oneiromancy.constant;
  */
 public class UrlConstant {
     public static final String URL_MYGITHUB_HOME = "https://github.com/steven945";
+    public static final String url_app_adv_photo = "http://imgk.zol.com.cn/sjbbs/3469/a3468634.jpg";
+    public static final String url_app_adv_function = "https://www.pgyer.com/i4H2";
 }

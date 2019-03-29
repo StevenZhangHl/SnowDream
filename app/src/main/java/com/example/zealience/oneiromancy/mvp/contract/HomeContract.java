@@ -25,6 +25,8 @@ public interface HomeContract {
         void setHotSearchData(String[] hotSearchData);
 
         void setRecommendData(List<HomeRecommendEntity> homeRecommendEntities);
+
+        void showAppAdv(String url,String functionUrl);
     }
 
     interface Model extends BaseModel {
@@ -39,5 +41,7 @@ public interface HomeContract {
         public abstract void getHotSearchData();
 
         public abstract void getHomeRecommendData();
+
+        public abstract void getAppActivityData();
     }
 }

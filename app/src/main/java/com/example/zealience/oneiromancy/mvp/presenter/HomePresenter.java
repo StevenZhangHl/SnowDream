@@ -3,6 +3,7 @@ package com.example.zealience.oneiromancy.mvp.presenter;
 import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.api.ApiRequest;
 import com.example.zealience.oneiromancy.constant.SharePConstant;
+import com.example.zealience.oneiromancy.constant.UrlConstant;
 import com.example.zealience.oneiromancy.entity.DreamTypeEntity;
 import com.example.zealience.oneiromancy.entity.HomeNormalEntity;
 import com.example.zealience.oneiromancy.entity.HomeRecommendEntity;
@@ -17,6 +18,7 @@ import com.steven.base.rx.BaseObserver;
 import com.steven.base.util.AssetsUtil;
 import com.steven.base.util.GsonUtil;
 import com.steven.base.util.SPUtils;
+import com.youth.banner.WeakHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,5 +70,10 @@ public class HomePresenter extends HomeContract.Presenter {
             recommendEntities.add(entity);
         }
         mView.setRecommendData(recommendEntities);
+    }
+
+    @Override
+    public void getAppActivityData() {
+        mView.showAppAdv(UrlConstant.url_app_adv_photo, UrlConstant.url_app_adv_function);
     }
 }
