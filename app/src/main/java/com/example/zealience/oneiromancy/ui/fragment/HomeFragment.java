@@ -151,7 +151,6 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         recyclerview_dream_type.setHasFixedSize(true);
         recyclerview_dream_type.setNestedScrollingEnabled(false);
         recyclerview_dream_type.setLayoutManager(gridLayoutManager);
-        recyclerview_dream_type.addItemDecoration(new SpaceItemDecoration(DisplayUtil.dip2px(girdMargin), column));
         dreamTypeAdapter = new DreamTypeAdapter(R.layout.item_dream_type, new ArrayList<>());
         recyclerview_dream_type.setAdapter(dreamTypeAdapter);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

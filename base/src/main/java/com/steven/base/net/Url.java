@@ -7,4 +7,6 @@ package com.steven.base.net;
  */
 public class Url {
     public static final String BASE_URL = "http://v.juhe.cn/";
+    public static final String BASE_JUHE_DEV = "http://web.juhe.cn:8080/";
+    public static final String BASE_JUHE_DEV_NAME = "base_juhe_dev_name";
 }

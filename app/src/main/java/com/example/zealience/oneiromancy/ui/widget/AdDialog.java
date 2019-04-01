@@ -74,7 +74,7 @@ public class AdDialog extends Dialog implements View.OnClickListener {
         //初始化布局的位置
         initLayoutParams();
         setCancelable(true);
-        setCanceledOnTouchOutside(true);
+        setCanceledOnTouchOutside(false);
     }
 
     /**

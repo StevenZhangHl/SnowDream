@@ -38,7 +38,7 @@ public class ChangePhoneActivity extends BaseActivity implements View.OnClickLis
     private String phone = "";
     private String code = "";
     private WeakHandler handler = new WeakHandler();
-    private int delayTime = 1500;
+    private int delayTime = 1000;
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {

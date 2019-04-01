@@ -57,6 +57,7 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
     private final int REQUEST_CODE_CHOOSE = 1;
     private final int REQUEST_CODE_ADD_DYNAMIC = 2;
     private final int REQUEST_CODE_EDIT_PHONE = 3;
+    private final int REQUEST_CODE_EDIT_GENDER = 4;
     private ImageView mIvBackgroundWall;
     private CircleImageView mIvUserInfoHead;
     /**
@@ -129,6 +130,7 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
                 .into(mIvBackgroundWall);
         setUserPhone();
         setUserNick();
+        setUserGender();
         initRecyclerView();
         startAnim();
     }
@@ -136,7 +138,7 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
     /**
      * 填充手机号
      */
-    private void setUserPhone(){
+    private void setUserPhone() {
         UserInfo userInfo = UserHelper.getUserInfo(UserInfolActivity.this);
         customLayout_user_phone.setTv_right(userInfo.getPhone());
     }
@@ -148,6 +150,15 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
         UserInfo userInfo = UserHelper.getUserInfo(UserInfolActivity.this);
         customLayout_user_name.setTv_right(userInfo.getNick());
     }
+
+    /**
+     * 填充性别
+     */
+    private void setUserGender() {
+        UserInfo userInfo = UserHelper.getUserInfo(UserInfolActivity.this);
+        customLayout_gender.setTv_right(userInfo.getGender() == 1 ? "小哥哥" : "小姐姐");
+    }
+
 
     private void initRecyclerView() {
         mItemDecoration = new DotItemDecoration
@@ -197,7 +208,6 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
                     .setListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            ToastUitl.showTopToast(UserInfolActivity.this, "弟弟的");
                         }
                     })
                     .create();
@@ -259,10 +269,10 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
             customDialog.fillEditViewContent(customLayout_user_name.getTv_right().getText().toString());
         }
         if (v == customLayout_user_phone) {
-            startActivityForResult(ChangePhoneActivity.class,REQUEST_CODE_EDIT_PHONE);
+            startActivityForResult(ChangePhoneActivity.class, REQUEST_CODE_EDIT_PHONE);
         }
         if (v == customLayout_gender) {
-
+            startActivityForResult(SelectGenderActivity.class, REQUEST_CODE_EDIT_GENDER);
         }
     }
 
@@ -326,8 +336,11 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
                 SPUtils.setSharedStringData(UserInfolActivity.this, SharePConstant.KEY_USER_DYNAMIC_LIST, GsonUtil.GsonString(userDynamicEntityList));
                 dynamicAdapter.setNewData(userDynamicEntityList);
             }
-            if (requestCode==REQUEST_CODE_EDIT_PHONE){
-               setUserPhone();
+            if (requestCode == REQUEST_CODE_EDIT_PHONE) {
+                setUserPhone();
+            }
+            if (requestCode == REQUEST_CODE_EDIT_GENDER) {
+                setUserGender();
             }
         }
     }

@@ -10,8 +10,9 @@ android {
         applicationId "com.example.zealience.oneiromancy"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 4
-        versionName "1.0.4"
+        versionCode 5
+        versionName "1.0.5"
+        flavorDimensions versionCode + ""
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
@@ -42,16 +43,52 @@ android {
         }
 
     }
+    productFlavors {
+        pugongying {
+            manifestPlaceholders = [CHANNEL_NAME: "PUGONGYING"]
+        }
+        sanliuling {
+            manifestPlaceholders = [CHANNEL_NAME: "360"]
+        }
+        yingyongbao {
+            manifestPlaceholders = [CHANNEL_NAME: "YINGYONGBAO"]
+        }
+        baidu {
+            manifestPlaceholders = [CHANNEL_NAME: "BAIDU"]
+        }
+        meizu {
+            manifestPlaceholders = [CHANNEL_NAME: "MEIZU"]
+        }
+        vivo {
+            manifestPlaceholders = [CHANNEL_NAME: "VIVO"]
+        }
+        oppo {
+            manifestPlaceholders = [CHANNEL_NAME: "OPPO"]
+        }
+        xiaomi {
+            manifestPlaceholders = [CHANNEL_NAME: "XIAOMI"]
+        }
+        huawei {
+            manifestPlaceholders = [CHANNEL_NAME: "HUAWEI"]
+        }
+        samsung {
+            manifestPlaceholders = [CHANNEL_NAME: "SAMSUNG"]
+        }
+        zishengji {
+            manifestPlaceholders = [CHANNEL_NAME: "ZISHENGJI"]
+        }
+    }
     applicationVariants.all { variant ->
         if (variant.buildType.name.equals('release')) {
             variant.outputs.all { output ->
                 def buildName = "com.snow.dream"
-                def releaseApkName = buildName + "_" + versionName + '_' + releaseTime() + '.apk'
+                def type = "${variant.productFlavors[0].name}"
+                def releaseApkName = buildName + '_' + type + "_" + versionName + '_' + releaseTime() + '.apk'
                 outputFileName = releaseApkName
             }
         } else {
             variant.outputs.all { output ->
-                def buildName = "com.meix"
+                def buildName = "com.snow.dream"
                 def releaseApkName = buildName + '_' + "test" + "_" + versionName + '_' + releaseTime() + '.apk'
                 outputFileName = releaseApkName
             }

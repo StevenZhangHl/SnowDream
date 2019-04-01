@@ -5,22 +5,29 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.zealience.oneiromancy.R;
+import com.example.zealience.oneiromancy.api.ApiManager;
+import com.example.zealience.oneiromancy.api.ApiRequest;
+import com.example.zealience.oneiromancy.constant.SharePConstant;
 import com.example.zealience.oneiromancy.constant.SnowConstant;
 import com.example.zealience.oneiromancy.entity.EventEntity;
+import com.example.zealience.oneiromancy.entity.LuckEntity;
+import com.example.zealience.oneiromancy.entity.UserInfo;
 import com.example.zealience.oneiromancy.ui.activity.MyAddressActivity;
-import com.example.zealience.oneiromancy.ui.activity.SearchActivity;
 import com.example.zealience.oneiromancy.ui.activity.SetingActivity;
-import com.example.zealience.oneiromancy.ui.activity.ShowAmapActivity;
 import com.example.zealience.oneiromancy.ui.activity.SignInActivity;
 import com.example.zealience.oneiromancy.ui.activity.UserInfolActivity;
-import com.example.zealience.oneiromancy.ui.widget.SnowRefershHeader;
+import com.example.zealience.oneiromancy.ui.widget.ConstellationSelectDialog;
 import com.example.zealience.oneiromancy.util.UserHelper;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
@@ -28,19 +35,13 @@ import com.hw.ycshareelement.YcShareElement;
 import com.hw.ycshareelement.transition.IShareElements;
 import com.hw.ycshareelement.transition.ShareElementInfo;
 import com.hw.ycshareelement.transition.TextViewStateSaver;
-import com.hw.ycshareelement.transition.ViewStateSaver;
-import com.jaeger.library.StatusBarUtil;
-import com.scwang.smartrefresh.header.BezierCircleHeader;
-import com.scwang.smartrefresh.header.DeliveryHeader;
-import com.scwang.smartrefresh.header.MaterialHeader;
-import com.scwang.smartrefresh.header.PhoenixHeader;
-import com.scwang.smartrefresh.header.TaurusHeader;
-import com.scwang.smartrefresh.header.WaterDropHeader;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
 import com.steven.base.app.GlideApp;
 import com.steven.base.base.BaseFragment;
+import com.steven.base.rx.BaseObserver;
+import com.steven.base.rx.RxHelper;
 import com.steven.base.util.DisplayUtil;
+import com.steven.base.util.GsonUtil;
+import com.steven.base.util.SPUtils;
 import com.steven.base.util.ToastUitl;
 import com.steven.base.widget.CustomLayoutGroup;
 
@@ -64,6 +65,22 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
     private CustomLayoutGroup customLayoutAddress;
     private TitleBar me_title_bar;
     private TextView tv_user_nick;
+    private TextView tv_set_constellation;
+    private CustomLayoutGroup rl_my_constellation;
+    private CustomLayoutGroup rl_date;
+    private CustomLayoutGroup rl_luck_color;
+    private CustomLayoutGroup rl_luck_number;
+    private CustomLayoutGroup rl_friend;
+    /**
+     * 今日概述
+     */
+    private TextView tv_summary;
+    private RatingBar rating_all;
+    private RatingBar rating_health;
+    private RatingBar rating_love;
+    private RatingBar rating_money;
+    private RatingBar rating_work;
+    private LinearLayout ll_luck_content;
 
     public static MeFragment newInstance(String title) {
         Bundle bundle = new Bundle();
@@ -87,11 +104,25 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
     public void initView(Bundle savedInstanceState) {
         me_title_bar = (TitleBar) rootView.findViewById(R.id.me_title_bar);
         me_scroll_view = (NestedScrollView) rootView.findViewById(R.id.me_scroll_view);
-        tv_user_nick = (TextView)rootView.findViewById(R.id.tv_user_nick);
+        tv_user_nick = (TextView) rootView.findViewById(R.id.tv_user_nick);
         ivMeHead = (CircleImageView) rootView.findViewById(R.id.iv_me_head);
         customLayout_collection = (CustomLayoutGroup) rootView.findViewById(R.id.customLayout_collection);
         customLayoutSignIn = (CustomLayoutGroup) rootView.findViewById(R.id.customLayout_signIn);
         customLayoutAddress = (CustomLayoutGroup) rootView.findViewById(R.id.customLayout_address);
+        tv_set_constellation = (TextView) rootView.findViewById(R.id.tv_set_constellation);
+        customLayout_collection = (CustomLayoutGroup) rootView.findViewById(R.id.customLayout_collection);
+        rl_my_constellation = (CustomLayoutGroup) rootView.findViewById(R.id.rl_my_constellation);
+        rl_date = (CustomLayoutGroup) rootView.findViewById(R.id.rl_date);
+        rl_luck_color = (CustomLayoutGroup) rootView.findViewById(R.id.rl_luck_color);
+        rl_luck_number = (CustomLayoutGroup) rootView.findViewById(R.id.rl_luck_number);
+        rl_friend = (CustomLayoutGroup) rootView.findViewById(R.id.rl_friend);
+        tv_summary = (TextView) rootView.findViewById(R.id.tv_summary);
+        rating_all = (RatingBar) rootView.findViewById(R.id.rating_all);
+        rating_health = (RatingBar) rootView.findViewById(R.id.rating_health);
+        rating_love = (RatingBar) rootView.findViewById(R.id.rating_love);
+        rating_money = (RatingBar) rootView.findViewById(R.id.rating_money);
+        rating_work = (RatingBar) rootView.findViewById(R.id.rating_work);
+        ll_luck_content = (LinearLayout) rootView.findViewById(R.id.ll_luck_content);
         me_title_bar.setRightIcon(R.mipmap.icon_set);
         GlideApp.with(_mActivity)
                 .load(UserHelper.getUserInfo(_mActivity).getHeadImageUrl())
@@ -102,6 +133,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
         customLayoutAddress.setOnClickListener(this);
         customLayoutSignIn.setOnClickListener(this);
         ivMeHead.setOnClickListener(this);
+        tv_set_constellation.setOnClickListener(this);
         me_scroll_view.setOnScrollChangeListener(this);
         me_title_bar.setOnTitleBarListener(new OnTitleBarListener() {
             @Override
@@ -120,6 +152,70 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
             }
         });
         EventBus.getDefault().register(this);
+        getUserLuckData();
+    }
+
+    /**
+     * 获取用户当天运势
+     */
+    private void getUserLuckData() {
+        UserInfo userInfo = UserHelper.getUserInfo(_mActivity);
+        if (!TextUtils.isEmpty(userInfo.getConstellation())) {
+            tv_set_constellation.setVisibility(View.GONE);
+            ll_luck_content.setVisibility(View.VISIBLE);
+            mRxManager.add(ApiManager.getInstance().getUserLuckData(ApiRequest.getUserLuckData(userInfo.getConstellation(), "")).compose(RxHelper.customResult()).subscribeWith(new BaseObserver<LuckEntity>(_mActivity, false) {
+                @Override
+                protected void onSuccess(LuckEntity luckEntity) {
+                    if (luckEntity != null) {
+                        rl_my_constellation.setTv_right(luckEntity.getName());
+                        rl_date.setTv_right(luckEntity.getDatetime());
+                        rl_luck_color.setTv_right(luckEntity.getColor());
+                        rl_luck_number.setTv_right(luckEntity.getNumber() + "");
+                        rl_friend.setTv_right(luckEntity.getQFriend());
+                        tv_summary.setText(luckEntity.getSummary());
+                        rating_all.setRating(calculateRatingNum(luckEntity.getAll()));
+                        rating_health.setRating(calculateRatingNum(luckEntity.getHealth()));
+                        rating_love.setRating(calculateRatingNum(luckEntity.getLove()));
+                        rating_money.setRating(calculateRatingNum(luckEntity.getMoney()));
+                        rating_work.setRating(calculateRatingNum(luckEntity.getWork()));
+                    }
+                }
+
+                @Override
+                protected void onError(String message) {
+
+                }
+            }));
+        } else {
+            ll_luck_content.setVisibility(View.GONE);
+            tv_set_constellation.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
+     * 计算星星的个数
+     *
+     * @param value
+     * @return
+     */
+    private int calculateRatingNum(String value) {
+        if (value.contains("%")) {
+            int i = Integer.parseInt(value.substring(0, value.length() - 1));
+            if (i == 0) {
+                return 0;
+            } else if (i > 0 && i < 20) {
+                return 1;
+            } else if (i >= 20 && i < 40) {
+                return 2;
+            } else if (i >= 40 && i < 60) {
+                return 3;
+            } else if (i >= 60 && i < 80) {
+                return 4;
+            } else if (i >= 80 && i < 100) {
+                return 5;
+            }
+        }
+        return 0;
     }
 
     @Override
@@ -148,6 +244,19 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
         if (v == customLayoutSignIn) {
             startActivity(SignInActivity.class);
         }
+        if (v == tv_set_constellation) {
+            ConstellationSelectDialog selectDialog = new ConstellationSelectDialog(_mActivity, null);
+            selectDialog.setMyOnItemClickListener(new ConstellationSelectDialog.MyOnItemClickListener() {
+                @Override
+                public void getSelectType(String s) {
+                    UserInfo userInfo = UserHelper.getUserInfo(_mActivity);
+                    userInfo.setConstellation(s);
+                    SPUtils.setSharedStringData(_mActivity, SharePConstant.KEY_USER_INFO_DATA, GsonUtil.GsonString(userInfo));
+                    getUserLuckData();
+                }
+            });
+            selectDialog.show();
+        }
     }
 
     @Override
@@ -168,7 +277,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
                     .load(UserHelper.getUserInfo(_mActivity).getHeadImageUrl())
                     .into(ivMeHead);
         }
-        if (SnowConstant.APLIPAY_APP_ID.equals(event.getEvent())){
+        if (SnowConstant.EVENT_UPDATE_USER_SNAK.equals(event.getEvent())) {
             tv_user_nick.setText(UserHelper.getUserInfo(_mActivity).getNick());
         }
     }
@@ -184,9 +293,9 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
             float alpha = (255 * scale);
             me_title_bar.setBackgroundColor(Color.argb((int) alpha, 44, 44, 44));
             me_title_bar.setTitleColor(Color.argb((int) alpha, 255, 255, 255));
-            me_title_bar.setTitle("小可爱");
+            me_title_bar.setTitle(UserHelper.getUserInfo(_mActivity).getNick());
         } else {
-            me_title_bar.setTitle("小可爱");
+            me_title_bar.setTitle(UserHelper.getUserInfo(_mActivity).getNick());
             me_title_bar.setBackgroundColor(Color.argb((int) 255, 44, 44, 44));
         }
     }

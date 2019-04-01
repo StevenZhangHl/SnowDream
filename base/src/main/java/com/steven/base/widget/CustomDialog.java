@@ -212,7 +212,7 @@ public class CustomDialog extends BaseDialog<CustomDialog> {
      */
     public void fillEditViewContent(String content) {
         et_input_content.setText(content);
-        et_input_content.setFilters(new InputFilter[content.length()]);
+        et_input_content.setSelection(content.length());
     }
 
     /**

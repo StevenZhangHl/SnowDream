@@ -12,6 +12,7 @@ public class UserInfo {
     private String nick;
     private int age;
     private int gender;
+    private String constellation;
 
     public String getToken() {
         return token;
@@ -60,5 +61,13 @@ public class UserInfo {
 
     public void setGender(int gender) {
         this.gender = gender;
+    }
+
+    public String getConstellation() {
+        return constellation;
+    }
+
+    public void setConstellation(String constellation) {
+        this.constellation = constellation;
     }
 }

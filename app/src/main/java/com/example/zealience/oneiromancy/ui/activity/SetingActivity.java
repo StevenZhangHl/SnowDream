@@ -62,6 +62,7 @@ public class SetingActivity extends BaseActivity implements View.OnClickListener
             }
         });
         rl_set_sound.setOnClickListener(this);
+        rl_about.setOnClickListener(this);
         bt_login_out.setOnClickListener(this);
     }
 
@@ -72,6 +73,9 @@ public class SetingActivity extends BaseActivity implements View.OnClickListener
         }
         if (v == bt_login_out) {
             showDailog();
+        }
+        if (v == rl_about) {
+            startActivity(AboutActivity.class);
         }
     }
 

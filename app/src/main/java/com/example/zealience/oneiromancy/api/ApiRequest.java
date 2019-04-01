@@ -88,4 +88,18 @@ public class ApiRequest {
         map.put("e_id", e_id);
         return map;
     }
+
+    /**
+     * 获取运势
+     * @param consName
+     * @param type
+     * @return
+     */
+    public static Map<String, Object> getUserLuckData(String consName, String type) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("key", "0a6c1a020029bba6fa5115a2f7411d8e");
+        map.put("consName", consName);
+        map.put("type", "today");
+        return map;
+    }
 }

@@ -5,16 +5,20 @@ import com.example.zealience.oneiromancy.entity.DreamEntity;
 import com.example.zealience.oneiromancy.entity.DreamTypeEntity;
 import com.example.zealience.oneiromancy.entity.HistoryDetailEntity;
 import com.example.zealience.oneiromancy.entity.HistoryEntity;
-import com.example.zealience.oneiromancy.entity.NewsEntity;
+import com.example.zealience.oneiromancy.entity.LuckEntity;
 import com.steven.base.bean.BaseEntity;
+import com.steven.base.net.Url;
 
 import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
+
+import static me.jessyan.retrofiturlmanager.RetrofitUrlManager.DOMAIN_NAME_HEADER;
 
 /**
  * @user steven
@@ -66,4 +70,14 @@ public interface Api {
      */
     @POST("todayOnhistory/queryDetail.php")
     Observable<BaseEntity<List<HistoryDetailEntity>>> getHistoryById(@QueryMap Map<String, Object> map);
+
+    /**
+     * 查询运势
+     *
+     * @param map
+     * @return
+     */
+    @Headers({DOMAIN_NAME_HEADER + Url.BASE_JUHE_DEV_NAME})
+    @POST("constellation/getAll")
+    Observable<LuckEntity> getUserLuckData(@QueryMap Map<String, Object> map);
 }

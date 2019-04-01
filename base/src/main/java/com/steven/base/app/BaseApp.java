@@ -17,6 +17,7 @@ import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
 import com.scwang.smartrefresh.layout.api.RefreshFooter;
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.steven.base.net.Url;
 import com.steven.base.util.DisplayUtil;
 import com.steven.base.widget.CustomFooter;
 import com.umeng.commonsdk.UMConfigure;
@@ -31,6 +32,8 @@ import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 
 /**
  * @user steven
@@ -50,7 +53,8 @@ public class BaseApp extends MultiDexApplication {
         instance = this;
         initLoadingLayout();
         initRefreshLayout();
-        UMConfigure.setLogEnabled(true);//友盟日志调试开关
+        RetrofitUrlManager.getInstance().putDomain(Url.BASE_JUHE_DEV_NAME,Url.BASE_JUHE_DEV);
+        UMConfigure.setLogEnabled(false);//友盟日志调试开关
         UMConfigure.init(this, "5c81d3f23fc1955bd7000998"
                 , "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");
         UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "1717496e0ac0e6b0c67c1f69cc0c6286");
