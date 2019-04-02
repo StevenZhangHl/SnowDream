@@ -1,4 +1,4 @@
-package com.example.zealience.oneiromancy.ui.activity;
+package com.example.zealience.oneiromancy.ui.activity.user;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import com.amap.api.services.core.PoiItem;
 import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.constant.SharePConstant;
+import com.example.zealience.oneiromancy.ui.activity.ShowAmapActivity;
 import com.hjq.bar.OnTitleBarListener;
 import com.steven.base.base.AppManager;
 import com.steven.base.base.BaseActivity;

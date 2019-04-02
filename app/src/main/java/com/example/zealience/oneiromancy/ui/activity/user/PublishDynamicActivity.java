@@ -1,4 +1,4 @@
-package com.example.zealience.oneiromancy.ui.activity;
+package com.example.zealience.oneiromancy.ui.activity.user;
 
 import android.content.Intent;
 import android.os.Bundle;

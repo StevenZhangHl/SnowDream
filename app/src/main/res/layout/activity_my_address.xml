@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.activity.MyAddressActivity">
+    tools:context=".ui.activity.user.MyAddressActivity">
 
     <LinearLayout
         android:id="@+id/ll_address_container"

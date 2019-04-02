@@ -1,4 +1,4 @@
-package com.example.zealience.oneiromancy.ui.activity;
+package com.example.zealience.oneiromancy.ui.activity.user;
 
 import android.Manifest;
 import android.content.Context;
@@ -36,7 +36,6 @@ import com.steven.base.util.DotItemDecoration;
 import com.steven.base.util.Glide4Engine;
 import com.steven.base.util.GsonUtil;
 import com.steven.base.util.SPUtils;
-import com.steven.base.util.ToastUitl;
 import com.steven.base.widget.CustomDialog;
 import com.steven.base.widget.CustomLayoutGroup;
 import com.steven.base.widget.RecyclerEmptyView;

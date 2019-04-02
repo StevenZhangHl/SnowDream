@@ -29,7 +29,7 @@
             android:label="@string/title_activity_dream_detail"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".ui.activity.UserInfolActivity"
+            android:name=".ui.activity.user.UserInfolActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.activity.VRActivity"
@@ -50,7 +50,7 @@
             android:name=".ui.activity.ShowAmapActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".ui.activity.MyAddressActivity"
+            android:name=".ui.activity.user.MyAddressActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.activity.SignInActivity"
@@ -73,12 +73,12 @@
         <service android:name=".umeng.UmengNotificationService" />
         <service android:name=".umeng.MyNotificationService" />
 
-        <activity android:name=".ui.activity.PublishDynamicActivity" />
-        <activity android:name=".ui.activity.ChangePhoneActivity" />
+        <activity android:name=".ui.activity.user.PublishDynamicActivity" />
+        <activity android:name=".ui.activity.user.ChangePhoneActivity" />
         <activity
             android:name=".ui.activity.CaptureActivity"
             android:theme="@style/ThemeTraslate" />
-        <activity android:name=".ui.activity.SelectGenderActivity" />
+        <activity android:name=".ui.activity.user.SelectGenderActivity" />
         <activity android:name=".ui.activity.AboutActivity"></activity>
     </application>
 
