@@ -202,7 +202,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         for (int i = 0; i < 10; i++) {
             strings.add(i + "我");
         }
-        dreamHotAdapter = new DreamHotAdapter(new ArrayList<>());
+        dreamHotAdapter = new DreamHotAdapter(_mActivity,new ArrayList<>());
         dreamHotAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(_mActivity);
         linearLayoutManager.setSmoothScrollbarEnabled(true);

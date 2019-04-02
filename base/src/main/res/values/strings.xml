@@ -15,4 +15,5 @@
     <string name="refresh_footer">正在刷新...</string>
     <string name="loading_fail">加载失败</string>
     <string name="loading_finish_footer">到底了</string>
+    <string name="disagree">取消</string>
 </resources>

@@ -7,8 +7,11 @@ import android.os.Build;
 import android.support.annotation.ColorRes;
 import android.support.annotation.LayoutRes;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.widget.FrameLayout;
@@ -43,6 +46,8 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().setExitTransition(new Slide(Gravity.LEFT));
+        getWindow().setEnterTransition(new Slide(Gravity.RIGHT));
         super.onCreate(savedInstanceState);
         PushAgent.getInstance(this).onAppStart();
         mRxManager = new RxManager();
@@ -144,13 +149,14 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
     /**
      * 标题栏
      *
-     * @param title       标题
+     * @param title 标题
      */
     public void showTitle(String title) {
         titlebar.setVisibility(View.VISIBLE);
         titlebar.setTitle(title);
-        titlebar.getRightView().setTextColor(ContextCompat.getColor(mContext,R.color.color_999999));
+        titlebar.getRightView().setTextColor(ContextCompat.getColor(mContext, R.color.color_999999));
     }
+
     /**
      * 白色标题栏
      *

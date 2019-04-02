@@ -1,6 +1,8 @@
 package com.example.zealience.oneiromancy.ui;
 
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewCompat;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,10 +28,12 @@ public class HomeHorzontalListAdapter extends BaseQuickAdapter<HomeNormalEntity,
     @Override
     protected void convert(BaseViewHolder helper, HomeNormalEntity item) {
         ImageView ivHotPic = helper.getView(R.id.iv_horzontal);
+        ViewCompat.setTransitionName(ivHotPic, item.getPhotoUrl());
         TextView tvContent = helper.getView(R.id.tv_content);
         tvContent.setText(item.getContent());
         GlideApp.with(mContext)
                 .load(item.getPhotoUrl())
                 .into(ivHotPic);
     }
+
 }

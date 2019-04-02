@@ -1,11 +1,14 @@
 package com.example.zealience.oneiromancy.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * @user steven
  * @createDate 2019/3/20 15:16
  * @description 首页数据正常的实体
  */
-public class HomeNormalEntity {
+public class HomeNormalEntity implements Parcelable {
     private String userName;
     private String userImage;
     private String photoUrl;
@@ -51,5 +54,15 @@ public class HomeNormalEntity {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }
