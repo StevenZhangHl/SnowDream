@@ -85,7 +85,7 @@ public class SearchActivity extends BaseActivity<SearchPresenter, SearchModel> i
             }
         });
         if (getIntent() != null && getIntent().getExtras() != null) {
-            dreamTypeEntity = (DreamTypeEntity) getIntent().getExtras().getSerializable("dreamType");
+            dreamTypeEntity = (DreamTypeEntity) getIntent().getExtras().getParcelable("dreamType");
         }
         et_search.setText(getIntent().getStringExtra(KeyConstant.HOME_HOT_SEARCH_KEY));
         if (dreamTypeEntity != null) {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
@@ -63,6 +64,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,7 +94,14 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
     private int column = 5;
     private int girdMargin = 10;
     private boolean isStopAnim;
-    private List<DreamTypeEntity> mDreamTypeList = new ArrayList<>();
+    /**
+     * 其他的解梦类型
+     */
+    private List<DreamTypeEntity> mOtherDreamTypeList = new ArrayList<>();
+    /**
+     * 当前的解梦类型
+     */
+    private List<DreamTypeEntity> mCurrentDreamTypeList = new ArrayList<>();
     private String[] mHotSearchData;
     private Handler handlerSearch = new Handler();
     private int count = 0;
@@ -189,11 +198,13 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         recyclerview_dream_type.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Bundle bundle = new Bundle();
                 if (position == 9) {
-                    startActivity(ChannelManagerActivity.class);
+                    bundle.putParcelableArrayList(ChannelManagerActivity.mMyChannelKey, (ArrayList<? extends Parcelable>) mCurrentDreamTypeList);
+                    bundle.putParcelableArrayList(ChannelManagerActivity.mOhterChannelKey, (ArrayList<? extends Parcelable>) mOtherDreamTypeList);
+                    startActivity(ChannelManagerActivity.class,bundle);
                 } else {
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("dreamType", mDreamTypeList.get(position));
+                    bundle.putParcelable("dreamType", mCurrentDreamTypeList.get(position));
                     startActivity(SearchActivity.class, bundle);
                 }
             }
@@ -202,7 +213,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         for (int i = 0; i < 10; i++) {
             strings.add(i + "我");
         }
-        dreamHotAdapter = new DreamHotAdapter(_mActivity,new ArrayList<>());
+        dreamHotAdapter = new DreamHotAdapter(_mActivity, new ArrayList<>());
         dreamHotAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(_mActivity);
         linearLayoutManager.setSmoothScrollbarEnabled(true);
@@ -264,15 +275,12 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
 
     @Override
     public void setDreamTypeData(List<DreamTypeEntity> dreamTypeEntityList) {
-        for (int i = 0; i < dreamTypeEntityList.size(); i++) {
-            if (dreamTypeEntityList.get(i).getName().equals("其他类")) {
-                dreamTypeEntityList.remove(i);
-            }
-        }
+        mOtherDreamTypeList.clear();
+        mOtherDreamTypeList.clear();
+        mCurrentDreamTypeList.addAll(dreamTypeEntityList.subList(0, 10));
         dreamTypeAdapter.setNewData(dreamTypeEntityList);
         nested_scrollview.smoothScrollTo(0, 0);
-        mDreamTypeList.clear();
-        mDreamTypeList.addAll(dreamTypeEntityList);
+        mOtherDreamTypeList.addAll(dreamTypeEntityList.subList(10, dreamTypeEntityList.size()));
     }
 
     @Override
