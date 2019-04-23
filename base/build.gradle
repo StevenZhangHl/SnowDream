@@ -100,4 +100,5 @@ dependencies {
     api 'com.umeng.sdk:utdid:1.1.5.3'
     //PushSDK
     api 'com.umeng.sdk:push:4.2.0'
+    api 'com.github.markzhai:blockcanary-android:1.5.0'
 }

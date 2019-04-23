@@ -118,7 +118,6 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        YcShareElement.enableContentTransition(BaseApp.getInstance());
         recyclerview_dream_type = (RecyclerView) rootView.findViewById(R.id.recyclerview_dream_type);
         et_search_dream = (TextView) rootView.findViewById(R.id.et_search_dream);
         iv_user_head = (CircleImageView) rootView.findViewById(R.id.iv_user_head);
@@ -255,10 +254,9 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
     @Override
     public void onClick(View v) {
         if (v == et_search_dream) {
-            Intent intent = new Intent(_mActivity, SearchActivity.class);
-            Bundle optionsBundle = YcShareElement.buildOptionsBundle(_mActivity, HomeFragment.this);
-            intent.putExtra(KeyConstant.HOME_HOT_SEARCH_KEY, et_search_dream.getText().toString());
-            startActivity(intent, optionsBundle);
+            Bundle optionsBundle = new Bundle();
+            optionsBundle.putString(KeyConstant.HOME_HOT_SEARCH_KEY, et_search_dream.getText().toString());
+            startActivity(SearchActivity.class, optionsBundle);
         }
         if (v == iv_user_head) {
             startActivity(UserInfolActivity.class);

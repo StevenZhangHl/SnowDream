@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.github.moduth.blockcanary.BlockCanary;
+import com.github.moduth.blockcanary.BlockCanaryContext;
 import com.kingja.loadsir.callback.SuccessCallback;
 import com.kingja.loadsir.core.LoadSir;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -72,6 +74,9 @@ public class BaseApp extends MultiDexApplication {
                 Log.i("deviceToken", s + s1);
             }
         });
+        BlockCanary.install(this,new BlockCanaryContext()).start();
+        CrashHandler crashHandler=CrashHandler.getInstance();
+//        crashHandler.init(this);
     }
 
     public static BaseApp getInstance() {

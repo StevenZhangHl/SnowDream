@@ -1,8 +1,10 @@
 package com.example.zealience.oneiromancy.ui.activity.user;
 
 import android.Manifest;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,11 +20,13 @@ import android.widget.ImageView;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.zealience.oneiromancy.R;
+import com.example.zealience.oneiromancy.constant.KeyConstant;
 import com.example.zealience.oneiromancy.constant.SharePConstant;
 import com.example.zealience.oneiromancy.constant.SnowConstant;
 import com.example.zealience.oneiromancy.entity.EventEntity;
 import com.example.zealience.oneiromancy.entity.UserDynamicEntity;
 import com.example.zealience.oneiromancy.entity.UserInfo;
+import com.example.zealience.oneiromancy.receiver.LocalReceiver;
 import com.example.zealience.oneiromancy.ui.UserDynamicAdapter;
 import com.example.zealience.oneiromancy.util.BlurTransformation;
 import com.example.zealience.oneiromancy.util.UserHelper;
@@ -70,6 +74,7 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
     private UserDynamicAdapter dynamicAdapter;
     private List<UserDynamicEntity> userDynamicEntityList = new ArrayList<>();
     private DotItemDecoration mItemDecoration;
+    private LocalReceiver localReceiver;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent();
@@ -262,6 +267,13 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
                             UserHelper.saveUserInfo(UserInfolActivity.this, userInfo);
                             setUserNick();
                             EventBus.getDefault().post(new EventEntity(SnowConstant.EVENT_UPDATE_USER_SNAK));
+                            Intent intent = new Intent("com.snow.user.info.update");
+                            intent.putExtra(KeyConstant.RECEIVER_CONTENT_KEY,"修改昵称成功");
+                            intent.putExtra(KeyConstant.PAGE_CODE_KEY,1);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                intent.setComponent(new ComponentName(getPackageName(), "com.example.zealience.oneiromancy.receiver.LocalReceiver"));
+                            }
+                            sendBroadcast(intent);
                         }
                     })
                     .show();
@@ -342,6 +354,11 @@ public class UserInfolActivity extends BaseActivity implements View.OnClickListe
                 setUserGender();
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override

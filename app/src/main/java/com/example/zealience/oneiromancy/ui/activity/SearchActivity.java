@@ -65,7 +65,6 @@ public class SearchActivity extends BaseActivity<SearchPresenter, SearchModel> i
         iv_back = (ImageView) findViewById(R.id.iv_back);
         tv_search = (TextView) findViewById(R.id.tv_search);
         recyclerview_dream_list = (RecyclerView) findViewById(R.id.recyclerview_dream_list);
-        YcShareElement.postStartTransition(this);
         et_search.setOnEditorActionListener(this);
         iv_back.setOnClickListener(this);
         tv_search.setOnClickListener(this);

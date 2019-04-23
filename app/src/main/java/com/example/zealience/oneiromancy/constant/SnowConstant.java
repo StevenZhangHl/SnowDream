@@ -26,4 +26,8 @@ public class SnowConstant {
      * partnerid
      */
     public static final String PARTNER_ID = "2088412107875571";
+    /**
+     * 应用程序是否在后台
+     */
+    public static boolean isForeground = false;
 }

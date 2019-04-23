@@ -12,4 +12,7 @@ public class KeyConstant {
     public static final String HISITORY_ENTITY_KEY = "history_entity_bundle";
     public static final String ISSHOW_SHARE_KEY = "is_show_share_bundle";
     public static final String HOME_HOT_SEARCH_KEY = "home_hot_search_bundle";
+    public static final String RECEIVER_TITLE_KEY = "receiver_title_key";
+    public static final String RECEIVER_CONTENT_KEY = "receiver_content_key";
+    public static final String PAGE_CODE_KEY = "page_code_key";
 }

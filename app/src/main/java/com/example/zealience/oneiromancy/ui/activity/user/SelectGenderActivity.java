@@ -25,7 +25,7 @@ public class SelectGenderActivity extends BaseActivity {
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            ToastUitl.showTopToast(SelectGenderActivity.this, "修改成功");
+            ToastUitl.showShort("修改成功");
             UserInfo userInfo = UserHelper.getUserInfo(SelectGenderActivity.this);
             userInfo.setGender(gender);
             UserHelper.saveUserInfo(SelectGenderActivity.this, userInfo);

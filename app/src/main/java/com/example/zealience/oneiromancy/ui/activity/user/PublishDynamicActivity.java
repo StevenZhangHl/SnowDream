@@ -39,6 +39,7 @@ public class PublishDynamicActivity extends BaseActivity {
     @Override
     public void initView(Bundle savedInstanceState) {
         showTitle("添加事件");
+        setWhiteStatusBar(R.color.white);
         et_dynamic = (EditText) findViewById(R.id.et_dynamic);
         tv_content_length = (TextView) findViewById(R.id.tv_content_length);
         getTitlebar().setRightTitle("保存");

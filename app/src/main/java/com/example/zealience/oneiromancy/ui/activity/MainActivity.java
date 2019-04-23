@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.zealience.oneiromancy.R;
+import com.example.zealience.oneiromancy.constant.SnowConstant;
 import com.example.zealience.oneiromancy.entity.TabEntity;
 import com.example.zealience.oneiromancy.ui.fragment.HistoryTodayFragment;
 import com.example.zealience.oneiromancy.ui.fragment.HomeFragment;
@@ -152,9 +153,16 @@ public class MainActivity extends SupportActivity implements View.OnClickListene
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        SnowConstant.isForeground = false;
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         JzvdStd.releaseAllVideos();
+        SnowConstant.isForeground = true;
     }
 
     private long time;

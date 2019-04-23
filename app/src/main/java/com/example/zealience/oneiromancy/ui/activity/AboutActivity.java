@@ -5,9 +5,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.zealience.oneiromancy.R;
-import com.example.zealience.oneiromancy.util.AppUtil;
 import com.steven.base.base.BaseActivity;
-import com.steven.base.util.ProviderUtil;
+import com.steven.base.util.AppUtil;
 import com.steven.base.util.ToastUitl;
 import com.steven.base.widget.CustomLayoutGroup;
 

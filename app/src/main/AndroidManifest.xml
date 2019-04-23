@@ -80,6 +80,16 @@
             android:theme="@style/ThemeTraslate" />
         <activity android:name=".ui.activity.user.SelectGenderActivity" />
         <activity android:name=".ui.activity.AboutActivity"></activity>
+
+        <receiver
+            android:name=".receiver.LocalReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.snow.user.info.update"></action>
+                <category android:name="com.snow"></category>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
