@@ -41,7 +41,7 @@ public class ChangePhoneActivity extends BaseActivity implements View.OnClickLis
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            ToastUitl.showTopToast(ChangePhoneActivity.this, "修改成功");
+            ToastUitl.showShort("修改成功");
             UserInfo userInfo = UserHelper.getUserInfo(ChangePhoneActivity.this);
             userInfo.setPhone(phone);
             UserHelper.saveUserInfo(ChangePhoneActivity.this, userInfo);
@@ -136,7 +136,7 @@ public class ChangePhoneActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         if (v == tv_get_code) {
             if (phone.length() != 11) {
-                ToastUitl.showTopToast(ChangePhoneActivity.this, "请输入正确的手机号");
+                ToastUitl.showShort("请输入正确的手机号");
                 return;
             }
             timeCountUtil.start();

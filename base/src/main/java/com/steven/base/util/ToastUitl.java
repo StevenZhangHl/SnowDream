@@ -52,46 +52,6 @@ public class ToastUitl {
         initToast(message, Toast.LENGTH_SHORT).show();
     }
 
-    public static void showTopToast(Context context, CharSequence message) {
-        if (!mIsShow) {
-            mWdm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-            //通过Toast实例获取当前android系统的默认Toast的View布局
-            mToastView = LayoutInflater.from(context).inflate(R.layout.self_toast_layout, null);
-            tv = (TextView) mToastView.findViewById(R.id.tv_self_toast);
-            tv.setText(message);
-            mTimer = new Timer();
-            //设置布局参数
-            setParams(context);
-            show();
-        }
-    }
-
-    private static void show() {
-        mIsShow = true;
-        mWdm.addView(mToastView, mParams);//将其加载到windowManager上
-        mTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                mWdm.removeView(mToastView);
-                mIsShow = false;
-            }
-        }, 1500);
-    }
-
-    private static void setParams(Context context) {
-        mParams = new WindowManager.LayoutParams();
-        mParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        mParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        mParams.format = PixelFormat.TRANSLUCENT;
-        mParams.windowAnimations = R.style.anim_view;//设置进入退出动画效果
-        mParams.type = WindowManager.LayoutParams.TYPE_TOAST;
-        mParams.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-                | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
-        mParams.gravity = Gravity.CENTER_HORIZONTAL;
-        mParams.y = 250;
-    }
-
     /**
      * 短时间显示Toast
      *

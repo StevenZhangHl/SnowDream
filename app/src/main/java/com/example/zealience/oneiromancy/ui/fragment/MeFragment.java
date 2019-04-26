@@ -20,6 +20,7 @@ import com.example.zealience.oneiromancy.constant.SnowConstant;
 import com.example.zealience.oneiromancy.entity.EventEntity;
 import com.example.zealience.oneiromancy.entity.LuckEntity;
 import com.example.zealience.oneiromancy.entity.UserInfo;
+import com.example.zealience.oneiromancy.ui.activity.CustomViewActivity;
 import com.example.zealience.oneiromancy.ui.activity.user.MyAddressActivity;
 import com.example.zealience.oneiromancy.ui.activity.SetingActivity;
 import com.example.zealience.oneiromancy.ui.activity.SignInActivity;
@@ -233,7 +234,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, IS
             startActivity(intent, optionsBundle);
         }
         if (v == customLayout_collection) {
-            ToastUitl.showShort("收藏");
+            startActivity(CustomViewActivity.class);
         }
         if (v == customLayoutAddress) {
             startActivity(MyAddressActivity.class);

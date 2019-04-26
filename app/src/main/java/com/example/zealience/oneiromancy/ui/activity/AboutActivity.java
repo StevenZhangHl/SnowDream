@@ -40,7 +40,7 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         if (v == rl_check_update) {
-            ToastUitl.showTopToast(this, "已是最新版本!");
+            ToastUitl.showShort("已是最新版本!");
         }
     }
 }

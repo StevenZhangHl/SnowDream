@@ -58,7 +58,7 @@ public class PublishDynamicActivity extends BaseActivity {
             public void onRightClick(View v) {
                 String content = et_dynamic.getText().toString().trim();
                 if (TextUtils.isEmpty(content)) {
-                    ToastUitl.showTopToast(mContext, "内容不能为空");
+                    ToastUitl.showShort("内容不能为空");
                     return;
                 }
                 UserDynamicEntity dynamicEntity = new UserDynamicEntity();

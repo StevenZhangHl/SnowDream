@@ -171,7 +171,7 @@ public class MainActivity extends SupportActivity implements View.OnClickListene
     @Override
     public void onBackPressedSupport() {
         if (System.currentTimeMillis() - time > delayTime) {
-            ToastUitl.showTopToast(this, "再按一次退出");
+            ToastUitl.showShort("再按一次退出");
             time = System.currentTimeMillis();
         } else {
             AppManager.getAppManager().finishAllActivity();

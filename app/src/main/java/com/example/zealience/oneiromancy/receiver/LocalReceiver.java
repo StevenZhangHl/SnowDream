@@ -13,7 +13,6 @@ import android.support.v4.app.NotificationCompat;
 import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.constant.KeyConstant;
 import com.example.zealience.oneiromancy.ui.activity.MainActivity;
-import com.example.zealience.oneiromancy.ui.activity.SetingActivity;
 import com.example.zealience.oneiromancy.ui.activity.user.UserInfolActivity;
 import com.steven.base.util.AppUtil;
 
@@ -30,10 +29,10 @@ public class LocalReceiver extends BroadcastReceiver {
         if (intent != null) {
             if (intent.getAction().equals("com.snow.user.info.update")) {
                 createNotificaition(context, intent);
+                return;
             }
             if (intent.getAction().equals("notification_open")) {
                 jumpPage(context, intent);
-                goAsync();
             }
         }
     }
