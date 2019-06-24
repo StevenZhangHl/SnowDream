@@ -1,1 +1,1 @@
-include ':app', ':base', ':amapmap', ':pay', ':chart', ':countrylib', ':indexlib', ':maplib'
+include ':dream', ':base', ':amapmap', ':pay', ':chart', ':countrylib', ':indexlib', ':maplib', ':weevideo', ':app'

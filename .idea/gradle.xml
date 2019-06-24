@@ -14,9 +14,11 @@
             <option value="$PROJECT_DIR$/base" />
             <option value="$PROJECT_DIR$/chart" />
             <option value="$PROJECT_DIR$/countrylib" />
+            <option value="$PROJECT_DIR$/dream" />
             <option value="$PROJECT_DIR$/indexlib" />
             <option value="$PROJECT_DIR$/maplib" />
             <option value="$PROJECT_DIR$/pay" />
+            <option value="$PROJECT_DIR$/weevideo" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

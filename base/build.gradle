@@ -101,4 +101,5 @@ dependencies {
     //PushSDK
     api 'com.umeng.sdk:push:4.2.0'
     api 'com.github.markzhai:blockcanary-android:1.5.0'
+    api 'com.google.android:flexbox:1.1.0'
 }

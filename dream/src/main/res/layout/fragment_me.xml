@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/me_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_F7F7F7"
+        android:orientation="vertical"
+        app:srlEnableLoadMore="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="190dp">
+
+                <com.steven.base.widget.ArcView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_150"
+                    app:arcHeight="@dimen/margin_50"
+                    app:bgColor="@color/mainColor" />
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="@dimen/margin_20"
+                    android:background="@color/white"
+                    app:cardCornerRadius="@dimen/margin_5">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_10">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/iv_me_head"
+                            android:layout_width="65dp"
+                            android:layout_height="65dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@mipmap/icon_user"
+                            android:transitionName="userInfoImageHead"
+                            app:civ_border_color="@color/DCDCDC"
+                            app:civ_border_width="2dp" />
+
+                        <TextView
+                            android:id="@+id/tv_user_nick"
+                            style="@style/text_16_333333"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:text="小可爱" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_20"
+                android:layout_marginRight="@dimen/margin_20"
+                app:cardCornerRadius="@dimen/margin_5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.steven.base.widget.CustomLayoutGroup
+                        android:id="@+id/customLayout_signIn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:left_drawable="@mipmap/icon_sign_in"
+                        app:left_title="签到"></com.steven.base.widget.CustomLayoutGroup>
+
+                    <com.steven.base.widget.CustomLayoutGroup
+                        android:id="@+id/customLayout_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:left_drawable="@mipmap/icon_address"
+                        app:left_title="地址"></com.steven.base.widget.CustomLayoutGroup>
+
+                    <com.steven.base.widget.CustomLayoutGroup
+                        android:id="@+id/customLayout_collection"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hide_line="true"
+                        app:left_drawable="@mipmap/icon_collection"
+                        app:left_title="收藏"></com.steven.base.widget.CustomLayoutGroup>
+                    <com.steven.base.widget.CustomLayoutGroup
+                        android:id="@+id/customLayout_wee_video"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hide_line="true"
+                        app:left_drawable="@mipmap/icon_collection"
+                        app:left_title="微观"></com.steven.base.widget.CustomLayoutGroup>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_20"
+                app:cardCornerRadius="@dimen/margin_5"
+                app:contentPadding="@dimen/margin_10">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/text_14_666666"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:drawableTop="@mipmap/icon_constellation_luck"
+                        android:drawablePadding="@dimen/margin_10"
+                        android:text="我今天的星座运势" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_luck_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:orientation="vertical">
+
+
+                        <com.steven.base.widget.CustomLayoutGroup
+                            android:id="@+id/rl_my_constellation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:hide_right_drawable="true"
+                            app:left_title="我的星座"></com.steven.base.widget.CustomLayoutGroup>
+
+                        <com.steven.base.widget.CustomLayoutGroup
+                            android:id="@+id/rl_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:hide_right_drawable="true"
+                            app:left_title="日期"></com.steven.base.widget.CustomLayoutGroup>
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/margin_45">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="@dimen/margin_10"
+                                android:text="综合指数" />
+
+                            <RatingBar
+                                android:id="@+id/rating_all"
+                                style="@style/roomRatingBar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:isIndicator="true" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.2dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginLeft="@dimen/margin_10"
+                                android:layout_marginRight="@dimen/margin_10"
+                                android:alpha="0.5"
+                                android:background="@color/DCDCDC"></View>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/margin_45">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="@dimen/margin_10"
+                                android:text="健康指数" />
+
+                            <RatingBar
+                                android:id="@+id/rating_health"
+                                style="@style/roomRatingBar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:isIndicator="true" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.2dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginLeft="@dimen/margin_10"
+                                android:layout_marginRight="@dimen/margin_10"
+                                android:alpha="0.5"
+                                android:background="@color/DCDCDC"></View>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/margin_45">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="@dimen/margin_10"
+                                android:text="爱情指数" />
+
+                            <RatingBar
+                                android:id="@+id/rating_love"
+                                style="@style/roomRatingBar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:isIndicator="true" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.2dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginLeft="@dimen/margin_10"
+                                android:layout_marginRight="@dimen/margin_10"
+                                android:alpha="0.5"
+                                android:background="@color/DCDCDC"></View>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/margin_45">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="@dimen/margin_10"
+                                android:text="财运指数" />
+
+                            <RatingBar
+                                android:id="@+id/rating_money"
+                                style="@style/roomRatingBar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:isIndicator="true" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.2dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginLeft="@dimen/margin_10"
+                                android:layout_marginRight="@dimen/margin_10"
+                                android:alpha="0.5"
+                                android:background="@color/DCDCDC"></View>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/margin_45">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="@dimen/margin_10"
+                                android:text="工作指数" />
+
+                            <RatingBar
+                                android:id="@+id/rating_work"
+                                style="@style/roomRatingBar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:isIndicator="true" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.2dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginLeft="@dimen/margin_10"
+                                android:layout_marginRight="@dimen/margin_10"
+                                android:alpha="0.5"
+                                android:background="@color/DCDCDC"></View>
+                        </RelativeLayout>
+
+                        <com.steven.base.widget.CustomLayoutGroup
+                            android:id="@+id/rl_luck_color"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:hide_right_drawable="true"
+                            app:left_title="幸运色"></com.steven.base.widget.CustomLayoutGroup>
+
+                        <com.steven.base.widget.CustomLayoutGroup
+                            android:id="@+id/rl_luck_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:hide_right_drawable="true"
+                            app:left_title="幸运数字"></com.steven.base.widget.CustomLayoutGroup>
+
+                        <com.steven.base.widget.CustomLayoutGroup
+                            android:id="@+id/rl_friend"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:hide_right_drawable="true"
+                            app:left_title="速配星座"></com.steven.base.widget.CustomLayoutGroup>
+
+                        <TextView
+                            android:id="@+id/tv_summary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_10"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:layout_marginRight="@dimen/margin_10"
+                            android:letterSpacing="0.1"
+                            android:lineSpacingExtra="@dimen/margin_2"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_set_constellation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="@dimen/margin_50"
+                        android:gravity="center"
+                        android:text="设置星座后才可以查看\n去设置" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <com.hjq.bar.TitleBar
+        android:id="@+id/me_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:backButton="false"
+        app:barStyle="transparent"></com.hjq.bar.TitleBar>
+</RelativeLayout>

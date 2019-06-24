@@ -1,16 +1,16 @@
 ext {
 
     android = [ // 配置信息
-                compileSdkVersion: 27,
-                buildToolsVersion: "27.0.2",
+                compileSdkVersion: 28,
+                buildToolsVersion: "28.0.2",
                 minSdkVersion    : 19,
-                targetSdkVersion : 22,
+                targetSdkVersion : 28,
                 versionCode      : 31,
                 versionName      : "5.0.1"
     ]
 
     // 依赖第三方库版本
-    supportVersion = "27.0.2"
+    supportVersion = "28.0.0"
     multidexVersion = "1.0.3"
     statusBarUtilVersion = "1.5.1"
 

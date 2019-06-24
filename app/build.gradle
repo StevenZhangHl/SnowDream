@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-
 def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }
@@ -7,18 +6,24 @@ def releaseTime() {
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.zealience.oneiromancy"
+        applicationId "com.snow.app"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 8
-        versionName "1.0.8"
+        versionCode 1
+        versionName "1.0"
         flavorDimensions versionCode + ""
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
             abiFilters "armeabi", "armeabi-v7a"
         }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -81,14 +86,14 @@ android {
     applicationVariants.all { variant ->
         if (variant.buildType.name.equals('release')) {
             variant.outputs.all { output ->
-                def buildName = "com.snow.dream"
+                def buildName = "com.snow.app"
                 def type = "${variant.productFlavors[0].name}"
                 def releaseApkName = buildName + '_' + type + "_" + versionName + '_' + releaseTime() + '.apk'
                 outputFileName = releaseApkName
             }
         } else {
             variant.outputs.all { output ->
-                def buildName = "com.snow.dream"
+                def buildName = "com.snow.app"
                 def releaseApkName = buildName + '_' + "test" + "_" + versionName + '_' + releaseTime() + '.apk'
                 outputFileName = releaseApkName
             }
@@ -98,10 +103,13 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.android.support:design:28.0.0'
     testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation project(':base')
-    implementation project(':amapmap')
+    annotationProcessor "com.alibaba:arouter-compiler:$aroutercompiler"
+    implementation project(':dream')
+    implementation project(':weevideo')
 }

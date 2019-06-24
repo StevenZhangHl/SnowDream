@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/fl_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/dream_tab_layout">
+
+        </FrameLayout>
+
+        <com.flyco.tablayout.CommonTabLayout
+            android:id="@+id/dream_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_50"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            tl:tl_indicator_color="#2C97DE"
+            tl:tl_indicator_height="0dp"
+            tl:tl_textSelectColor="@color/mainColor"
+            tl:tl_textUnselectColor="@color/color_707070"
+            tl:tl_textsize="10sp"
+            tl:tl_underline_color="@color/DCDCDC"
+            tl:tl_underline_height="1dp"></com.flyco.tablayout.CommonTabLayout>
+        <!-- 这里的ImageButton即是中间凸起按钮，是独立于FlycoTabLayout而存在。是在FlycoTabLayout视图之上的一个遮挡视图。 -->
+        <ImageView
+            android:id="@+id/tab_main_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/tab_main_center" />
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

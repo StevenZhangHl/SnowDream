@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.zealience.oneiromancy">
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <application>
+        <activity android:name=".ui.activity.SearchActivity" />
+        <activity
+            android:name=".ui.activity.DreamDetailActivity"
+            android:label="@string/title_activity_dream_detail"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.activity.user.UserInfolActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.activity.VRActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".ui.activity.WebViewActivity" />
+        <activity
+            android:name=".ui.activity.SetingActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".ui.activity.LoginActivity" />
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.HistoryDetailActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.activity.ShowAmapActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.activity.user.MyAddressActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.activity.SignInActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".ui.activity.ChannelManagerActivity" />
+        <activity android:name=".ui.activity.ShowScanResultActivity" />
+        <activity
+            android:name=".ui.activity.SplashMessageActivity"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5c81d3f23fc1955bd7000998" />
+        <!-- Channel ID用来标识App的推广渠道，作为推送消息时给用户分组的一个维度。 -->
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Channel ID" />
+
+        <service android:name=".umeng.UmengNotificationService" />
+        <service android:name=".umeng.MyNotificationService" />
+
+        <activity android:name=".ui.activity.user.PublishDynamicActivity" />
+        <activity android:name=".ui.activity.user.ChangePhoneActivity" />
+        <activity
+            android:name=".ui.activity.CaptureActivity"
+            android:theme="@style/ThemeTraslate" />
+        <activity android:name=".ui.activity.user.SelectGenderActivity" />
+        <activity android:name=".ui.activity.AboutActivity" />
+
+        <receiver
+            android:name=".receiver.LocalReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.snow.user.info.update" />
+
+                <category android:name="com.snow" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".ui.activity.CustomViewActivity"></activity>
+    </application>
+
+</manifest>
