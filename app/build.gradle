@@ -99,6 +99,17 @@ android {
             }
         }
     }
+//    packagingOptions {
+//        exclude 'META-INF/androidx.localbroadcastmanager_localbroadcastmanager.version'
+//        exclude 'META-INF/androidx.customview_customview.version'
+//        exclude 'META-INF/androidx.legacy_legacy-support-core-ui.version'
+//        exclude 'META-INF/androidx.legacy_legacy-support-core-utils.version'
+//        exclude 'META-INF/androidx.slidingpanelayout_slidingpanelayout.version'
+//        exclude 'META-INF/androidx.print_print.version'
+//        exclude 'META-INF/androidx.documentfile_documentfile.version'
+//        exclude 'META-INF/androidx.recyclerview_recyclerview.version'
+//        exclude 'META-INF/androidx.versionedparcelable_versionedparcelable.version'
+//    }
 }
 
 dependencies {

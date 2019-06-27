@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_item_video_root"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_video_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_EA5048" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin_10">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_video_user_head"
+            android:layout_width="@dimen/margin_20"
+            android:layout_height="@dimen/margin_20"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_15"
+            android:src="@mipmap/icon_user" />
+
+        <TextView
+            android:id="@+id/tv_praise"
+            style="@style/text_13_white"
+            android:drawablePadding="@dimen/margin_5"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:drawableLeft="@mipmap/icon_praise_small"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin_15"
+            android:text="45" />
+    </RelativeLayout>
+</RelativeLayout>

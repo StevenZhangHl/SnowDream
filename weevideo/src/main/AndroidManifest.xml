@@ -3,7 +3,8 @@
     package="com.snow.weevideo">
 
     <application>
-        <activity android:name=".WeeVideoMainActivity"></activity>
+        <activity android:name=".WeeVideoMainActivity" />
+        <activity android:name=".module.video.activity.VideoDetailActivity"></activity>
     </application>
 
 </manifest>

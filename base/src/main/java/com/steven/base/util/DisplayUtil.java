@@ -337,4 +337,19 @@ public class DisplayUtil {
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         mTextView.setCompoundDrawables(null, null, drawable, null);
     }
+    /**
+     * 获取导航栏高度(如华为底部导航栏高度)
+     *
+     * @param context
+     * @return
+     */
+    public static int getBottomBarHeight(Context context) {
+        int resourceId = 0;
+        int rid = context.getResources().getIdentifier("config_showNavigationBar", "bool", "android");
+        if (rid != 0) {
+            resourceId = context.getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+            return context.getResources().getDimensionPixelSize(resourceId);
+        } else
+            return 0;
+    }
 }

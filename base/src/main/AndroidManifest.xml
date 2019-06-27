@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.steven.base">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -23,8 +24,9 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <application>
-
+    <application
+        android:appComponentFactory="appComponentFactory"
+        tools:replace="android:appComponentFactory">
         <!-- 新浪 -->
         <activity
             android:name="com.umeng.socialize.media.WBShareCallBackActivity"

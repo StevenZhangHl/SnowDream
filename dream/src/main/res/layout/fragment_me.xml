@@ -94,7 +94,6 @@
                         android:id="@+id/customLayout_collection"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:hide_line="true"
                         app:left_drawable="@mipmap/icon_collection"
                         app:left_title="收藏"></com.steven.base.widget.CustomLayoutGroup>
                     <com.steven.base.widget.CustomLayoutGroup
@@ -102,7 +101,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:hide_line="true"
-                        app:left_drawable="@mipmap/icon_collection"
+                        app:left_drawable="@mipmap/icon_wee_video"
                         app:left_title="微观"></com.steven.base.widget.CustomLayoutGroup>
                 </LinearLayout>
             </android.support.v7.widget.CardView>

@@ -1,5 +1,6 @@
 package com.steven.base.util;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -150,5 +151,29 @@ public class NumberUtil {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static float formitFloatTwoPoint(float number) {
+        BigDecimal b = new BigDecimal(number);
+        float f = b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
+        return f;
+    }
+
+    public static double formitFloatDouble(float number) {
+        BigDecimal b = new BigDecimal(number);
+        double f = b.setScale(0, BigDecimal.ROUND_HALF_UP).doubleValue();
+        return f;
+    }
+
+    public static int formitSaveInt(float number) {
+        BigDecimal b = new BigDecimal(number);
+        int i = b.setScale(0, BigDecimal.ROUND_HALF_UP).intValue();
+        return i;
+    }
+
+    public static double formitSaveOnePoint(double number) {
+        BigDecimal b = new BigDecimal(number);
+        double i = b.setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
+        return i;
     }
 }
