@@ -1,4 +1,4 @@
-package com.snow.weevideo.adapter;
+package com.snow.weevideo.module.video.adapter;
 
 import android.support.annotation.Nullable;
 import android.view.ViewGroup;

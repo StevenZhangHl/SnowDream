@@ -15,7 +15,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.snow.weevideo.R;
-import com.snow.weevideo.adapter.SameCityAdapter;
+import com.snow.weevideo.module.samecity.adapter.SameCityAdapter;
 import com.snow.weevideo.module.samecity.entity.SameCityEntity;
 import com.steven.base.util.RecyclerView.SpaceItemDecoration;
 
