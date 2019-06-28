@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="chart_colors">
+        <item>#FACF25</item>
+        <item>#FF8238</item>
+        <item>#F6AC46</item>
+        <item>#54E0E2</item>
+    </string-array>
+
+</resources>

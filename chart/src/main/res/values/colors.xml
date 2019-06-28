@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bar_color">#F15B02</color>
+    <color name="bar_warning_color">#FF0000</color>
+    <color name="bar_end_color">#FFFFFF</color>
+    <color name="base_text_color_light">#6FBA2C</color>
+    <color name="line_chart_send_color">#EF8D06</color>
+</resources>

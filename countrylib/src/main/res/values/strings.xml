@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search">请输入国家/地区</string>
+    <string name="select_countries_regions">选择国家和地区</string>
+</resources>

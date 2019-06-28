@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_video_detail_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_F6C100"
+    tools:context=".module.video.activity.VideoDetailActivity">
+
+    <com.snow.weevideo.module.video.widget.MyJz
+        android:id="@+id/video_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.snow.weevideo.module.video.widget.MyJz>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_45"
+        android:layout_marginTop="@dimen/margin_25"
+        android:background="@color/transparent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_10"
+            android:src="@mipmap/bar_icon_back_white" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/margin_10"
+            android:src="@mipmap/icon_more_white" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bt_go_comment"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/margin_15"
+        android:layout_marginBottom="@dimen/margin_10"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/icon_praise_white" />
+
+        <TextView
+            style="@style/text_13_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_5"
+            android:text="333" />
+
+        <TextView
+            android:id="@+id/tv_comment"
+            style="@style/text_13_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_15"
+            android:drawableTop="@mipmap/icon_comment_white"
+            android:drawablePadding="@dimen/margin_5"
+            android:gravity="center"
+            android:text="44" />
+
+        <TextView
+            style="@style/text_13_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_15"
+            android:drawableTop="@mipmap/icon_share_white"
+            android:drawablePadding="@dimen/margin_5"
+            android:gravity="center"
+            android:text="22" />
+    </LinearLayout>
+
+    <com.allen.library.SuperButton
+        android:id="@+id/bt_go_comment"
+        style="@style/text_13_white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_35"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/margin_12"
+        android:background="@color/white"
+        android:drawableLeft="@mipmap/icon_write_white"
+        android:drawablePadding="@dimen/margin_5"
+        android:gravity="left"
+        android:paddingLeft="@dimen/margin_15"
+        android:text="说点什么"
+        app:sCornersRadius="@dimen/margin_5" />
+
+    <include
+        layout="@layout/include_comment_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"></include>
+
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_reply_hide"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            app:layout_behavior="@string/bottom_sheet_behavior">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_45"
+                android:layout_marginTop="@dimen/margin_25">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="查看回复" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/margin_10"
+                    android:src="@mipmap/icon_black_close" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_1"
+                android:background="@color/color_EFEFEF" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_reply"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:scrollbars="none"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

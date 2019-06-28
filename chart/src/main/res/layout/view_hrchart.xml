@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_marker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/shape_marker_green"
+            android:gravity="center"
+            android:paddingBottom="4dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="4dp"
+            tools:text="300"
+            android:textColor="#FFF"
+            android:textSize="12sp"
+            android:visibility="invisible" />
+    </FrameLayout>
+
+    <com.horen.chart.hrlinechart.SuitLines
+        android:id="@+id/suitlines"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingRight="40dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

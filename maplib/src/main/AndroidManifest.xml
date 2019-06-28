@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.horen.maplib">
+
+    <application android:supportsRtl="true">
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="ZFxKz79iEtdtAzHB0mMwgLtLFMi5231f" />
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+    </application>
+</manifest>
