@@ -80,7 +80,7 @@
                 android:id="@+id/iv_loading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_bt_loading" />
+                app:srcCompat="@drawable/icon_bt_loading" />
 
             <TextView
                 android:id="@+id/tv_loading"

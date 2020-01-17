@@ -6,7 +6,7 @@
     android:layout_marginTop="@dimen/margin_10"
     android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/mainColor"
@@ -33,5 +33,5 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/margin_10" />
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

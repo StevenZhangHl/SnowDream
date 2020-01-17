@@ -2,13 +2,11 @@ package com.example.zealience.oneiromancy.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.content.ContextCompat;
-import android.view.MenuItem;
+
+import androidx.core.content.ContextCompat;
+
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;

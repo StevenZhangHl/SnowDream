@@ -5,11 +5,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +22,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.constant.KeyConstant;
+import com.example.zealience.oneiromancy.ui.widget.SnowRefershHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.steven.base.app.SharePConstant;
 import com.example.zealience.oneiromancy.constant.SnowConstant;
 import com.example.zealience.oneiromancy.constant.UrlConstant;
@@ -75,7 +79,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @createDate 2019/3/6 18:02
  * @description 首页
  */
-public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> implements HomeContract.View, View.OnClickListener, IShareElements {
+public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> implements HomeContract.View, View.OnClickListener, IShareElements, OnRefreshListener {
     private static final int REQUEST_CODE = 1;
     private DreamTypeAdapter dreamTypeAdapter;
     private RecyclerView recyclerview_dream_type;
@@ -88,6 +92,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
     private NestedScrollView nested_scrollview;
     private RecyclerView recyclerview_dream_hot;
     private DreamHotAdapter dreamHotAdapter;
+    private SmartRefreshLayout refresh_home_layout;
     private int column = 5;
     private int girdMargin = 10;
     private boolean isStopAnim;
@@ -124,6 +129,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         bannerContainer = (Banner) rootView.findViewById(R.id.bannerContainer);
         nested_scrollview = (NestedScrollView) rootView.findViewById(R.id.nested_scrollview);
         recyclerview_dream_hot = (RecyclerView) rootView.findViewById(R.id.recyclerview_dream_hot);
+        refresh_home_layout = (SmartRefreshLayout) rootView.findViewById(R.id.refresh_home_layout);
+        refresh_home_layout.setRefreshHeader(new SnowRefershHeader(_mActivity));
         GlideApp.with(_mActivity)
                 .load(UserHelper.getUserInfo(_mActivity).getHeadImageUrl())
                 .placeholder(R.mipmap.icon_user)
@@ -131,6 +138,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
         initClick();
         initRecyclerView();
         initRabot();
+        refresh_home_layout.autoRefresh();
+        refresh_home_layout.setOnRefreshListener(this);
         mPresenter.getHomeBannerData();
         mPresenter.getHotSearchData();
         mPresenter.getHomeRecommendData();
@@ -198,7 +207,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
                 if (position == 9) {
                     bundle.putParcelableArrayList(ChannelManagerActivity.mMyChannelKey, (ArrayList<? extends Parcelable>) mCurrentDreamTypeList);
                     bundle.putParcelableArrayList(ChannelManagerActivity.mOhterChannelKey, (ArrayList<? extends Parcelable>) mOtherDreamTypeList);
-                    startActivity(ChannelManagerActivity.class,bundle);
+                    startActivity(ChannelManagerActivity.class, bundle);
                 } else {
                     bundle.putParcelable("dreamType", mCurrentDreamTypeList.get(position));
                     startActivity(SearchActivity.class, bundle);
@@ -383,5 +392,10 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModel> impleme
                 }
             }
         }
+    }
+
+    @Override
+    public void onRefresh(RefreshLayout refreshLayout) {
+        refresh_home_layout.finishRefresh(2000);
     }
 }

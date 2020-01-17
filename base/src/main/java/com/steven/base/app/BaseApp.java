@@ -1,11 +1,10 @@
 package com.steven.base.app;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
-import android.support.annotation.NonNull;
-import android.support.multidex.MultiDexApplication;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.multidex.MultiDexApplication;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -15,25 +14,14 @@ import com.kingja.loadsir.callback.SuccessCallback;
 import com.kingja.loadsir.core.LoadSir;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
-import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
 import com.scwang.smartrefresh.layout.api.RefreshFooter;
-import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.steven.base.net.Url;
-import com.steven.base.util.DisplayUtil;
 import com.steven.base.widget.CustomFooter;
 import com.umeng.commonsdk.UMConfigure;
-import com.umeng.commonsdk.debug.UMLogCommon;
-import com.umeng.commonsdk.debug.UMLogUtils;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
-import com.umeng.message.UmengMessageService;
-import com.umeng.message.inapp.InAppMessageManager;
-import com.umeng.socialize.PlatformConfig;
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
-
-import java.util.LinkedList;
-import java.util.List;
 
 import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 

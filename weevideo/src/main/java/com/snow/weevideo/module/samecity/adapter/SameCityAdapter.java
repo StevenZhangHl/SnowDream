@@ -1,6 +1,6 @@
 package com.snow.weevideo.module.samecity.adapter;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ImageView;

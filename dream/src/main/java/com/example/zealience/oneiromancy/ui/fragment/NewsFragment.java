@@ -3,35 +3,23 @@ package com.example.zealience.oneiromancy.ui.fragment;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
 import com.example.zealience.oneiromancy.R;
-import com.example.zealience.oneiromancy.entity.NewsEntity;
-import com.example.zealience.oneiromancy.mvp.contract.NewsContract;
-import com.example.zealience.oneiromancy.mvp.model.NewsModel;
-import com.example.zealience.oneiromancy.mvp.presenter.NewsPresenter;
 import com.example.zealience.oneiromancy.ui.FragmentListAdapter;
-import com.jaeger.library.StatusBarUtil;
 import com.steven.base.base.BaseFragment;
-import com.steven.base.util.AssetsUtil;
-import com.steven.base.util.DisplayUtil;
 import com.steven.base.util.Typefaces;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
-import net.lucode.hackware.magicindicator.buildins.UIUtil;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.WrapPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ClipPagerTitleView;
 
 import java.util.ArrayList;

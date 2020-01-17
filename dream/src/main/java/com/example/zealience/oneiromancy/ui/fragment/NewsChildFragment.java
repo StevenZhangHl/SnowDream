@@ -1,17 +1,18 @@
 package com.example.zealience.oneiromancy.ui.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.constant.KeyConstant;
 import com.example.zealience.oneiromancy.entity.NewsEntity;
@@ -24,7 +25,6 @@ import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.steven.base.rx.RxManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +40,7 @@ public class NewsChildFragment extends SupportFragment implements NewsContract.V
 
     private NewsPresenter mPresenter;
     private NewsModel mModel;
-    private RecyclerView recyclerviewNewsList;
+    private ShimmerRecyclerView recyclerviewNewsList;
     private SmartRefreshLayout refreshNews;
     private NewsListAdapter newsListAdapter;
     private List<NewsEntity> mNewsList = new ArrayList<>();
@@ -59,7 +59,7 @@ public class NewsChildFragment extends SupportFragment implements NewsContract.V
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_news_child, null);
         refreshNews = (SmartRefreshLayout) view.findViewById(R.id.refresh__news);
-        recyclerviewNewsList = (RecyclerView) view.findViewById(R.id.recyclerview_news_list);
+        recyclerviewNewsList = (ShimmerRecyclerView) view.findViewById(R.id.recyclerview_news_list);
         mPresenter = new NewsPresenter();
         mModel = new NewsModel();
         if (mPresenter != null) {
@@ -85,9 +85,16 @@ public class NewsChildFragment extends SupportFragment implements NewsContract.V
         recyclerviewNewsList.setLayoutManager(new LinearLayoutManager(_mActivity));
         newsListAdapter = new NewsListAdapter(new ArrayList<>());
         recyclerviewNewsList.setAdapter(newsListAdapter);
+        recyclerviewNewsList.showShimmerAdapter();
         refreshNews.setOnRefreshListener(this);
         refreshNews.setRefreshHeader(new MaterialHeader(_mActivity));
         refreshNews.autoRefresh();
+        title = getArguments().getString("title");
+    }
+
+    @Override
+    public void setNewsList(List<NewsEntity> newsEntities) {
+        recyclerviewNewsList.hideShimmerAdapter();
         recyclerviewNewsList.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -97,11 +104,6 @@ public class NewsChildFragment extends SupportFragment implements NewsContract.V
                 WebViewActivity.startActivity(_mActivity, bundle);
             }
         });
-        title = getArguments().getString("title");
-    }
-
-    @Override
-    public void setNewsList(List<NewsEntity> newsEntities) {
         refreshNews.finishRefresh();
         newsListAdapter.setNewData(newsEntities);
         mNewsList.clear();

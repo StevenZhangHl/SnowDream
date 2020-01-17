@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.ChannelManagerActivity">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_channel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_20"></android.support.v7.widget.RecyclerView>
+        android:layout_margin="@dimen/margin_20"></androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

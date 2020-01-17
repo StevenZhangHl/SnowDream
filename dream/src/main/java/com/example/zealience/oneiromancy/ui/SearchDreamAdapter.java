@@ -1,8 +1,6 @@
 package com.example.zealience.oneiromancy.ui;
 
-import android.support.annotation.Nullable;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;

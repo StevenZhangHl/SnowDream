@@ -1,14 +1,15 @@
 package com.steven.base.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.v4.widget.NestedScrollView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 
 /**
  * @user steven
@@ -42,7 +43,7 @@ public class KeyboardUtil {
     /**
      * 关闭软键盘
      */
-    public static void closeAllKeybord(Activity context) {
+    public static void closeAllKeybord(AppCompatActivity context) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm.isActive() && context.getCurrentFocus() != null) {
             if (context.getCurrentFocus().getWindowToken() != null) {
@@ -57,14 +58,14 @@ public class KeyboardUtil {
      * @param activity
      * @return
      */
-    public static boolean isSoftInputShow(Activity activity) {
+    public static boolean isSoftInputShow(AppCompatActivity activity) {
 
         // 虚拟键盘隐藏 判断view是否为空
         View view = activity.getWindow().peekDecorView();
         if (view != null) {
             // 隐藏虚拟键盘
             InputMethodManager inputmanger = (InputMethodManager) activity
-                    .getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    .getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE);
 //       inputmanger.hideSoftInputFromWindow(view.getWindowToken(),0);
 
             return inputmanger.isActive() && activity.getWindow().getCurrentFocus() != null;
@@ -80,7 +81,7 @@ public class KeyboardUtil {
      * @param vID
      * @param svID
      */
-    public static void pullKeywordTop(final Activity activity, final int lyRootID, final int vID, final int svID) {
+    public static void pullKeywordTop(final AppCompatActivity activity, final int lyRootID, final int vID, final int svID) {
         ViewGroup ly = (ViewGroup) activity.findViewById(lyRootID);
         //获取屏幕高度，根据经验，输入法弹出高度一般在屏幕1/3到1/2之间
         final int defaultHeight = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getHeight();

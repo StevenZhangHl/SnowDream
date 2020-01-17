@@ -11,11 +11,16 @@
         android:layout_height="match_parent"
         app:srlEnableLoadMore="false">
 
-        <android.support.v7.widget.RecyclerView
+        <com.cooltechworks.views.shimmer.ShimmerRecyclerView
             android:id="@+id/recyclerview_news_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:shimmer_demo_child_count="10"
+            app:shimmer_demo_layout="@layout/item_news_loading_view"
+            app:shimmer_demo_layout_manager_type="linear_vertical"
+            app:shimmer_demo_angle="20"
+            app:shimmer_demo_duration="3000"
             android:layout_marginLeft="@dimen/margin_10"
-            android:layout_marginRight="@dimen/margin_10"></android.support.v7.widget.RecyclerView>
+            android:layout_marginRight="@dimen/margin_10"></com.cooltechworks.views.shimmer.ShimmerRecyclerView>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

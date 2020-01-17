@@ -2,10 +2,10 @@ package com.example.zealience.oneiromancy.ui.activity;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import com.google.android.material.appbar.AppBarLayout;
+import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -20,7 +20,6 @@ import com.example.zealience.oneiromancy.ui.VRPhotoAdapter;
 import com.google.vr.sdk.widgets.pano.VrPanoramaView;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
-import com.steven.base.app.BaseApp;
 import com.steven.base.base.AppManager;
 import com.steven.base.base.BaseActivity;
 import com.steven.base.util.AssetsUtil;

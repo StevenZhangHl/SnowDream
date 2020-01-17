@@ -1,6 +1,5 @@
 package com.steven.base.widget;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,6 +12,8 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.steven.base.R;
 
@@ -65,7 +66,7 @@ public class LoadingDialog {
         return mLoadingDialog;
     }
 
-    public Dialog showDialogForLoading(Activity context) {
+    public Dialog showDialogForLoading(AppCompatActivity context) {
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_loading, null);
         TextView loadingText = (TextView) view.findViewById(R.id.id_tv_loading_dialog_text);
         iv_animation = (ImageView) view.findViewById(R.id.iv_animation);

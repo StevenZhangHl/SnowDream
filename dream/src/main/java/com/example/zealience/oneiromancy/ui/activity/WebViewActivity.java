@@ -63,6 +63,7 @@ public class WebViewActivity extends BaseActivity implements OnTitleBarListener 
         setWhiteStatusBar(R.color.white);
         webView = (WebView) findViewById(R.id.webView);
         mProgressBar = (ProgressBar) findViewById(R.id.mProgressBar);
+        boolean isShowShare = getIntent().getBundleExtra(KeyConstant.URL_BUNDLE_KEY).getBoolean(KeyConstant.ISSHOW_SHARE_KEY);
         WebSettings settings = webView.getSettings();
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
         settings.setJavaScriptEnabled(true);
@@ -116,20 +117,19 @@ public class WebViewActivity extends BaseActivity implements OnTitleBarListener 
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                currentUrl = url;
                 super.onPageFinished(view, url);
+                currentUrl = url;
+                if (isShowShare) {
+                    getTitlebar().setRightIcon(R.mipmap.icon_share);
+                    webType = 0;
+                } else {
+                    getTitlebar().setRightIcon(R.mipmap.icon_web_more);
+                    getTitlebar().setLeftIcon(R.mipmap.icon_close);
+                    webType = 1;
+                }
             }
         });
         url = getIntent().getBundleExtra(KeyConstant.URL_BUNDLE_KEY).getString(KeyConstant.URL_KEY);
-        boolean isShowShare = getIntent().getBundleExtra(KeyConstant.URL_BUNDLE_KEY).getBoolean(KeyConstant.ISSHOW_SHARE_KEY);
-        if (isShowShare) {
-            getTitlebar().setRightIcon(R.mipmap.icon_share);
-            webType = 0;
-        } else {
-            getTitlebar().setRightIcon(R.mipmap.icon_web_more);
-            getTitlebar().setLeftIcon(R.mipmap.icon_close);
-            webType = 1;
-        }
         webView.loadUrl(url);
         initDialog();
     }

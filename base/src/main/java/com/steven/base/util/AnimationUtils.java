@@ -360,6 +360,22 @@ public class AnimationUtils {
     }
 
     /**
+     * 缩小View
+     *
+     * @param view     view
+     * @param duration 时间
+     */
+    public static void scaleSmallView(View view, int duration,float from,float to) {
+        ObjectAnimator animatorX = ObjectAnimator.ofFloat(view, "scaleX", from, to);
+        ObjectAnimator animatorY = ObjectAnimator.ofFloat(view, "scaleY", from, to);
+        AnimatorSet set = new AnimatorSet();
+        set.play(animatorX).with(animatorY);
+        set.setDuration(duration);
+        set.setInterpolator(new LinearInterpolator());
+        set.start();
+    }
+
+    /**
      * 根据传入的值 放大缩小view
      *
      * @param view     view

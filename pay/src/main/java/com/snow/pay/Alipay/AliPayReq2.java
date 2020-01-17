@@ -1,10 +1,11 @@
 package com.snow.pay.Alipay;
 
-import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.alipay.sdk.app.PayTask;
 
@@ -27,7 +28,7 @@ public class AliPayReq2 {
 	private static final int SDK_PAY_FLAG = 1;
 	private static final int SDK_CHECK_FLAG = 2;
 
-	private Activity mActivity;
+	private AppCompatActivity mActivity;
 
 	//未签名的订单信息
 	private String rawAliPayOrderInfo;
@@ -204,7 +205,7 @@ public class AliPayReq2 {
 	
 	public static class Builder{
 		//上下文
-		private Activity activity;
+		private AppCompatActivity activity;
 
 		//未签名的订单信息
 		private String rawAliPayOrderInfo;
@@ -215,7 +216,7 @@ public class AliPayReq2 {
 			super();
 		}
 		
-		public Builder with(Activity activity){
+		public Builder with(AppCompatActivity activity){
 			this.activity = activity;
 			return this;
 		}

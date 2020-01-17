@@ -1,15 +1,10 @@
 package com.steven.base;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.Parcelable;
-import android.support.annotation.Nullable;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,6 +14,11 @@ import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -33,7 +33,6 @@ import com.jaeger.library.StatusBarUtil;
 import com.steven.base.app.GlideApp;
 import com.steven.base.base.BaseActivity;
 import com.steven.base.util.GlideFileHelper;
-import com.steven.base.util.ToastUitl;
 import com.steven.base.widget.SheetDialog;
 import com.steven.base.widget.ViewPagerFixed;
 
@@ -59,7 +58,7 @@ public class ShowBigImageActivity extends BaseActivity {
         activity.startActivity(intent);
     }
 
-    public static void startImageForResouceId(Activity activity, List<Integer> imageResouceIds, int position) {
+    public static void startImageForResouceId(AppCompatActivity activity, List<Integer> imageResouceIds, int position) {
         Intent intent = new Intent(activity, ShowBigImageActivity.class);
         intent.putIntegerArrayListExtra(INTENT_LIST, new ArrayList<Integer>(imageResouceIds));
         intent.putExtra(INTENT_POSITION, position);

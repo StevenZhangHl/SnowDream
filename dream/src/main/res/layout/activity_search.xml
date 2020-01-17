@@ -19,7 +19,7 @@
             android:layout_centerVertical="true"
             android:layout_gravity="center_vertical"
             android:padding="@dimen/margin_10"
-            android:src="@mipmap/bar_icon_back_black" />
+            app:srcCompat="@mipmap/bar_icon_back_black" />
 
         <EditText
             android:id="@+id/et_search"
@@ -54,9 +54,9 @@
             android:text="搜索" />
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_dream_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:overScrollMode="never"></android.support.v7.widget.RecyclerView>
+        android:overScrollMode="never"></androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

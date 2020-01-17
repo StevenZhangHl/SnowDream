@@ -1,28 +1,22 @@
 package com.example.zealience.oneiromancy.ui;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.zealience.oneiromancy.R;
-import com.example.zealience.oneiromancy.constant.KeyConstant;
 import com.example.zealience.oneiromancy.entity.HomeNormalEntity;
 import com.example.zealience.oneiromancy.entity.HomeRecommendEntity;
-import com.example.zealience.oneiromancy.ui.activity.SearchActivity;
-import com.example.zealience.oneiromancy.ui.fragment.HomeFragment;
 import com.example.zealience.oneiromancy.util.BlurTransformation;
-import com.hw.ycshareelement.YcShareElement;
 import com.hw.ycshareelement.transition.IShareElements;
 import com.hw.ycshareelement.transition.ShareElementInfo;
 import com.steven.base.ShowBigImageActivity;
@@ -41,7 +35,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @description 自定义
  */
 public class DreamHotAdapter extends BaseMultiItemQuickAdapter<HomeRecommendEntity, BaseViewHolder> implements IShareElements {
-    private Activity activity;
+    private AppCompatActivity activity;
 
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
@@ -49,7 +43,7 @@ public class DreamHotAdapter extends BaseMultiItemQuickAdapter<HomeRecommendEnti
      *
      * @param data A new list is created out of this one to avoid mutable list
      */
-    public DreamHotAdapter(Activity activity, List<HomeRecommendEntity> data) {
+    public DreamHotAdapter(AppCompatActivity activity, List<HomeRecommendEntity> data) {
         super(data);
         this.activity = activity;
         addItemType(0, R.layout.item_horizontal_list);

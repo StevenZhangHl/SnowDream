@@ -1,8 +1,8 @@
 package com.example.zealience.oneiromancy.ui;
 
-import android.support.annotation.Nullable;
-import android.support.v4.view.ViewCompat;
-import android.view.View;
+import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,7 +10,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.entity.HomeNormalEntity;
-import com.example.zealience.oneiromancy.entity.HomeRecommendEntity;
 import com.steven.base.app.GlideApp;
 
 import java.util.List;

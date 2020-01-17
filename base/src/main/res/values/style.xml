@@ -11,7 +11,7 @@
     <!--普通dialog-->
     <style name="CustomProgressDialog" parent="@style/CustomDialog">
         <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="text_20_1E1E1E">
@@ -183,7 +183,7 @@
     </style>
     <!--底部线-->
     <style name="divider">
-        <item name="android:background">@color/divider_color</item>
+        <item name="background">@color/divider_color</item>
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>

@@ -1,14 +1,12 @@
 package com.snow.weevideo.module.video.activity;
 
 import android.animation.Animator;
-import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.BottomSheetDialogFragment;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.NonNull;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,7 +27,6 @@ import com.snow.weevideo.R;
 import com.snow.weevideo.module.video.mvp.contract.VideoDetailContract;
 import com.snow.weevideo.module.video.mvp.model.VideoDetailModel;
 import com.snow.weevideo.module.video.mvp.presenter.VideoDetailPresenter;
-import com.snow.weevideo.module.video.widget.CommentBottomDialog;
 import com.snow.weevideo.module.video.widget.MyJz;
 import com.steven.base.app.GlideApp;
 import com.steven.base.base.BaseActivity;

@@ -1,7 +1,7 @@
 package com.example.zealience.oneiromancy.ui.activity;
 
 import android.os.Bundle;
-import android.support.v7.widget.SwitchCompat;
+import androidx.appcompat.widget.SwitchCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;

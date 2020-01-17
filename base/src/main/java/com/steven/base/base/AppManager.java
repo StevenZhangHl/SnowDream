@@ -1,8 +1,9 @@
 package com.steven.base.base;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Stack;
 
@@ -12,7 +13,7 @@ import java.util.Stack;
  * @description activity管理
  */
 public class AppManager {
-    private static Stack<Activity> activityStack;
+    private static Stack<AppCompatActivity> activityStack;
     private volatile static AppManager instance;
 
     private AppManager() {
@@ -38,9 +39,9 @@ public class AppManager {
     /**
      * 添加Activity到堆栈
      */
-    public void addActivity(Activity activity) {
+    public void addActivity(AppCompatActivity activity) {
         if (activityStack == null) {
-            activityStack = new Stack<Activity>();
+            activityStack = new Stack<AppCompatActivity>();
         }
         activityStack.add(activity);
     }
@@ -48,9 +49,9 @@ public class AppManager {
     /**
      * 获取当前Activity（堆栈中最后一个压入的）
      */
-    public Activity currentActivity() {
+    public AppCompatActivity currentActivity() {
         try {
-            Activity activity = activityStack.lastElement();
+            AppCompatActivity activity = activityStack.lastElement();
             return activity;
         } catch (Exception e) {
 //            e.printStackTrace();
@@ -61,12 +62,12 @@ public class AppManager {
     /**
      * 获取当前Activity的前一个Activity
      */
-    public Activity preActivity() {
+    public AppCompatActivity preActivity() {
         int index = activityStack.size() - 2;
         if (index < 0) {
             return null;
         }
-        Activity activity = activityStack.get(index);
+        AppCompatActivity activity = activityStack.get(index);
         return activity;
     }
 
@@ -74,14 +75,14 @@ public class AppManager {
      * 结束当前Activity（堆栈中最后一个压入的）
      */
     public void finishActivity() {
-        Activity activity = activityStack.lastElement();
+        AppCompatActivity activity = activityStack.lastElement();
         finishActivity(activity);
     }
 
     /**
      * 结束指定的Activity
      */
-    public void finishActivity(Activity activity) {
+    public void finishActivity(AppCompatActivity activity) {
         if (activity != null) {
             activityStack.remove(activity);
             activity.finish();
@@ -92,7 +93,7 @@ public class AppManager {
     /**
      * 移除指定的Activity
      */
-    public void removeActivity(Activity activity) {
+    public void removeActivity(AppCompatActivity activity) {
         if (activity != null) {
             activityStack.remove(activity);
             activity = null;
@@ -104,7 +105,7 @@ public class AppManager {
      */
     public void finishActivity(Class<?> cls) {
         try {
-            for (Activity activity : activityStack) {
+            for (AppCompatActivity activity : activityStack) {
                 if (activity.getClass().equals(cls)) {
                     finishActivity(activity);
                 }

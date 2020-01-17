@@ -1,11 +1,12 @@
 package com.example.zealience.oneiromancy.ui.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -15,7 +16,6 @@ import com.scwang.smartrefresh.layout.api.RefreshKernel;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.RefreshState;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
-import com.steven.base.app.GlideApp;
 import com.steven.base.util.DisplayUtil;
 
 /**
@@ -23,8 +23,9 @@ import com.steven.base.util.DisplayUtil;
  * @createDate 2019/3/15 13:40
  * @description 自定义
  */
+@SuppressLint("RestrictedApi")
 public class SnowRefershHeader extends RelativeLayout implements RefreshHeader {
-    protected ImageView mProgressView;
+    private SnowLoadingView snowLoadingView;
     protected RefreshKernel mRefreshKernel;
     protected SpinnerStyle mSpinnerStyle = SpinnerStyle.Translate;
     protected int mFinishDuration = 100;
@@ -45,16 +46,14 @@ public class SnowRefershHeader extends RelativeLayout implements RefreshHeader {
     }
 
     private void initView(Context context) {
-        mProgressView = new ImageView(context);
-        mProgressView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        GlideApp.with(context)
-                .asGif()
-                .load(R.drawable.gif_refersh_down)
-                .into(mProgressView);
+        snowLoadingView = new SnowLoadingView(context);
+        snowLoadingView.setmAutoAnim(false);
         LinearLayout layout = new LinearLayout(context);
-        LayoutParams layoutParams = new LayoutParams(DisplayUtil.dip2px(100), DisplayUtil.dip2px(80));
-        layoutParams.addRule(CENTER_HORIZONTAL);
-        layout.addView(mProgressView);
+        layout.setBackgroundColor(ContextCompat.getColor(context, R.color.color_F8C400));
+        layout.setGravity(Gravity.CENTER);
+        LayoutParams layoutParams = new LayoutParams(DisplayUtil.dip2px(80), DisplayUtil.dip2px(80));
+        layoutParams.addRule(CENTER_IN_PARENT);
+        layout.addView(snowLoadingView);
         addView(layout, layoutParams);
     }
 
@@ -82,7 +81,7 @@ public class SnowRefershHeader extends RelativeLayout implements RefreshHeader {
 
     @Override
     public void onPulling(float percent, int offset, int height, int extendHeight) {
-
+        snowLoadingView.start();
     }
 
     @Override
@@ -102,6 +101,8 @@ public class SnowRefershHeader extends RelativeLayout implements RefreshHeader {
 
     @Override
     public int onFinish(@NonNull RefreshLayout refreshLayout, boolean success) {
+        snowLoadingView.stop();
+        snowLoadingView.setSize(DisplayUtil.dip2px(40));
         return mFinishDuration;
     }
 

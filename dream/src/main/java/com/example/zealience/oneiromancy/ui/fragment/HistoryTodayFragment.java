@@ -2,10 +2,10 @@ package com.example.zealience.oneiromancy.ui.fragment;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.TimeUtils;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 import android.widget.DatePicker;
 
@@ -13,7 +13,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.zealience.oneiromancy.R;
 import com.example.zealience.oneiromancy.constant.KeyConstant;
-import com.example.zealience.oneiromancy.entity.HistoryDetailEntity;
 import com.example.zealience.oneiromancy.entity.HistoryEntity;
 import com.example.zealience.oneiromancy.mvp.contract.HistoryContract;
 import com.example.zealience.oneiromancy.mvp.model.HistoryModel;
@@ -22,10 +21,7 @@ import com.example.zealience.oneiromancy.ui.HistoryListAdapter;
 import com.example.zealience.oneiromancy.ui.activity.HistoryDetailActivity;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
-import com.jaeger.library.StatusBarUtil;
 import com.steven.base.base.BaseFragment;
-import com.steven.base.util.DateTimeHelper;
-import com.steven.base.util.ToastUitl;
 
 import java.util.ArrayList;
 import java.util.Calendar;

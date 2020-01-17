@@ -3,13 +3,14 @@ package com.steven.base.util;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * @user steven
@@ -221,7 +222,7 @@ public class CircularAnim {
 
 
     public static class FullActivityBuilder {
-        private Activity mActivity;
+        private AppCompatActivity mActivity;
         private Point mTriggerPoint;
         private float mStartRadius = MINI_RADIUS;
         private int mColorOrImageRes = getColorOrImageRes();
@@ -232,7 +233,7 @@ public class CircularAnim {
         private OnAnimationEndListener mOnAnimationEndListener;
         private int mEnterAnim = android.R.anim.fade_in, mExitAnim = android.R.anim.fade_out;
 
-        public FullActivityBuilder(Activity activity, View triggerView) {
+        public FullActivityBuilder(AppCompatActivity activity, View triggerView) {
             mActivity = activity;
             int[] location = new int[2];
             triggerView.getLocationInWindow(location);
@@ -241,7 +242,7 @@ public class CircularAnim {
             mTriggerPoint = new Point(cx, cy);
         }
 
-        public FullActivityBuilder(Activity activity, Point triggerPoint) {
+        public FullActivityBuilder(AppCompatActivity activity, Point triggerPoint) {
             mActivity = activity;
             mTriggerPoint = triggerPoint;
         }
@@ -398,7 +399,7 @@ public class CircularAnim {
     }
 
     /* 以@triggerView 为触发点铺满整个@activity */
-    public static FullActivityBuilder fullActivity(Activity activity, View triggerView) {
+    public static FullActivityBuilder fullActivity(AppCompatActivity activity, View triggerView) {
         return new FullActivityBuilder(activity, triggerView);
     }
 

@@ -23,14 +23,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_10"
-            android:src="@mipmap/bar_icon_back_white" />
+            app:srcCompat="@mipmap/bar_icon_back_white" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:padding="@dimen/margin_10"
-            android:src="@mipmap/icon_more_white" />
+            app:srcCompat="@mipmap/icon_more_white" />
     </RelativeLayout>
 
     <LinearLayout
@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:src="@mipmap/icon_praise_white" />
+            app:srcCompat="@mipmap/icon_praise_white" />
 
         <TextView
             style="@style/text_13_white"
@@ -101,7 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"></include>
 
-    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -133,7 +133,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:padding="@dimen/margin_10"
-                    android:src="@mipmap/icon_black_close" />
+                    app:srcCompat="@mipmap/icon_black_close" />
             </RelativeLayout>
 
             <View
@@ -141,12 +141,12 @@
                 android:layout_height="@dimen/margin_1"
                 android:background="@color/color_EFEFEF" />
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_reply"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
-                android:scrollbars="none"></android.support.v7.widget.RecyclerView>
+                android:scrollbars="none"></androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </RelativeLayout>

@@ -68,7 +68,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="com.steven.snow.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">

@@ -19,27 +19,27 @@
             android:layout_centerVertical="true"
             android:padding="@dimen/margin_10"
             android:scaleType="centerCrop"
-            android:src="@mipmap/icon_sao" />
+            app:srcCompat="@mipmap/icon_sao" />
 
         <LinearLayout
             android:id="@+id/ll_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:transitionName="search_edit"
             android:layout_toLeftOf="@+id/iv_user_head"
             android:layout_toRightOf="@+id/iv_sao"
             android:background="@drawable/shape_radio_white_15"
             android:paddingLeft="@dimen/margin_10"
             android:paddingTop="@dimen/margin_5"
-            android:paddingBottom="@dimen/margin_5">
+            android:paddingBottom="@dimen/margin_5"
+            android:transitionName="search_edit">
 
             <TextView
                 android:id="@+id/et_search_dream"
                 style="@style/text_14_white"
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="" />
         </LinearLayout>
 
@@ -57,51 +57,59 @@
 
     </RelativeLayout>
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/nested_scrollview"
-        android:layout_width="match_parent"
-        android:background="@color/white"
-        android:layout_height="match_parent"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_home_layout"
         android:layout_below="@+id/rl_title"
-        android:focusableInTouchMode="false">
+        android:layout_width="match_parent"
+        app:srlReboundDuration="1000"
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:descendantFocusability="blocksDescendants"
-            android:orientation="vertical">
+            android:background="@color/white"
+            android:focusableInTouchMode="false">
 
-            <com.youth.banner.Banner
-                android:id="@+id/bannerContainer"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:focusableInTouchMode="false"></com.youth.banner.Banner>
+                android:layout_height="match_parent"
+                android:descendantFocusability="blocksDescendants"
+                android:orientation="vertical">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerview_dream_type"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_5"
-                android:layout_marginTop="@dimen/margin_10"
-                android:layout_marginRight="@dimen/margin_5" />
+                <com.youth.banner.Banner
+                    android:id="@+id/bannerContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:focusableInTouchMode="false"></com.youth.banner.Banner>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerview_dream_hot"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_5"
-                android:layout_marginTop="@dimen/margin_10"
-                android:layout_marginRight="@dimen/margin_5" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_dream_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_5"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_marginRight="@dimen/margin_5" />
 
-            <TextView
-                android:id="@+id/tv_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:padding="@dimen/margin_10"
-                android:text="——————我是有底线的——————" />
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_dream_hot"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_5"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_marginRight="@dimen/margin_5" />
+
+                <TextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="@dimen/margin_10"
+                    android:text="——————我是有底线的——————" />
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
     <ImageView
         android:id="@+id/iv_small_snow"

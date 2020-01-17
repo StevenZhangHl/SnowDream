@@ -22,8 +22,9 @@ import android.widget.RelativeLayout;
 import android.widget.Scroller;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.zealience.oneiromancy.R;
-import com.steven.base.util.DisplayUtil;
 
 /**
  * @user steven
@@ -220,7 +221,7 @@ public class ScrollPaintView extends RelativeLayout {
         lpp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         // 获取屏幕信息
         DisplayMetrics displayMetrics = new DisplayMetrics();
-        ((Activity) getContext()).getWindowManager().getDefaultDisplay()
+        ((AppCompatActivity) getContext()).getWindowManager().getDefaultDisplay()
                 .getMetrics(displayMetrics);
         // 屏幕高度
         screenHeight = displayMetrics.heightPixels;

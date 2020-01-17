@@ -23,7 +23,7 @@
             android:visibility="gone"
             android:layout_centerInParent="true"
             android:scaleType="centerCrop"
-            android:src="@mipmap/icon_location_marker" />
+            app:srcCompat="@mipmap/icon_location_marker" />
     </RelativeLayout>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
@@ -34,9 +34,9 @@
         android:background="@color/white"
         app:srlEnableRefresh="false">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_near_address"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </RelativeLayout>

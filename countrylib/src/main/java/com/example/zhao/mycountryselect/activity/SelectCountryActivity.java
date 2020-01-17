@@ -1,16 +1,11 @@
 package com.example.zhao.mycountryselect.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -18,12 +13,14 @@ import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.zhao.mycountryselect.R;
 import com.example.zhao.mycountryselect.adapter.CountrySelectAdapter;
@@ -73,7 +70,7 @@ public class SelectCountryActivity extends AppCompatActivity {
      */
     private HashMap<String, String> listHashMap;
 
-    public static void startResultAction(Activity activity) {
+    public static void startResultAction(AppCompatActivity activity) {
         Intent intent = new Intent();
         intent.setClass(activity, SelectCountryActivity.class);
         activity.startActivityForResult(intent, REQUEST_ZONE);

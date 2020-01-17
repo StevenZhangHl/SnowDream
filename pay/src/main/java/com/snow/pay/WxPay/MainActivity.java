@@ -1,7 +1,6 @@
 package com.snow.pay.WxPay;
 
-import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.snow.pay.Alipay.AliPayAPI;
 import com.snow.pay.Alipay.AliPayReq;
@@ -65,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         String partner          = "";
         String seller           = "";
 
-        Activity activity       = this;
+        AppCompatActivity activity       = this;
         String outTradeNo       = "";
         String price            = "";
         String orderSubject     = "";
@@ -100,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         String partner          = "";
         String seller           = "";
 
-        Activity activity       = this;
+        AppCompatActivity activity       = this;
         String outTradeNo       = "";
         String price            = "";
         String orderSubject     = "";

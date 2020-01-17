@@ -1,10 +1,11 @@
 package com.snow.pay.Alipay;
 
-import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.alipay.sdk.app.PayTask;
 
@@ -25,7 +26,7 @@ public class AliPayReq {
 	private static final int SDK_PAY_FLAG = 1;
 	private static final int SDK_CHECK_FLAG = 2;
 	
-	private Activity mActivity;
+	private AppCompatActivity mActivity;
 	
 	//支付宝支付的配置
 	private AliPayAPI.Config mConfig;
@@ -253,7 +254,7 @@ public class AliPayReq {
 	
 	public static class Builder{
 		//上下文
-		private Activity activity;
+		private AppCompatActivity activity;
 		//支付宝支付配置
 		private AliPayAPI.Config config;
 		// 商户网站唯一订单号
@@ -270,7 +271,7 @@ public class AliPayReq {
 			super();
 		}
 		
-		public Builder with(Activity activity){
+		public Builder with(AppCompatActivity activity){
 			this.activity = activity;
 			return this;
 		}

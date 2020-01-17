@@ -1,8 +1,9 @@
 package com.snow.pay.WxPay;
 
-import android.app.Activity;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.tencent.mm.sdk.constants.ConstantsAPI;
 import com.tencent.mm.sdk.modelbase.BaseReq;
@@ -22,7 +23,7 @@ public class WechatPayReq implements IWXAPIEventHandler {
 	
 	private static final String TAG = WechatPayReq.class.getSimpleName();
 
-	private Activity mActivity;
+	private AppCompatActivity mActivity;
 
 	//微信支付AppID
 	private String appId;
@@ -70,7 +71,7 @@ public class WechatPayReq implements IWXAPIEventHandler {
 	
 	public static class Builder{
 		//上下文
-		private Activity activity;
+		private AppCompatActivity activity;
 		//微信支付AppID
 		private String appId;
 		//微信支付商户号
@@ -88,7 +89,7 @@ public class WechatPayReq implements IWXAPIEventHandler {
 			super();
 		}
 		
-		public Builder with(Activity activity){
+		public Builder with(AppCompatActivity activity){
 			this.activity = activity;
 			return this;
 		}

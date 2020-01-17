@@ -62,6 +62,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:padding="@dimen/margin_10"
-            android:src="@mipmap/icon_add_address" />
+            app:srcCompat="@mipmap/icon_add_address" />
     </LinearLayout>
 </RelativeLayout>

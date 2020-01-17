@@ -1,7 +1,6 @@
 package com.example.zealience.oneiromancy.ui.activity;
 
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 
 import com.example.zealience.oneiromancy.R;
 import com.steven.base.base.BaseActivity;

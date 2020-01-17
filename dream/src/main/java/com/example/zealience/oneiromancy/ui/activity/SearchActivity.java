@@ -2,9 +2,9 @@ package com.example.zealience.oneiromancy.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -25,11 +24,9 @@ import com.example.zealience.oneiromancy.mvp.contract.SearchContract;
 import com.example.zealience.oneiromancy.mvp.model.SearchModel;
 import com.example.zealience.oneiromancy.mvp.presenter.SearchPresenter;
 import com.example.zealience.oneiromancy.ui.SearchDreamAdapter;
-import com.hw.ycshareelement.YcShareElement;
 import com.hw.ycshareelement.transition.IShareElements;
 import com.hw.ycshareelement.transition.ShareElementInfo;
 import com.hw.ycshareelement.transition.TextViewStateSaver;
-import com.steven.base.app.BaseApp;
 import com.steven.base.base.AppManager;
 import com.steven.base.base.BaseActivity;
 import com.steven.base.util.KeyboardUtil;

@@ -10,6 +10,6 @@
     <!--闪屏页主题-->
     <style name="ThemeSplash" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowFullscreen">true</item>
-        <item name="android:background">@mipmap/lanucher_one</item>
+        <item name="background">@mipmap/lanucher_one</item>
     </style>
 </resources>
